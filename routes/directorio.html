@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="../styles/styles.css"> <link rel="stylesheet" href="../styles/dashboard.css">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .search-bar { padding: 10px; width: 100%; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <nav style="background: #1e293b; color: white; padding: 1rem;">
+        <a href="dashboard.html" style="color:white; margin-right: 15px;">Dashboard</a>
+        <a href="directorio.html" style="color:white;">Directorio</a>
+    </nav>
+    <main class="container">
+        <h1>Listado de Personal</h1>
+        <input type="text" class="search-bar" placeholder="Filtrar por nombre...">
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Nombre</th><th>Puesto</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Juan Pérez</td><td>Administrador</td></tr>
+                <tr><td>2</td><td>Ana García</td><td>Técnico</td></tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+.operaciones-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.operacion-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+}
+
+.operacion-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.operacion-card input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.operacion-card button {
+    padding: 0.8rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-rojo {
+    background: #ef4444 !important;
+}

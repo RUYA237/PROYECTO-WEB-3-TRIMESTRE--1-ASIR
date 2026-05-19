@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="../styles/styles.css"> <link rel="stylesheet" href="../styles/dashboard.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Operaciones Críticas</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/operaciones.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Intranet Corporativa</h2>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="directorio.html">Directorio</a>
+            <a href="operaciones.html">Operaciones</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Panel de Gestión</h1>
+        
+        <div class="operaciones-grid">
+            <div class="operacion-card">
+                <h3>Contratación</h3>
+                <form id="formContratar">
+                    <input type="text" placeholder="Nombre Empleado" required>
+                    <input type="text" placeholder="Departamento" required>
+                    <button type="submit">Ejecutar Alta</button>
+                </form>
+            </div>
+
+            <div class="operacion-card">
+                <h3>Despido</h3>
+                <form id="formDespedir">
+                    <input type="number" placeholder="ID Empleado" required>
+                    <button type="submit" class="btn-rojo">Ejecutar Baja</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="../js/operaciones.js"></script>
+</body>
+</html>

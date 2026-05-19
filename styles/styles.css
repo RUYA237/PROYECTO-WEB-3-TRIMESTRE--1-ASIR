@@ -1,0 +1,50 @@
+/* styles/styles.css */
+:root {
+    --primary-color: #0f172a;
+    --secondary-color: #3b82f6;
+    --background-light: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #ffffff;
+    --error-color: #ef4444;
+    --success-color: #10b981;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Clases utilitarias (Mobile First) */
+.container {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+/* Navbar común para todas las vistas */
+nav { background-color: var(--primary); padding: 1rem; color: var(--white); display: flex; gap: 20px; }
+nav a { color: var(--white); text-decoration: none; font-weight: bold; }
+nav a:hover { color: var(--accent); }
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+    }
+}

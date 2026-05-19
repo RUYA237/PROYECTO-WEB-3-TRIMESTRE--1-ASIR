@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="../styles/styles.css"> <link rel="stylesheet" href="../styles/dashboard.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Intranet</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        .login-box { max-width: 400px; margin: 100px auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; margin-bottom: 1.5rem; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 100%; padding: 10px; background: #3b82f6; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login</h1>
+        <form action="routes/dashboard.html">
+            <input type="text" placeholder="Usuario" required>
+            <input type="password" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
