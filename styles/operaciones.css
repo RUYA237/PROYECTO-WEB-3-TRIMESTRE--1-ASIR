@@ -1,34 +1,15 @@
-/* ========== OPERACIONES ========== */
 .ops-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
 }
 .ops-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 1.4rem;
 }
-.ops-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--text);
-  margin-bottom: 0.3rem;
-  letter-spacing: 0.05em;
-}
-.ops-card .ops-desc {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.04em;
-  line-height: 1.5;
-}
-.ops-card .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-.ops-card .form-row.single { grid-template-columns: 1fr; }
-.ops-card .btn { margin-top: 0.5rem; width: 100%; }
+.ops-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.ops-card p  { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.5; }
+.form-row      { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.form-row.solo { grid-template-columns: 1fr; }

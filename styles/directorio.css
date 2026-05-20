@@ -43,7 +43,7 @@
   font-weight: 700; font-size: 0.9rem; color: var(--blue);
   margin-bottom: 0.75rem;
 }
-.emp-name  { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.1rem; }
-.emp-role  { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem; }
-.emp-info  { font-size: 0.7rem; color: var(--dim); display: flex; flex-direction: column; gap: 0.15rem; }
+.emp-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.1rem; }
+.emp-role { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem; }
+.emp-info { font-size: 0.7rem; color: var(--dim); display: flex; flex-direction: column; gap: 0.15rem; }
 .no-results { grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; }

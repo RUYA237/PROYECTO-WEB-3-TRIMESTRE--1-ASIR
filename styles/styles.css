@@ -22,9 +22,6 @@ body {
   min-height: 100vh;
 }
 
-.view { display: none; min-height: 100vh; }
-.view.active { display: flex; }
-
 /* Formularios */
 .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
 .form-group label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
@@ -56,12 +53,12 @@ body {
   width: 100%;
   margin-top: 0.5rem;
 }
-.btn-blue    { background: var(--blue);    color: #fff; }
-.btn-blue:hover { opacity: 0.88; }
-.btn-green   { background: var(--success); color: #fff; }
+.btn-blue  { background: var(--blue);    color: #fff; }
+.btn-blue:hover  { opacity: 0.88; }
+.btn-green { background: var(--success); color: #fff; }
 .btn-green:hover { opacity: 0.88; }
-.btn-red     { background: var(--danger);  color: #fff; }
-.btn-red:hover { opacity: 0.88; }
+.btn-red   { background: var(--danger);  color: #fff; }
+.btn-red:hover   { opacity: 0.88; }
 
 /* Badges */
 .badge {
@@ -74,11 +71,6 @@ body {
 }
 .badge-on  { background: rgba(34,197,94,0.15);  color: var(--success); }
 .badge-off { background: rgba(239,68,68,0.15);   color: var(--danger);  }
-
-/* Spinner */
-.loading { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.8rem; padding: 1rem 0; }
-.spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Nav */
 .nav {
@@ -116,14 +108,41 @@ body {
 }
 .nav-out:hover { color: var(--danger); border-color: var(--danger); }
 
-/* Contenido */
-#view-app { flex-direction: column; }
+/* Contenido páginas */
 .app-content { flex: 1; overflow-y: auto; }
 .page { display: none; padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
 .page.active { display: block; }
 .page-header { margin-bottom: 1.75rem; }
 .page-header h1 { font-size: 1.5rem; font-weight: 700; }
 .page-header p  { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 70%), var(--bg);
+}
+
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.login-logo { text-align: center; }
+.login-logo h1 { font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+.login-logo p  { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+#login-error { font-size: 0.78rem; color: var(--danger); display: none; text-align: center; }
+
+.login-hint { font-size: 0.72rem; color: var(--dim); text-align: center; }
+.login-hint span { color: var(--blue); }
 
 /* Toast */
 #toast {
