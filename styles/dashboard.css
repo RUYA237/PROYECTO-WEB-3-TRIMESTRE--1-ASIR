@@ -1,78 +1,4 @@
-/* =====================
-   DASHBOARD STYLES
-===================== */
-
-/* LOGIN */
-#view-login {
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%),
-    var(--bg);
-}
-.login-wrap {
-  width: 100%;
-  max-width: 380px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.login-brand { text-align: center; }
-.login-brand .brand-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem;
-  font-weight: 300;
-  letter-spacing: 0.25em;
-  color: var(--gold-light);
-  text-transform: uppercase;
-  line-height: 1;
-}
-.login-brand .brand-sub {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 0.4rem;
-}
-.login-divider {
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  opacity: 0.4;
-  margin: 0.8rem auto 0;
-}
-.login-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-.login-card h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.login-hint {
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  text-align: center;
-}
-.login-hint span { color: var(--gold); opacity: 0.7; }
-#login-error {
-  font-size: 0.78rem;
-  color: var(--danger);
-  display: none;
-  text-align: center;
-}
-
-/* DASHBOARD METRICS */
+/* ========== DASHBOARD ========== */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -101,10 +27,10 @@
   color: var(--gold-light);
   line-height: 1;
 }
-.metric-sub { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; }
+.metric-sub  { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; }
 .metric-change { font-size: 0.68rem; margin-top: 0.4rem; }
-.metric-change.up { color: var(--success); }
-.metric-change.down { color: var(--danger); }
+.metric-change.up   { color: var(--success); }
+.metric-change.down { color: var(--danger);  }
 
 .dashboard-grid {
   display: grid;
@@ -112,6 +38,7 @@
   gap: 1rem;
 }
 @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
 
 .dash-panel {
   background: var(--card);
@@ -126,11 +53,12 @@
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
+
+/* Actividad */
 .activity-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
 .activity-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.78rem; }
 .activity-dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--gold);
   margin-top: 0.35rem;
@@ -140,6 +68,21 @@
 .activity-text { color: var(--text); line-height: 1.4; }
 .activity-time { color: var(--text-dim); font-size: 0.68rem; margin-top: 0.1rem; }
 
-@media (max-width: 600px) {
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
+/* Tabla departamentos */
+.simple-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.simple-table th {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
 }
+.simple-table td {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(46,43,36,0.5);
+  color: var(--text);
+  vertical-align: middle;
+}
+.simple-table tr:last-child td { border-bottom: none; }
