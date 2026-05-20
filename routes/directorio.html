@@ -1,31 +1,22 @@
-<!-- routes/directorio.html — Contenido de la página Directorio -->
-
 <div id="page-directorio" class="page">
   <div class="page-header">
-    <h1>Directorio de Empleados</h1>
-    <p>Busca y filtra entre el personal de la empresa</p>
+    <h1>Directorio</h1>
+    <p>Busca empleados por nombre, cargo o departamento</p>
   </div>
 
-  <!-- Barra de búsqueda y filtros -->
   <div class="search-bar">
-    <div class="search-input-wrap">
-      <span class="search-icon">⌕</span>
-      <input type="text" id="search-input" placeholder="Buscar por nombre, cargo…" oninput="filtrarEmpleados()" />
-    </div>
-    <select class="filter-select" id="filter-dept" onchange="filtrarEmpleados()">
+    <input type="text" id="buscar" placeholder="Buscar..." oninput="filtrarEmpleados()" />
+    <select id="filtro-depto" onchange="filtrarEmpleados()">
       <option value="">Todos los departamentos</option>
     </select>
-    <select class="filter-select" id="filter-status" onchange="filtrarEmpleados()">
-      <option value="">Todos los estados</option>
+    <select id="filtro-estado" onchange="filtrarEmpleados()">
+      <option value="">Todos</option>
       <option value="Activo">Activo</option>
       <option value="Inactivo">Inactivo</option>
     </select>
   </div>
 
-  <!-- Rejilla de empleados -->
-  <div class="employee-grid" id="employee-grid">
-    <div class="loading" style="grid-column:1/-1">
-      <div class="spinner"></div>Cargando empleados…
-    </div>
+  <div class="emp-grid" id="emp-grid">
+    <div class="loading" style="grid-column:1/-1"><div class="spinner"></div> Cargando...</div>
   </div>
 </div>

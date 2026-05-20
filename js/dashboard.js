@@ -1,40 +1,26 @@
-/* =========================================
-   dashboard.js — Lógica del Panel General
-   ========================================= */
-
 function cargarDashboard() {
-  // Simula: GET /api/metricas  (latencia de red)
-  setTimeout(() => {
+  setTimeout(function() {
 
-    // Métricas
-    document.getElementById('metrics-grid').innerHTML = MOCK_METRICAS.map(m => `
-      <div class="metric-card">
-        <div class="metric-label">${m.label}</div>
-        <div class="metric-value">${m.value}</div>
-        <div class="metric-sub">${m.sub}</div>
-        ${m.change ? `<div class="metric-change ${m.up === true ? 'up' : m.up === false ? 'down' : ''}">${m.change}</div>` : ''}
-      </div>
-    `).join('');
+    document.getElementById("metrics-grid").innerHTML = METRICAS.map(function(m) {
+      return '<div class="metric-card">' +
+        '<div class="metric-label">' + m.label + '</div>' +
+        '<div class="metric-value">' + m.valor + '</div>' +
+        '<div class="metric-sub">'   + m.sub   + '</div>' +
+        (m.cambio ? '<div class="metric-up">↑ ' + m.cambio + '</div>' : '') +
+      '</div>';
+    }).join("");
 
-    // Actividad reciente
-    document.getElementById('activity-list').innerHTML = MOCK_ACTIVIDAD.map(a => `
-      <li class="activity-item">
-        <div class="activity-dot"></div>
-        <div>
-          <div class="activity-text">${a.texto}</div>
-          <div class="activity-time">${a.tiempo}</div>
-        </div>
-      </li>
-    `).join('');
+    document.getElementById("activity-list").innerHTML = ACTIVIDAD.map(function(a) {
+      return '<li class="activity-item">' +
+        '<div class="dot"></div>' +
+        '<div><div>' + a.texto + '</div><div class="act-time">' + a.tiempo + '</div></div>' +
+      '</li>';
+    }).join("");
 
-    // Tabla departamentos
-    document.getElementById('dept-tbody').innerHTML = MOCK_DEPTOS.map(d => `
-      <tr>
-        <td>${d.nombre}</td>
-        <td>${d.empleados}</td>
-        <td><span class="badge badge-active">${d.estado}</span></td>
-      </tr>
-    `).join('');
+    document.getElementById("dept-tbody").innerHTML = DEPTOS.map(function(d) {
+      return '<tr><td>' + d.nombre + '</td><td>' + d.empleados + '</td>' +
+        '<td><span class="badge badge-on">Activo</span></td></tr>';
+    }).join("");
 
-  }, 600);
+  }, 500);
 }

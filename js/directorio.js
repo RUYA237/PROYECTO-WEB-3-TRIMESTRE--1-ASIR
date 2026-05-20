@@ -1,63 +1,51 @@
-/* =========================================
-   directorio.js — Lógica del Directorio
-   ========================================= */
-
-let empleados = [];
+var listaEmpleados = [];
 
 function cargarDirectorio() {
-  const grid = document.getElementById('employee-grid');
-  grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><div class="spinner"></div>Cargando empleados…</div>';
+  setTimeout(function() {
+    listaEmpleados = EMPLEADOS;
 
-  // Simula: GET /api/empleados
-  setTimeout(() => {
-    empleados = MOCK_EMPLEADOS;
-    poblarFiltros();
-    renderEmpleados(empleados);
-  }, 500);
-}
+    var sel = document.getElementById("filtro-depto");
+    var deptos = [...new Set(listaEmpleados.map(function(e) { return e.depto; }))].sort();
+    sel.innerHTML = '<option value="">Todos los departamentos</option>' +
+      deptos.map(function(d) { return '<option value="' + d + '">' + d + '</option>'; }).join("");
 
-function poblarFiltros() {
-  const sel = document.getElementById('filter-dept');
-  const deptos = [...new Set(empleados.map(e => e.depto))].sort();
-  sel.innerHTML = '<option value="">Todos los departamentos</option>' +
-    deptos.map(d => `<option value="${d}">${d}</option>`).join('');
+    renderEmpleados(listaEmpleados);
+  }, 400);
 }
 
 function filtrarEmpleados() {
-  const q    = document.getElementById('search-input').value.toLowerCase();
-  const dept = document.getElementById('filter-dept').value;
-  const stat = document.getElementById('filter-status').value;
+  var q     = document.getElementById("buscar").value.toLowerCase();
+  var depto = document.getElementById("filtro-depto").value;
+  var estado= document.getElementById("filtro-estado").value;
 
-  const filtrados = empleados.filter(e => {
-    const matchQ    = !q    || (e.nombre + e.cargo + e.email).toLowerCase().includes(q);
-    const matchDept = !dept || e.depto   === dept;
-    const matchStat = !stat || e.estado  === stat;
-    return matchQ && matchDept && matchStat;
+  var resultado = listaEmpleados.filter(function(e) {
+    var okQ     = !q     || (e.nombre + e.cargo + e.email).toLowerCase().includes(q);
+    var okDepto = !depto || e.depto === depto;
+    var okEst   = !estado
+      || (estado === "Activo"   &&  e.activo)
+      || (estado === "Inactivo" && !e.activo);
+    return okQ && okDepto && okEst;
   });
-  renderEmpleados(filtrados);
+
+  renderEmpleados(resultado);
 }
 
 function renderEmpleados(lista) {
-  const grid = document.getElementById('employee-grid');
+  var grid = document.getElementById("emp-grid");
   if (!lista.length) {
-    grid.innerHTML = '<div class="no-results">· Sin resultados ·</div>';
+    grid.innerHTML = '<div class="no-results">Sin resultados</div>';
     return;
   }
-  grid.innerHTML = lista.map(e => {
-    const initials = e.nombre.split(' ').map(w => w[0]).join('').slice(0, 2);
-    return `
-      <div class="employee-card">
-        <div class="employee-avatar">${initials}</div>
-        <div class="employee-name">${e.nombre}</div>
-        <div class="employee-role">${e.cargo}</div>
-        <div class="employee-meta">
-          <span>📁 ${e.depto}</span>
-          <span>✉ ${e.email}</span>
-          <span style="margin-top:0.4rem">
-            <span class="badge ${e.estado === 'Activo' ? 'badge-active' : 'badge-inactive'}">${e.estado}</span>
-          </span>
-        </div>
-      </div>
-    `;
-  }).join('');
+  grid.innerHTML = lista.map(function(e) {
+    var iniciales = e.nombre.split(" ").map(function(p) { return p[0]; }).join("").slice(0, 2);
+    return '<div class="emp-card">' +
+      '<div class="emp-avatar">' + iniciales + '</div>' +
+      '<div class="emp-name">'  + e.nombre  + '</div>' +
+      '<div class="emp-role">'  + e.cargo   + '</div>' +
+      '<div class="emp-info">' +
+        '<span>📁 ' + e.depto + '</span>' +
+        '<span>✉ '  + e.email + '</span>' +
+        '<span style="margin-top:0.3rem"><span class="badge ' + (e.activo ? 'badge-on' : 'badge-off') + '">' + (e.activo ? 'Activo' : 'Inactivo') + '</span></span>' +
+      '</div></div>';
+  }).join("");
 }

@@ -3,129 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LUMIÈRE · Intranet Corporativa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <!-- Estilos globales -->
+  <title>Nexora Tech · Intranet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/styles.css" />
-
-  <!-- Estilos por sección -->
   <link rel="stylesheet" href="styles/dashboard.css" />
   <link rel="stylesheet" href="styles/directorio.css" />
   <link rel="stylesheet" href="styles/operaciones.css" />
-
   <style>
-    /* ===== LOGIN (solo en index) ===== */
     #view-login {
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%),
-        var(--bg);
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 70%), var(--bg);
     }
-    .login-wrap {
-      width: 100%; max-width: 380px;
-      padding: 1.5rem;
-      display: flex; flex-direction: column; gap: 2rem;
+    .login-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
     }
-    .login-brand { text-align: center; }
-    .login-brand .brand-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem; font-weight: 300;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold-light); line-height: 1;
-    }
-    .login-brand .brand-sub {
-      font-size: 0.65rem; letter-spacing: 0.35em;
-      text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem;
-    }
-    .login-divider {
-      width: 40px; height: 1px;
-      background: var(--gold); opacity: 0.4; margin: 0.8rem auto 0;
-    }
-    .login-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 2rem;
-      display: flex; flex-direction: column; gap: 1.25rem;
-    }
-    .login-card h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 400;
-      color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase;
-    }
-    .login-hint { font-size: 0.72rem; color: var(--text-dim); text-align: center; }
-    .login-hint span { color: var(--gold); opacity: 0.7; }
+    .login-logo { text-align: center; }
+    .login-logo h1 { font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+    .login-logo p  { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
     #login-error { font-size: 0.78rem; color: var(--danger); display: none; text-align: center; }
+    .login-hint  { font-size: 0.72rem; color: var(--dim); text-align: center; }
+    .login-hint span { color: var(--blue); }
   </style>
 </head>
 <body>
 
-<!-- =================== LOGIN =================== -->
+<!-- LOGIN -->
 <div id="view-login" class="view active">
-  <div class="login-wrap">
-    <div class="login-brand">
-      <div class="brand-name">Lumière</div>
-      <div class="brand-sub">Complementos de Lujo · Sistema de Gestión</div>
-      <div class="login-divider"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <h1>Nexora Tech</h1>
+      <p>Sistema de Gestión Interna</p>
     </div>
-    <div class="login-card">
-      <h2>Acceso a Intranet</h2>
-      <div class="form-group">
-        <label>Usuario</label>
-        <input type="text" id="login-user" placeholder="usuario@lumiere.es" value="admin" />
-      </div>
-      <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" id="login-pass" placeholder="••••••••" value="1234" />
-      </div>
-      <p id="login-error">Credenciales incorrectas. Inténtelo de nuevo.</p>
-      <button class="btn btn-primary" onclick="doLogin()">Iniciar Sesión</button>
+    <div class="form-group">
+      <label>Usuario</label>
+      <input type="text" id="login-user" value="admin" placeholder="usuario" />
     </div>
-    <p class="login-hint">Demo: <span>admin / 1234</span> &nbsp;|&nbsp; <span>rrhh / 1234</span></p>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" value="1234" placeholder="••••••" />
+    </div>
+    <p id="login-error">Usuario o contraseña incorrectos.</p>
+    <button class="btn btn-blue" onclick="doLogin()">Entrar</button>
+    <p class="login-hint">Demo: <span>admin / 1234</span> · <span>rrhh / 1234</span></p>
   </div>
 </div>
 
-<!-- =================== APP =================== -->
+<!-- APP -->
 <div id="view-app" class="view">
-
-  <!-- NAV -->
   <nav class="nav">
-    <div class="nav-brand">Lumière</div>
-    <div class="nav-links">
-      <div class="nav-link active"  onclick="showPage('dashboard',   this)">Dashboard</div>
-      <div class="nav-link"         onclick="showPage('directorio',  this)">Directorio</div>
-      <div class="nav-link"         onclick="showPage('operaciones', this)">Operaciones</div>
+    <div class="nav-logo">Nexora Tech</div>
+    <div class="nav-link active"  onclick="irA('dashboard',   this)">Dashboard</div>
+    <div class="nav-link"         onclick="irA('directorio',  this)">Directorio</div>
+    <div class="nav-link"         onclick="irA('operaciones', this)">Operaciones</div>
+    <div class="nav-right">
+      <div class="nav-user">Sesión: <span id="nav-rol">—</span></div>
+      <div class="nav-out" onclick="doLogout()">Salir</div>
     </div>
-    <div class="nav-user">Sesión: <span id="nav-username">—</span></div>
-    <div class="nav-logout" onclick="doLogout()">Salir</div>
   </nav>
 
   <div class="app-content">
-    <!-- Páginas inyectadas desde /routes/ -->
-    <!-- En producción usar fetch() o un bundler; aquí se incluyen inline -->
 
     <!-- Dashboard -->
     <div id="page-dashboard" class="page active">
       <div class="page-header">
         <h1>Panel General</h1>
-        <p>Resumen en tiempo real · Lumière Complementos S.A.</p>
+        <p>Resumen de Nexora Tech</p>
       </div>
       <div class="metrics-grid" id="metrics-grid">
-        <div class="loading"><div class="spinner"></div>Cargando métricas…</div>
+        <div class="loading"><div class="spinner"></div> Cargando...</div>
       </div>
-      <div class="dashboard-grid">
-        <div class="dash-panel">
+      <div class="dash-grid">
+        <div class="panel">
           <h3>Actividad Reciente</h3>
           <ul class="activity-list" id="activity-list">
-            <li class="loading"><div class="spinner"></div>Cargando…</li>
+            <li class="loading"><div class="spinner"></div> Cargando...</li>
           </ul>
         </div>
-        <div class="dash-panel">
+        <div class="panel">
           <h3>Empleados por Departamento</h3>
           <table class="simple-table">
             <thead><tr><th>Departamento</th><th>Empleados</th><th>Estado</th></tr></thead>
             <tbody id="dept-tbody">
-              <tr><td colspan="3"><div class="loading"><div class="spinner"></div>Cargando…</div></td></tr>
+              <tr><td colspan="3"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
             </tbody>
           </table>
         </div>
@@ -135,177 +103,170 @@
     <!-- Directorio -->
     <div id="page-directorio" class="page">
       <div class="page-header">
-        <h1>Directorio de Empleados</h1>
-        <p>Busca y filtra entre el personal de la empresa</p>
+        <h1>Directorio</h1>
+        <p>Busca empleados por nombre, cargo o departamento</p>
       </div>
       <div class="search-bar">
-        <div class="search-input-wrap">
-          <span class="search-icon">⌕</span>
-          <input type="text" id="search-input" placeholder="Buscar por nombre, cargo…" oninput="filtrarEmpleados()" />
-        </div>
-        <select class="filter-select" id="filter-dept" onchange="filtrarEmpleados()">
+        <input type="text" id="buscar" placeholder="Buscar..." oninput="filtrarEmpleados()" />
+        <select id="filtro-depto" onchange="filtrarEmpleados()">
           <option value="">Todos los departamentos</option>
         </select>
-        <select class="filter-select" id="filter-status" onchange="filtrarEmpleados()">
-          <option value="">Todos los estados</option>
+        <select id="filtro-estado" onchange="filtrarEmpleados()">
+          <option value="">Todos</option>
           <option value="Activo">Activo</option>
           <option value="Inactivo">Inactivo</option>
         </select>
       </div>
-      <div class="employee-grid" id="employee-grid">
-        <div class="loading" style="grid-column:1/-1"><div class="spinner"></div>Cargando empleados…</div>
+      <div class="emp-grid" id="emp-grid">
+        <div class="loading" style="grid-column:1/-1"><div class="spinner"></div> Cargando...</div>
       </div>
     </div>
 
     <!-- Operaciones -->
     <div id="page-operaciones" class="page">
       <div class="page-header">
-        <h1>Panel de Operaciones</h1>
-        <p>Transacciones críticas que afectan a múltiples tablas simultáneamente</p>
+        <h1>Operaciones</h1>
+        <p>Gestión de empleados y proyectos</p>
       </div>
       <div class="ops-grid">
 
         <div class="ops-card">
           <h3>Alta de Empleado</h3>
-          <p class="ops-desc">Transacción completa: inserta el empleado, asigna departamento, crea usuario de acceso y registra salario inicial.</p>
+          <p>Añade un nuevo empleado a la empresa.</p>
           <div class="form-row">
-            <div class="form-group"><label>Nombre</label><input type="text" id="new-nombre" placeholder="Sofía" /></div>
-            <div class="form-group"><label>Apellido</label><input type="text" id="new-apellido" placeholder="Martínez" /></div>
+            <div class="form-group"><label>Nombre</label><input type="text" id="n-nombre" placeholder="Sara" /></div>
+            <div class="form-group"><label>Apellido</label><input type="text" id="n-apellido" placeholder="Llopis" /></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Cargo</label><input type="text" id="new-cargo" placeholder="Ej: Vendedora" /></div>
+            <div class="form-group"><label>Cargo</label><input type="text" id="n-cargo" placeholder="Developer" /></div>
             <div class="form-group">
               <label>Departamento</label>
-              <select id="new-dept">
-                <option value="1">Ventas</option><option value="2">Almacén</option>
-                <option value="3">Diseño</option><option value="4">Dirección</option><option value="5">RRHH</option>
+              <select id="n-dept">
+                <option value="1">Desarrollo</option>
+                <option value="2">Marketing</option>
+                <option value="3">Soporte</option>
+                <option value="4">Dirección</option>
               </select>
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Email</label><input type="email" id="new-email" placeholder="sofia@lumiere.es" /></div>
-            <div class="form-group"><label>Salario (€)</label><input type="number" id="new-salario" placeholder="28000" /></div>
+            <div class="form-group"><label>Email</label><input type="email" id="n-email" placeholder="sara@nexora.io" /></div>
+            <div class="form-group"><label>Salario (€)</label><input type="number" id="n-salario" placeholder="30000" /></div>
           </div>
-          <button class="btn btn-success" onclick="altaEmpleado()">Ejecutar Transacción</button>
+          <button class="btn btn-green" onclick="altaEmpleado()">Dar de Alta</button>
         </div>
 
         <div class="ops-card">
           <h3>Baja de Empleado</h3>
-          <p class="ops-desc">Desactiva el usuario, cierra proyectos activos, elimina accesos futuros e inserta el registro en auditoría.</p>
-          <div class="form-row single">
-            <div class="form-group"><label>ID o Nombre del Empleado</label><input type="text" id="baja-id" placeholder="Ej: 7 o «Carlos López»" /></div>
+          <p>Desactiva un empleado de la empresa.</p>
+          <div class="form-row solo">
+            <div class="form-group"><label>Nombre o ID</label><input type="text" id="b-id" placeholder="Sara Llopis o 7" /></div>
           </div>
-          <div class="form-row single">
+          <div class="form-row solo">
             <div class="form-group">
-              <label>Motivo de la Baja</label>
-              <select id="baja-motivo">
-                <option>Voluntaria</option><option>Despido</option><option>Jubilación</option><option>Fin de contrato</option>
+              <label>Motivo</label>
+              <select id="b-motivo">
+                <option>Voluntaria</option><option>Despido</option>
+                <option>Fin de contrato</option><option>Jubilación</option>
               </select>
             </div>
           </div>
-          <div class="form-row single">
-            <div class="form-group"><label>Observaciones</label><textarea id="baja-obs" placeholder="Notas adicionales…"></textarea></div>
+          <div class="form-row solo">
+            <div class="form-group"><label>Observaciones</label><textarea id="b-obs" placeholder="Notas..."></textarea></div>
           </div>
-          <button class="btn btn-danger" onclick="bajaEmpleado()">Ejecutar Transacción</button>
+          <button class="btn btn-red" onclick="bajaEmpleado()">Dar de Baja</button>
         </div>
 
         <div class="ops-card">
-          <h3>Transferencia de Departamento</h3>
-          <p class="ops-desc">Cierra la posición actual del empleado (fecha de fin), lo inserta en el nuevo departamento y reasigna sus proyectos en curso.</p>
+          <h3>Cambio de Departamento</h3>
+          <p>Mueve un empleado a otro departamento.</p>
           <div class="form-row">
-            <div class="form-group"><label>ID Empleado</label><input type="number" id="trans-emp" placeholder="ID" /></div>
+            <div class="form-group"><label>ID Empleado</label><input type="number" id="t-emp" placeholder="ID" /></div>
             <div class="form-group">
-              <label>Nuevo Departamento</label>
-              <select id="trans-dest">
-                <option value="1">Ventas</option><option value="2">Almacén</option>
-                <option value="3">Diseño</option><option value="4">Dirección</option><option value="5">RRHH</option>
+              <label>Destino</label>
+              <select id="t-dest">
+                <option value="1">Desarrollo</option><option value="2">Marketing</option>
+                <option value="3">Soporte</option><option value="4">Dirección</option>
               </select>
             </div>
           </div>
-          <div class="form-row single">
-            <div class="form-group"><label>Fecha Efectiva</label><input type="date" id="trans-fecha" /></div>
+          <div class="form-row solo">
+            <div class="form-group"><label>Fecha</label><input type="date" id="t-fecha" /></div>
           </div>
-          <button class="btn btn-primary" onclick="transferenciaDepto()">Ejecutar Transacción</button>
+          <button class="btn btn-blue" onclick="transferenciaDepto()">Transferir</button>
         </div>
 
         <div class="ops-card">
           <h3>Cierre de Proyecto</h3>
-          <p class="ops-desc">Marca el proyecto como finalizado, libera a todos los empleados asignados y descuenta el coste del presupuesto del departamento.</p>
-          <div class="form-row single">
-            <div class="form-group"><label>ID o Nombre del Proyecto</label><input type="text" id="proj-id" placeholder="Ej: 12 o «Campaña Otoño»" /></div>
+          <p>Marca un proyecto como finalizado.</p>
+          <div class="form-row solo">
+            <div class="form-group"><label>Nombre o ID</label><input type="text" id="p-id" placeholder="App Móvil o 12" /></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Coste Final (€)</label><input type="number" id="proj-coste" placeholder="15000" /></div>
-            <div class="form-group"><label>Fecha Cierre</label><input type="date" id="proj-fecha" /></div>
+            <div class="form-group"><label>Coste Final (€)</label><input type="number" id="p-coste" placeholder="20000" /></div>
+            <div class="form-group"><label>Fecha Cierre</label><input type="date" id="p-fecha" /></div>
           </div>
-          <div class="form-row single">
+          <div class="form-row solo">
             <div class="form-group">
               <label>Resultado</label>
-              <select id="proj-resultado">
-                <option>Completado con éxito</option><option>Completado con incidencias</option><option>Cancelado</option>
+              <select id="p-resultado">
+                <option>Éxito</option><option>Con incidencias</option><option>Cancelado</option>
               </select>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="cierreProyecto()">Ejecutar Transacción</button>
+          <button class="btn btn-blue" onclick="cierreProyecto()">Cerrar Proyecto</button>
         </div>
 
       </div>
     </div>
 
-  </div><!-- /app-content -->
-</div><!-- /view-app -->
+  </div>
+</div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
-<!-- Scripts modularizados -->
 <script src="js/api.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/directorio.js"></script>
 <script src="js/operaciones.js"></script>
 <script>
-  /* =========================================
-     index.html — Sesión y navegación
-     ========================================= */
-
-  let currentUser = null;
+  var usuarioActual = null;
 
   function doLogin() {
-    const u   = document.getElementById('login-user').value.trim().toLowerCase();
-    const p   = document.getElementById('login-pass').value;
-    const err = document.getElementById('login-error');
+    var u = document.getElementById("login-user").value.trim().toLowerCase();
+    var p = document.getElementById("login-pass").value;
+    var err = document.getElementById("login-error");
 
-    if (USERS[u] && USERS[u].pass === p) {
-      currentUser = { username: u, role: USERS[u].role };
-      err.style.display = 'none';
-      document.getElementById('view-login').classList.remove('active');
-      document.getElementById('view-app').classList.add('active');
-      document.getElementById('nav-username').textContent = currentUser.role;
-      // Fecha de hoy en campos tipo date
-      const hoy = new Date().toISOString().split('T')[0];
-      document.querySelectorAll('input[type="date"]').forEach(el => el.value = hoy);
+    if (USUARIOS[u] && USUARIOS[u].pass === p) {
+      usuarioActual = u;
+      err.style.display = "none";
+      document.getElementById("view-login").classList.remove("active");
+      document.getElementById("view-app").classList.add("active");
+      document.getElementById("nav-rol").textContent = USUARIOS[u].rol;
+      var hoy = new Date().toISOString().split("T")[0];
+      document.querySelectorAll('input[type="date"]').forEach(function(el) { el.value = hoy; });
       cargarDashboard();
     } else {
-      err.style.display = 'block';
+      err.style.display = "block";
     }
   }
 
-  document.getElementById('login-pass').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doLogin();
+  document.getElementById("login-pass").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doLogin();
   });
 
   function doLogout() {
-    document.getElementById('view-app').classList.remove('active');
-    document.getElementById('view-login').classList.add('active');
-    currentUser = null;
+    document.getElementById("view-app").classList.remove("active");
+    document.getElementById("view-login").classList.add("active");
+    usuarioActual = null;
   }
 
-  function showPage(page, el) {
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('page-' + page).classList.add('active');
-    if (page === 'directorio') cargarDirectorio();
+  function irA(pagina, el) {
+    document.querySelectorAll(".nav-link").forEach(function(l) { l.classList.remove("active"); });
+    document.querySelectorAll(".page").forEach(function(p) { p.classList.remove("active"); });
+    el.classList.add("active");
+    document.getElementById("page-" + pagina).classList.add("active");
+    if (pagina === "directorio") cargarDirectorio();
   }
 </script>
 

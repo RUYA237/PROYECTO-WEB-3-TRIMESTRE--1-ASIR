@@ -1,88 +1,41 @@
-/* ========== DASHBOARD ========== */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 .metric-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.25rem;
-  transition: border-color var(--transition);
+  padding: 1.2rem;
 }
-.metric-card:hover { border-color: var(--accent); }
-.metric-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-}
-.metric-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem;
-  font-weight: 300;
-  color: var(--gold-light);
-  line-height: 1;
-}
-.metric-sub  { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; }
-.metric-change { font-size: 0.68rem; margin-top: 0.4rem; }
-.metric-change.up   { color: var(--success); }
-.metric-change.down { color: var(--danger);  }
+.metric-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.4rem; }
+.metric-value { font-size: 2rem; font-weight: 700; color: var(--blue); }
+.metric-sub   { font-size: 0.68rem; color: var(--dim); margin-top: 0.2rem; }
+.metric-up    { font-size: 0.7rem; color: var(--success); margin-top: 0.3rem; }
 
-.dashboard-grid {
+.dash-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-@media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; } }
-@media (max-width: 600px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .dash-grid { grid-template-columns: 1fr; } }
 
-.dash-panel {
+.panel {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: 1.2rem;
 }
-.dash-panel h3 {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
+.panel h3 { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
 
-/* Actividad */
 .activity-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.activity-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.78rem; }
-.activity-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  margin-top: 0.35rem;
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-.activity-text { color: var(--text); line-height: 1.4; }
-.activity-time { color: var(--text-dim); font-size: 0.68rem; margin-top: 0.1rem; }
+.activity-item { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.8rem; }
+.dot { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; margin-top: 0.35rem; flex-shrink: 0; opacity: 0.7; }
+.act-time { font-size: 0.68rem; color: var(--dim); margin-top: 0.1rem; }
 
-/* Tabla departamentos */
-.simple-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
-.simple-table th {
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  text-align: left;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.simple-table td {
-  padding: 0.55rem 0;
-  border-bottom: 1px solid rgba(46,43,36,0.5);
-  color: var(--text);
-  vertical-align: middle;
-}
+.simple-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.simple-table th { font-size: 0.65rem; color: var(--dim); text-align: left; padding: 0.4rem 0; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+.simple-table td { padding: 0.5rem 0; border-bottom: 1px solid rgba(42,50,69,0.5); }
 .simple-table tr:last-child td { border-bottom: none; }

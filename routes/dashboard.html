@@ -1,38 +1,28 @@
-<!-- routes/dashboard.html — Contenido de la página Dashboard -->
-
 <div id="page-dashboard" class="page active">
   <div class="page-header">
     <h1>Panel General</h1>
-    <p>Resumen en tiempo real · Lumière Complementos S.A.</p>
+    <p>Resumen de Nexora Tech</p>
   </div>
 
-  <!-- Métricas -->
   <div class="metrics-grid" id="metrics-grid">
-    <div class="loading"><div class="spinner"></div>Cargando métricas…</div>
+    <div class="loading"><div class="spinner"></div> Cargando...</div>
   </div>
 
-  <div class="dashboard-grid">
-
-    <!-- Actividad reciente -->
-    <div class="dash-panel">
+  <div class="dash-grid">
+    <div class="panel">
       <h3>Actividad Reciente</h3>
       <ul class="activity-list" id="activity-list">
-        <li class="loading"><div class="spinner"></div>Cargando…</li>
+        <li class="loading"><div class="spinner"></div> Cargando...</li>
       </ul>
     </div>
-
-    <!-- Empleados por departamento -->
-    <div class="dash-panel">
+    <div class="panel">
       <h3>Empleados por Departamento</h3>
-      <table class="simple-table" id="dept-table">
-        <thead>
-          <tr><th>Departamento</th><th>Empleados</th><th>Estado</th></tr>
-        </thead>
+      <table class="simple-table">
+        <thead><tr><th>Departamento</th><th>Empleados</th><th>Estado</th></tr></thead>
         <tbody id="dept-tbody">
-          <tr><td colspan="3"><div class="loading"><div class="spinner"></div>Cargando…</div></td></tr>
+          <tr><td colspan="3"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
         </tbody>
       </table>
     </div>
-
   </div>
 </div>

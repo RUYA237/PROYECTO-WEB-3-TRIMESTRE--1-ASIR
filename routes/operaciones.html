@@ -1,146 +1,102 @@
-<!-- routes/operaciones.html — Contenido de la página Operaciones -->
-
 <div id="page-operaciones" class="page">
   <div class="page-header">
-    <h1>Panel de Operaciones</h1>
-    <p>Transacciones críticas que afectan a múltiples tablas simultáneamente</p>
+    <h1>Operaciones</h1>
+    <p>Gestión de empleados y proyectos</p>
   </div>
 
   <div class="ops-grid">
 
-    <!-- Alta de empleado -->
     <div class="ops-card">
       <h3>Alta de Empleado</h3>
-      <p class="ops-desc">Transacción completa: inserta el empleado, asigna departamento, crea usuario de acceso y registra salario inicial.</p>
+      <p>Añade un nuevo empleado a la empresa.</p>
       <div class="form-row">
-        <div class="form-group">
-          <label>Nombre</label>
-          <input type="text" id="new-nombre" placeholder="Sofía" />
-        </div>
-        <div class="form-group">
-          <label>Apellido</label>
-          <input type="text" id="new-apellido" placeholder="Martínez" />
-        </div>
+        <div class="form-group"><label>Nombre</label><input type="text" id="n-nombre" placeholder="Sara" /></div>
+        <div class="form-group"><label>Apellido</label><input type="text" id="n-apellido" placeholder="Llopis" /></div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Cargo</label>
-          <input type="text" id="new-cargo" placeholder="Ej: Vendedora" />
-        </div>
+        <div class="form-group"><label>Cargo</label><input type="text" id="n-cargo" placeholder="Developer" /></div>
         <div class="form-group">
           <label>Departamento</label>
-          <select id="new-dept">
-            <option value="1">Ventas</option>
-            <option value="2">Almacén</option>
-            <option value="3">Diseño</option>
+          <select id="n-dept">
+            <option value="1">Desarrollo</option>
+            <option value="2">Marketing</option>
+            <option value="3">Soporte</option>
             <option value="4">Dirección</option>
-            <option value="5">RRHH</option>
           </select>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="new-email" placeholder="sofia@lumiere.es" />
-        </div>
-        <div class="form-group">
-          <label>Salario (€)</label>
-          <input type="number" id="new-salario" placeholder="28000" />
-        </div>
+        <div class="form-group"><label>Email</label><input type="email" id="n-email" placeholder="sara@nexora.io" /></div>
+        <div class="form-group"><label>Salario (€)</label><input type="number" id="n-salario" placeholder="30000" /></div>
       </div>
-      <button class="btn btn-success" onclick="altaEmpleado()">Ejecutar Transacción</button>
+      <button class="btn btn-green" onclick="altaEmpleado()">Dar de Alta</button>
     </div>
 
-    <!-- Baja de empleado -->
     <div class="ops-card">
       <h3>Baja de Empleado</h3>
-      <p class="ops-desc">Desactiva el usuario, cierra proyectos activos, elimina accesos futuros e inserta el registro en auditoría.</p>
-      <div class="form-row single">
-        <div class="form-group">
-          <label>ID o Nombre del Empleado</label>
-          <input type="text" id="baja-id" placeholder="Ej: 7 o «Carlos López»" />
-        </div>
+      <p>Desactiva un empleado de la empresa.</p>
+      <div class="form-row solo">
+        <div class="form-group"><label>Nombre o ID</label><input type="text" id="b-id" placeholder="Sara Llopis o 7" /></div>
       </div>
-      <div class="form-row single">
+      <div class="form-row solo">
         <div class="form-group">
-          <label>Motivo de la Baja</label>
-          <select id="baja-motivo">
+          <label>Motivo</label>
+          <select id="b-motivo">
             <option>Voluntaria</option>
             <option>Despido</option>
-            <option>Jubilación</option>
             <option>Fin de contrato</option>
+            <option>Jubilación</option>
           </select>
         </div>
       </div>
-      <div class="form-row single">
-        <div class="form-group">
-          <label>Observaciones</label>
-          <textarea id="baja-obs" placeholder="Notas adicionales…"></textarea>
-        </div>
+      <div class="form-row solo">
+        <div class="form-group"><label>Observaciones</label><textarea id="b-obs" placeholder="Notas..."></textarea></div>
       </div>
-      <button class="btn btn-danger" onclick="bajaEmpleado()">Ejecutar Transacción</button>
+      <button class="btn btn-red" onclick="bajaEmpleado()">Dar de Baja</button>
     </div>
 
-    <!-- Transferencia de departamento -->
     <div class="ops-card">
-      <h3>Transferencia de Departamento</h3>
-      <p class="ops-desc">Cierra la posición actual del empleado (fecha de fin), lo inserta en el nuevo departamento y reasigna sus proyectos en curso.</p>
+      <h3>Cambio de Departamento</h3>
+      <p>Mueve un empleado a otro departamento.</p>
       <div class="form-row">
+        <div class="form-group"><label>ID Empleado</label><input type="number" id="t-emp" placeholder="ID" /></div>
         <div class="form-group">
-          <label>ID Empleado</label>
-          <input type="number" id="trans-emp" placeholder="ID" />
-        </div>
-        <div class="form-group">
-          <label>Nuevo Departamento</label>
-          <select id="trans-dest">
-            <option value="1">Ventas</option>
-            <option value="2">Almacén</option>
-            <option value="3">Diseño</option>
+          <label>Destino</label>
+          <select id="t-dest">
+            <option value="1">Desarrollo</option>
+            <option value="2">Marketing</option>
+            <option value="3">Soporte</option>
             <option value="4">Dirección</option>
-            <option value="5">RRHH</option>
           </select>
         </div>
       </div>
-      <div class="form-row single">
-        <div class="form-group">
-          <label>Fecha Efectiva</label>
-          <input type="date" id="trans-fecha" />
-        </div>
+      <div class="form-row solo">
+        <div class="form-group"><label>Fecha</label><input type="date" id="t-fecha" /></div>
       </div>
-      <button class="btn btn-primary" onclick="transferenciaDepto()">Ejecutar Transacción</button>
+      <button class="btn btn-blue" onclick="transferenciaDepto()">Transferir</button>
     </div>
 
-    <!-- Cierre de proyecto -->
     <div class="ops-card">
       <h3>Cierre de Proyecto</h3>
-      <p class="ops-desc">Marca el proyecto como finalizado, libera a todos los empleados asignados y descuenta el coste del presupuesto del departamento.</p>
-      <div class="form-row single">
-        <div class="form-group">
-          <label>ID o Nombre del Proyecto</label>
-          <input type="text" id="proj-id" placeholder="Ej: 12 o «Campaña Otoño»" />
-        </div>
+      <p>Marca un proyecto como finalizado.</p>
+      <div class="form-row solo">
+        <div class="form-group"><label>Nombre o ID del Proyecto</label><input type="text" id="p-id" placeholder="App Móvil o 12" /></div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Coste Final (€)</label>
-          <input type="number" id="proj-coste" placeholder="15000" />
-        </div>
-        <div class="form-group">
-          <label>Fecha Cierre</label>
-          <input type="date" id="proj-fecha" />
-        </div>
+        <div class="form-group"><label>Coste Final (€)</label><input type="number" id="p-coste" placeholder="20000" /></div>
+        <div class="form-group"><label>Fecha Cierre</label><input type="date" id="p-fecha" /></div>
       </div>
-      <div class="form-row single">
+      <div class="form-row solo">
         <div class="form-group">
           <label>Resultado</label>
-          <select id="proj-resultado">
-            <option>Completado con éxito</option>
-            <option>Completado con incidencias</option>
+          <select id="p-resultado">
+            <option>Éxito</option>
+            <option>Con incidencias</option>
             <option>Cancelado</option>
           </select>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="cierreProyecto()">Ejecutar Transacción</button>
+      <button class="btn btn-blue" onclick="cierreProyecto()">Cerrar Proyecto</button>
     </div>
 
   </div>
