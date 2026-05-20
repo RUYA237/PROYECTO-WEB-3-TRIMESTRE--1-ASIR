@@ -1,15 +1,26 @@
 .ops-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
 }
+
 .ops-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
-.ops-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
-.ops-card p  { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.5; }
-.form-row      { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.ops-card h3 { font-size: 0.9rem; font-weight: 700; }
+.ops-card > p { font-size: 0.78rem; color: var(--muted); }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
 .form-row.solo { grid-template-columns: 1fr; }

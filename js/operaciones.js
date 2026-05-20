@@ -1,60 +1,119 @@
-function altaEmpleado() {
-  var nombre   = document.getElementById("n-nombre").value.trim();
-  var apellido = document.getElementById("n-apellido").value.trim();
-  var cargo    = document.getElementById("n-cargo").value.trim();
-  var email    = document.getElementById("n-email").value.trim();
-  var salario  = document.getElementById("n-salario").value;
+checkAuth();
 
-  if (!nombre || !apellido || !cargo || !email || !salario) {
-    showToast("Rellena todos los campos", "error");
+var user = localStorage.getItem("nexora-user");
+document.getElementById("nav-user-name").textContent = user;
+
+document.getElementById("btn-salir").onclick = function() {
+  localStorage.clear();
+  window.location.href = "../index.html";
+};
+
+async function altaEmpleado() {
+  var dni       = document.getElementById("n-dni").value.trim();
+  var nombre    = document.getElementById("n-nombre").value.trim();
+  var apellidos = document.getElementById("n-apellido").value.trim();
+  var id_dept   = document.getElementById("n-dept").value;
+  var email     = document.getElementById("n-email").value.trim();
+  var salario   = document.getElementById("n-salario").value;
+
+  if (!dni || !nombre || !apellidos || !email || !salario) {
+    showToast("Rellena todos los campos.", "error");
     return;
   }
 
-  showToast("✓ " + nombre + " " + apellido + " dado de alta correctamente");
-  document.getElementById("n-nombre").value   = "";
-  document.getElementById("n-apellido").value = "";
-  document.getElementById("n-cargo").value    = "";
-  document.getElementById("n-email").value    = "";
-  document.getElementById("n-salario").value  = "";
+  try {
+    await apiFetch("/api/transaccion/contratar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        dni,
+        nombre,
+        apellidos,
+        id_departamento: Number(id_dept),
+        email,
+        salario: Number(salario),
+      }),
+    });
+    showToast("Empleado dado de alta correctamente.");
+    ["n-dni","n-nombre","n-apellido","n-email","n-salario"].forEach(function(id) {
+      document.getElementById(id).value = "";
+    });
+  } catch(e) {
+    showToast(e.message || "Error al dar de alta.", "error");
+  }
 }
 
-function bajaEmpleado() {
-  var id     = document.getElementById("b-id").value.trim();
-  var motivo = document.getElementById("b-motivo").value;
+async function bajaEmpleado() {
+  var id = document.getElementById("b-id").value.trim();
 
   if (!id) {
-    showToast("Introduce el nombre o ID del empleado", "error");
+    showToast("Introduce el ID del empleado.", "error");
     return;
   }
 
-  showToast("✓ Baja procesada. Motivo: " + motivo);
-  document.getElementById("b-id").value  = "";
-  document.getElementById("b-obs").value = "";
+  try {
+    await apiFetch("/api/transaccion/despedir", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_empleado: Number(id), id_admin_ejecutor: user }),
+    });
+    showToast("Empleado dado de baja.");
+    document.getElementById("b-id").value = "";
+  } catch(e) {
+    showToast(e.message || "Error al dar de baja.", "error");
+  }
 }
 
-function transferenciaDepto() {
-  var empId = document.getElementById("t-emp").value;
-  var dest  = document.getElementById("t-dest");
+async function transferenciaDepto() {
+  var id_emp  = document.getElementById("t-emp").value;
+  var id_dest = document.getElementById("t-dest").value;
 
-  if (!empId) {
-    showToast("Introduce el ID del empleado", "error");
+  if (!id_emp) {
+    showToast("Introduce el ID del empleado.", "error");
     return;
   }
 
-  showToast("✓ Empleado #" + empId + " transferido a " + dest.options[dest.selectedIndex].text);
-  document.getElementById("t-emp").value = "";
+  try {
+    await apiFetch("/api/transaccion/trasladar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id_empleado: Number(id_emp),
+        id_departamento_nuevo: Number(id_dest),
+      }),
+    });
+    showToast("Empleado trasladado correctamente.");
+    document.getElementById("t-emp").value = "";
+  } catch(e) {
+    showToast(e.message || "Error en la transferencia.", "error");
+  }
 }
 
-function cierreProyecto() {
-  var id    = document.getElementById("p-id").value.trim();
-  var coste = document.getElementById("p-coste").value;
+async function cierreProyecto() {
+  var id_proyecto = document.getElementById("p-proyecto").value;
+  var id_empleado = document.getElementById("p-empleado").value;
+  var incentivo   = document.getElementById("p-incentivo").value;
 
-  if (!id || !coste) {
-    showToast("Introduce el proyecto y el coste", "error");
+  if (!id_proyecto || !id_empleado || !incentivo) {
+    showToast("Rellena todos los campos.", "error");
     return;
   }
 
-  showToast("✓ Proyecto «" + id + "» cerrado. Coste: €" + Number(coste).toLocaleString("es-ES"));
-  document.getElementById("p-id").value    = "";
-  document.getElementById("p-coste").value = "";
+  try {
+    await apiFetch("/api/transaccion/cerrar-proyecto", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id_proyecto: Number(id_proyecto),
+        id_empleado: Number(id_empleado),
+        incentivo:   Number(incentivo),
+      }),
+    });
+    showToast("Proyecto cerrado correctamente.");
+    ["p-proyecto","p-empleado","p-incentivo"].forEach(function(id) {
+      document.getElementById(id).value = "";
+    });
+  } catch(e) {
+    showToast(e.message || "Error al cerrar el proyecto.", "error");
+  }
 }

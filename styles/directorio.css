@@ -1,6 +1,13 @@
-.search-bar { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.search-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
 .search-bar input {
-  flex: 1; min-width: 200px;
+  flex: 1;
+  min-width: 200px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -8,42 +15,54 @@
   padding: 0.6rem 0.8rem;
   font-size: 0.85rem;
   outline: none;
+  font-family: inherit;
 }
+
 .search-bar input:focus { border-color: var(--blue); }
+
 .search-bar select {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
   padding: 0.6rem 0.8rem;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   outline: none;
   cursor: pointer;
+  font-family: inherit;
 }
+
 .search-bar select:focus { border-color: var(--blue); }
 
 .emp-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
 }
+
 .emp-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.2rem;
 }
-.emp-card:hover { border-color: var(--blue); }
-.emp-avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--blue-dim);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 0.9rem; color: var(--blue);
-  margin-bottom: 0.75rem;
+
+.emp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.6rem;
 }
-.emp-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.1rem; }
-.emp-role { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.5rem; }
-.emp-info { font-size: 0.7rem; color: var(--dim); display: flex; flex-direction: column; gap: 0.15rem; }
-.no-results { grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; }
+
+.emp-nombre { font-size: 0.9rem; font-weight: 600; }
+.emp-cargo  { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+.emp-depto  { font-size: 0.72rem; color: var(--blue); margin-top: 0.5rem; }
+.emp-email  { font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; word-break: break-all; }
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 3rem 0;
+}

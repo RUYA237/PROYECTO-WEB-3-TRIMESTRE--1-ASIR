@@ -1,28 +1,53 @@
-<div id="page-dashboard" class="page active">
-  <div class="page-header">
-    <h1>Panel General</h1>
-    <p>Resumen de Nexora Tech</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexora Tech · Dashboard</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/dashboard.css" />
+</head>
+<body class="app">
+  <nav class="nav">
+    <span class="nav-logo">Nexora</span>
+    <a class="nav-link active" href="dashboard.html">Dashboard</a>
+    <a class="nav-link" href="directorio.html">Directorio</a>
+    <a class="nav-link" href="operaciones.html">Operaciones</a>
+    <div class="nav-right">
+      <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
+      <span class="nav-out" id="btn-salir">Salir</span>
+    </div>
+  </nav>
+
+  <div class="app-content">
+    <div class="page">
+      <div class="page-header">
+        <h1>Panel General</h1>
+        <p>Resumen de Nexora Tech</p>
+      </div>
+      <div class="metrics-grid" id="metrics-grid"></div>
+      <div class="dash-grid">
+        <div class="panel">
+          <h3>Actividad Reciente</h3>
+          <ul class="activity-list" id="activity-list"></ul>
+        </div>
+        <div class="panel">
+          <h3>Empleados por Departamento</h3>
+          <table class="simple-table">
+            <tr>
+              <th>Departamento</th>
+              <th>Empleados</th>
+              <th>Estado</th>
+            </tr>
+            <tbody id="dept-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="metrics-grid" id="metrics-grid">
-    <div class="loading"><div class="spinner"></div> Cargando...</div>
-  </div>
-
-  <div class="dash-grid">
-    <div class="panel">
-      <h3>Actividad Reciente</h3>
-      <ul class="activity-list" id="activity-list">
-        <li class="loading"><div class="spinner"></div> Cargando...</li>
-      </ul>
-    </div>
-    <div class="panel">
-      <h3>Empleados por Departamento</h3>
-      <table class="simple-table">
-        <thead><tr><th>Departamento</th><th>Empleados</th><th>Estado</th></tr></thead>
-        <tbody id="dept-tbody">
-          <tr><td colspan="3"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+  <div id="toast"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

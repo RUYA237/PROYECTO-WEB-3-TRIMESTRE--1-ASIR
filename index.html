@@ -4,33 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexora Tech · Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="stylesheet" href="styles/login.css" />
 </head>
-<body>
-
+<body class="login">
   <div class="login-box">
     <div class="login-logo">
       <h1>Nexora Tech</h1>
       <p>Sistema de Gestión Interna</p>
     </div>
-
     <div class="form-group">
       <label>Usuario</label>
-      <input type="text" id="login-user" value="admin" placeholder="usuario" />
+      <input type="text" id="login-user" placeholder="usuario" autocomplete="username" />
     </div>
-
     <div class="form-group">
       <label>Contraseña</label>
-      <input type="password" id="login-pass" value="1234" placeholder="••••••" />
+      <input type="password" id="login-pass" placeholder="••••••" autocomplete="current-password" />
     </div>
-
     <p id="login-error">Usuario o contraseña incorrectos.</p>
-
     <button class="btn btn-blue" onclick="doLogin()">Entrar</button>
-
-    <p class="login-hint">Demo: <span>admin / 1234</span> · <span>rrhh / 1234</span></p>
   </div>
 
   <script src="js/api.js"></script>
@@ -40,11 +31,12 @@
     });
 
     function doLogin() {
-      var u   = document.getElementById("login-user").value.trim().toLowerCase();
-      var p   = document.getElementById("login-pass").value;
+      var u = document.getElementById("login-user").value.trim().toLowerCase();
+      var p = document.getElementById("login-pass").value;
       var err = document.getElementById("login-error");
 
       if (USUARIOS[u] && USUARIOS[u].pass === p) {
+        err.style.display = "none";
         localStorage.setItem("nexora-user", u);
         localStorage.setItem("nexora-rol",  USUARIOS[u].rol);
         window.location.href = "routes/dashboard.html";
@@ -53,6 +45,5 @@
       }
     }
   </script>
-
 </body>
 </html>

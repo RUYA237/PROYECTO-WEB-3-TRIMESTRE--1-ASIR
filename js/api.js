@@ -1,3 +1,5 @@
+var API_URL = "http://localhost:3000";
+
 var USUARIOS = {
   admin: { pass: "1234", rol: "Administrador" },
   rrhh:  { pass: "1234", rol: "Recursos Humanos" },
@@ -5,9 +7,9 @@ var USUARIOS = {
 
 var METRICAS = [
   { label: "Empleados Activos", valor: "38",   sub: "en plantilla",  cambio: "+2 este mes" },
-  { label: "Departamentos",     valor: "4",    sub: "áreas activas", cambio: null },
-  { label: "Proyectos",         valor: "9",    sub: "en curso",      cambio: "+1 nuevo" },
-  { label: "Ingresos Mes",      valor: "€62K", sub: "brutos",        cambio: "+5.1%" },
+  { label: "Departamentos",     valor: "4",    sub: "áreas activas", cambio: null           },
+  { label: "Proyectos",         valor: "9",    sub: "en curso",      cambio: "+1 nuevo"      },
+  { label: "Ingresos Mes",      valor: "€62K", sub: "brutos",        cambio: "+5.1%"         },
 ];
 
 var ACTIVIDAD = [
@@ -36,9 +38,22 @@ var EMPLEADOS = [
   { nombre: "Tomás Ibáñez", cargo: "DevOps",            depto: "Desarrollo", email: "t.ibanez@nexora.io", activo: true  },
 ];
 
+function checkAuth() {
+  if (!localStorage.getItem("nexora-user")) {
+    window.location.href = "../index.html";
+  }
+}
+
 function showToast(msg, tipo) {
   var t = document.getElementById("toast");
   t.textContent = msg;
   t.className = "show " + (tipo || "success");
   setTimeout(function() { t.className = ""; }, 3000);
+}
+
+async function apiFetch(path, opciones) {
+  var resp = await fetch(API_URL + path, opciones);
+  var data = await resp.json();
+  if (!resp.ok) throw new Error(data.mensaje || "Error " + resp.status);
+  return data;
 }

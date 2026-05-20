@@ -1,22 +1,48 @@
-<div id="page-directorio" class="page">
-  <div class="page-header">
-    <h1>Directorio</h1>
-    <p>Busca empleados por nombre, cargo o departamento</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexora Tech · Directorio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/directorio.css" />
+</head>
+<body class="app">
+  <nav class="nav">
+    <span class="nav-logo">Nexora</span>
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+    <a class="nav-link active" href="directorio.html">Directorio</a>
+    <a class="nav-link" href="operaciones.html">Operaciones</a>
+    <div class="nav-right">
+      <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
+      <span class="nav-out" id="btn-salir">Salir</span>
+    </div>
+  </nav>
+
+  <div class="app-content">
+    <div class="page">
+      <div class="page-header">
+        <h1>Directorio</h1>
+        <p>Busca empleados por nombre, cargo o departamento</p>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="buscar" placeholder="Buscar..." oninput="filtrarEmpleados()" />
+        <select id="filtro-depto" onchange="filtrarEmpleados()">
+          <option value="">Todos los departamentos</option>
+        </select>
+        <select id="filtro-estado" onchange="filtrarEmpleados()">
+          <option value="">Todos</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="emp-grid" id="emp-grid"></div>
+    </div>
   </div>
 
-  <div class="search-bar">
-    <input type="text" id="buscar" placeholder="Buscar..." oninput="filtrarEmpleados()" />
-    <select id="filtro-depto" onchange="filtrarEmpleados()">
-      <option value="">Todos los departamentos</option>
-    </select>
-    <select id="filtro-estado" onchange="filtrarEmpleados()">
-      <option value="">Todos</option>
-      <option value="Activo">Activo</option>
-      <option value="Inactivo">Inactivo</option>
-    </select>
-  </div>
-
-  <div class="emp-grid" id="emp-grid">
-    <div class="loading" style="grid-column:1/-1"><div class="spinner"></div> Cargando...</div>
-  </div>
-</div>
+  <div id="toast"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/directorio.js"></script>
+</body>
+</html>
