@@ -21,29 +21,7 @@
       <input type="password" id="login-pass" placeholder="••••••" autocomplete="current-password" />
     </div>
     <p id="login-error">Usuario o contraseña incorrectos.</p>
-    <button class="btn btn-blue" onclick="doLogin()">Entrar</button>
+    <button class="btn btn-blue" onclick="window.location.href='routes/dashboard.html'">Entrar</button>
   </div>
-
-  <script src="js/api.js"></script>
-  <script>
-    document.getElementById("login-pass").addEventListener("keydown", function(e) {
-      if (e.key === "Enter") doLogin();
-    });
-
-    function doLogin() {
-      var u = document.getElementById("login-user").value.trim().toLowerCase();
-      var p = document.getElementById("login-pass").value;
-      var err = document.getElementById("login-error");
-
-      if (USUARIOS[u] && USUARIOS[u].pass === p) {
-        err.style.display = "none";
-        localStorage.setItem("nexora-user", u);
-        localStorage.setItem("nexora-rol",  USUARIOS[u].rol);
-        window.location.href = "routes/dashboard.html";
-      } else {
-        err.style.display = "block";
-      }
-    }
-  </script>
 </body>
 </html>
