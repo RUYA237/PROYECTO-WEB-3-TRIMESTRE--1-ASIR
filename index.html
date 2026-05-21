@@ -28,59 +28,5 @@
       Ejemplo: <span>cgomez</span> / <span>hash_auto_1</span>
     </p>
   </div>
-
-  <script>
-    var API = "http://localhost:3000";
-
-    document.getElementById("login-pass").addEventListener("keydown", function(e) {
-      if (e.key === "Enter") doLogin();
-    });
-
-    async function doLogin() {
-      var user  = document.getElementById("login-user").value.trim();
-      var pass  = document.getElementById("login-pass").value;
-      var errEl = document.getElementById("login-error");
-      var btn   = document.getElementById("btn-entrar");
-
-      errEl.style.display = "none";
-
-      if (!user || !pass) {
-        errEl.textContent   = "Rellena los dos campos.";
-        errEl.style.display = "block";
-        return;
-      }
-
-      btn.textContent = "Entrando...";
-      btn.disabled    = true;
-
-      try {
-        var resp = await fetch(API + "/api/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: user, password: pass }),
-        });
-
-        var data = await resp.json();
-
-        if (data.exito) {
-          localStorage.setItem("nx-user",   data.datos.username);
-          localStorage.setItem("nx-rol",    data.datos.rol);
-          localStorage.setItem("nx-nombre", data.datos.nombre);
-          window.location.href = "routes/dashboard.html";
-        } else {
-          errEl.textContent   = data.mensaje || "Credenciales incorrectas.";
-          errEl.style.display = "block";
-        }
-
-      } catch (e) {
-        errEl.textContent   = "No se puede conectar con el servidor (localhost:3000).";
-        errEl.style.display = "block";
-      } finally {
-        btn.textContent = "Entrar";
-        btn.disabled    = false;
-      }
-    }
-  </script>
-
 </body>
 </html>

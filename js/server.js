@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { 
-    verificarLogin,
     obtenerListaEmpleados, 
     obtenerDashboardStats, 
     transaccionDespedirEmpleado,
@@ -15,7 +14,7 @@ import {
     transaccionActualizarDepartamento,
     transaccionContratarEmpleado,
     transaccionCerrarProyecto
-} from './consultas_estudiantes.js';
+} from '../consultas_estudiantes.js';
 
 dotenv.config();
 const app = express();
@@ -119,23 +118,6 @@ app.post('/api/transaccion/cerrar-proyecto', async (req, res) => {
         res.json({ exito: true, mensaje: "Proyecto cerrado correctamente." });
     } catch (error) {
         res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
-    }
-});
-
-// Ruta POST: Login (verifica credenciales contra credenciales_acceso)
-app.post('/api/login', async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        return res.status(400).json({ exito: false, mensaje: 'Faltan credenciales' });
-    }
-    try {
-        const user = await verificarLogin(username, password);
-        if (!user) {
-            return res.status(401).json({ exito: false, mensaje: 'Usuario o contraseña incorrectos' });
-        }
-        res.json({ exito: true, datos: user });
-    } catch (error) {
-        res.status(500).json({ exito: false, mensaje: 'Error interno', error: error.message });
     }
 });
 
