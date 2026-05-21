@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { 
     obtenerListaEmpleados, 
     obtenerDashboardStats, 
@@ -14,10 +16,13 @@ import {
     transaccionActualizarDepartamento,
     transaccionContratarEmpleado,
     transaccionCerrarProyecto
-} from '../consultas_estudiantes.js';
+} from './consultas_estudiantes.js';
 import authRoutes from './index.js';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: join(__dirname, '../.env') });
 const app = express();
 
 // Middlewares obligatorios

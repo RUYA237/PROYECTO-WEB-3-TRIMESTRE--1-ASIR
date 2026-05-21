@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexora Tech · Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Nexora — Dashboard</title>
   <link rel="stylesheet" href="../styles/styles.css" />
   <link rel="stylesheet" href="../styles/dashboard.css" />
 </head>
@@ -16,8 +15,8 @@
     <a class="nav-link"        href="directorio.html">Directorio</a>
     <a class="nav-link"        href="operaciones.html">Operaciones</a>
     <div class="nav-right">
-      <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
-      <span class="nav-out"  id="btn-salir">Salir</span>
+      <span class="nav-user">Sesión:<span id="nav-user-name"></span></span>
+      <span class="nav-out" id="btn-salir">Salir</span>
     </div>
   </nav>
 
@@ -27,41 +26,42 @@
       <p>Métricas en tiempo real de empresa_core_DB</p>
     </div>
 
-    <p id="aviso-servidor" style="display:none; font-size:0.78rem; color:var(--danger); margin-bottom:1rem;">
-      ⚠ Servidor no disponible. Los datos mostrados son estáticos.
-    </p>
-
-    <div class="metrics-grid" id="metrics-grid"></div>
-
     <div class="dash-grid">
       <div class="panel">
         <h3>Departamentos</h3>
-        <table class="dept-table">
-          <thead>
-            <tr><th>Nombre</th><th>Presupuesto</th><th>Estado</th></tr>
-          </thead>
-          <tbody id="dept-tbody"></tbody>
-        </table>
+          <li>
+            <span class="dept-name">Marketing</span>
+            <span class="dept-badge-active">Activo</span>
+          </li>
+          <li>
+            <span class="dept-name">Ingeniería</span>
+            <span class="dept-badge-active">Activo</span>
+          </li>
+          <li>
+            <span class="dept-name">Recursos Humanos</span>
+            <span class="dept-badge-warning">En Revisión</span>
+          </li>
+          <li>
+            <span class="dept-name">Legal</span>
+            <span class="dept-badge-inactive">Inactivo</span>
+          </li>
+        </ul>
       </div>
+
       <div class="panel">
         <h3>Información del sistema</h3>
         <ul class="log-list">
           <li><span>Base de datos</span><small>empresa_core</small></li>
-          <li><span>SGBD</span><small>MySQL 8</small></li>
-          <li><span>API</span><small>Node.js / Express</small></li>
-          <li><span>Puerto</span><small>localhost:3000</small></li>
-          <li><span>Rol activo</span><small id="info-rol"></small></li>
+          <li><span>SGBD</span>         <small>MySQL 8</small></li>
+          <li><span>API</span>          <small>Node.js / Express</small></li>
+          <li><span>Puerto</span>       <small>localhost:3000</small></li>
+          <li><span>Rol activo</span>   <small id="info-rol">—</small></li>
         </ul>
       </div>
+
     </div>
   </div>
 
   <div id="toast"></div>
-  <script src="../js/api.js"></script>
-  <script src="../js/dashboard.js"></script>
-  <script>
-    var rolEl = document.getElementById("info-rol");
-    if (rolEl) rolEl.textContent = getRol() || "—";
-  </script>
 </body>
 </html>

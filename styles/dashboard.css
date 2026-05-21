@@ -1,79 +1,59 @@
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.75rem;
-}
-
-.metric-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.2rem 1.4rem;
-}
-
-.metric-label {
-  font-size: 0.7rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.5rem;
-}
-
-.metric-valor {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.metric-sub {
-  font-size: 0.72rem;
-  color: var(--muted);
-  margin-top: 0.4rem;
-}
-
 .dash-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-}
-
-@media (max-width: 700px) {
-  .dash-grid { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  margin-top: 3rem;
 }
 
 .panel {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.2rem;
+  padding: 2.5rem;
 }
 
-.panel h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+.panel h3 { 
+font-size: 0.85rem;
+font-weight: 600;
+margin-bottom: 1rem;
+padding-bottom: 0.5rem;
+border-bottom: 1px solid var(--border);
+}
 
-.dept-table {
-  width: 100%;
-  border-collapse: collapse;
+.dept-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.dept-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.8rem;
-}
-
-.dept-table th {
-  text-align: left;
-  color: var(--muted);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0 0 0.6rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.dept-table td {
   padding: 0.6rem 0;
   border-bottom: 1px solid var(--border);
 }
-
-.dept-table tr:last-child td { border-bottom: none; }
+.dept-badge-active {
+  color: var(--green);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  margin-left: 6.5rem;
+}
+.badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+}
+.dept-badge-warning {
+  color: var(--yellow);
+  margin-left: 6.5rem;
+}
+.dept-badge-inactive {
+  color: var(--red);
+  margin-left: 6.5rem;
+}
 
 .log-list {
   list-style: none;
@@ -92,10 +72,12 @@
   gap: 1rem;
 }
 
-.log-list li:last-child { border-bottom: none; }
-
 .log-list li small {
   color: var(--muted);
-  font-size: 0.7rem;
-  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 700px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
 }
