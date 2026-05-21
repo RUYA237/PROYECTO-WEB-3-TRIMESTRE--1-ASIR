@@ -5,76 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexora Tech · Operaciones Críticas</title>
   <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/operaciones.css" />
   <style>
-    /* Tabs */
-    .ops-tabs {
-      display: flex;
-      gap: 0;
-      border-bottom: 2px solid var(--cream-dark);
-      margin-bottom: 32px;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-    }
-    .ops-tab {
-      padding: 12px 20px;
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .ops-tab:hover { color: var(--terracotta); }
-    .ops-tab.active { color: var(--terracotta); border-bottom-color: var(--terracotta); }
-
-    .ops-panel { display: none; }
-    .ops-panel.active { display: block; }
-
-    /* Transaction card */
-    .tx-card {
-      background: var(--warm-white);
-      border: 1px solid var(--cream-dark);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    .tx-card-header {
-      background: var(--cream);
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border-bottom: 1px solid var(--cream-dark);
-    }
-    .tx-number {
-      width: 32px; height: 32px;
-      background: var(--terracotta);
-      color: white;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .78rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .tx-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--brown-dark);
-    }
-    .tx-card-subtitle {
-      font-size: .78rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-    .tx-card-body { padding: 24px; }
-    .tx-result {
-      margin-top: 16px;
-      display: none;
-    }
-    .tx-result.show { display: block; }
   </style>
 </head>
 <body>
