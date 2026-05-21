@@ -10,7 +10,6 @@
 
 <div class="app-layout">
 
-  <!-- ===================== SIDEBAR ===================== -->
   <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
@@ -72,7 +71,6 @@
     </div>
   </aside>
 
-  <!-- ===================== MAIN ===================== -->
   <main class="main-content">
 
     <!-- Top bar -->
@@ -87,10 +85,8 @@
       </div>
     </div>
 
-    <!-- Page content -->
     <div class="page-content">
 
-      <!-- Hero banner -->
       <div class="hero-banner fade-in">
         <img
           src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=400&dpr=1"
@@ -104,7 +100,6 @@
         </div>
       </div>
 
-      <!-- Stats row -->
       <div class="stats-grid">
         <div class="stat-card fade-in delay-1">
           <div class="stat-label">Total Empleados</div>
@@ -127,47 +122,14 @@
           <div class="stat-value" id="stat-proyectos">—</div>
           <div class="stat-change">En ejecución</div>
           <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
         </div>
-        <div class="stat-card fade-in delay-3">
-          <div class="stat-label">Nómina Total / mes</div>
-          <div class="stat-value" id="stat-nomina">—</div>
-          <div class="stat-change">Coste de personal</div>
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
         </div>
       </div>
 
-      <!-- Two-col: recent employees + activity -->
       <div class="grid-2 fade-in delay-2">
-
-        <!-- Últimas incorporaciones -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Últimas Incorporaciones</span>
-            <a href="empleados.html" class="btn btn-outline btn-sm">Ver todos</a>
-          </div>
-          <div class="card-body" style="padding:0;">
-            <div id="loading-empleados" style="padding:24px;text-align:center;color:var(--text-muted)">
-              <div class="spinner" style="margin:0 auto 8px;"></div>
-              Cargando…
-            </div>
-            <table class="data-table" id="tabla-empleados" style="display:none">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Departamento</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody id="tbody-empleados"></tbody>
-            </table>
-          </div>
         </div>
 
-        <!-- Actividad reciente -->
         <div class="card">
           <div class="card-header">
             <span class="card-title">Actividad Reciente</span>
@@ -175,79 +137,33 @@
           <div class="card-body">
             <div id="activity-list">
               <div class="activity-item">
-                <div class="activity-dot"></div>
                 <div style="flex:1">
                   <div class="activity-text">Nuevo empleado incorporado al sistema</div>
                   <div class="activity-time">Hace 10 min</div>
                 </div>
               </div>
               <div class="activity-item">
-                <div class="activity-dot" style="background:var(--brown-mid)"></div>
                 <div style="flex:1">
                   <div class="activity-text">Transacción de nómina completada</div>
                   <div class="activity-time">Hace 1 hora</div>
                 </div>
               </div>
               <div class="activity-item">
-                <div class="activity-dot" style="background:#5A8A5A"></div>
                 <div style="flex:1">
-                  <div class="activity-text">Proyecto "Alpha" marcado como finalizado</div>
+                  <div class="activity-text">Proyecto Alpha marcado como finalizado</div>
                   <div class="activity-time">Hace 3 horas</div>
                 </div>
               </div>
               <div class="activity-item">
-                <div class="activity-dot"></div>
-                <div style="flex:1">
-                  <div class="activity-text">Transferencia de departamento ejecutada</div>
-                  <div class="activity-time">Ayer, 16:42</div>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-dot" style="background:#A84040"></div>
                 <div style="flex:1">
                   <div class="activity-text">Baja de empleado registrada en auditoría</div>
                   <div class="activity-time">Ayer, 09:15</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /grid-2 -->
-
-      <!-- Proyectos recientes -->
-      <div class="card fade-in delay-3" style="margin-top:24px">
-        <div class="card-header">
-          <span class="card-title">Proyectos en Curso</span>
-          <a href="proyectos.html" class="btn btn-outline btn-sm">Ver todos</a>
-        </div>
-        <div class="card-body" style="padding:0;">
-          <div id="loading-proyectos" style="padding:24px;text-align:center;color:var(--text-muted)">
-            <div class="spinner" style="margin:0 auto 8px;"></div>
-            Cargando…
-          </div>
-          <table class="data-table" id="tabla-proyectos" style="display:none">
-            <thead>
-              <tr>
-                <th>Proyecto</th>
-                <th>Departamento</th>
-                <th>Presupuesto</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tbody-proyectos"></tbody>
-          </table>
-        </div>
-      </div>
-
-    </div><!-- /page-content -->
   </main>
-</div><!-- /app-layout -->
+</div>
 
 <script src="../js/api.js"></script>
 <script>
-/* ---- Auth guard ---- */
+
 (function() {
   const user = localStorage.getItem('nexora-user');
   if (!user) { window.location.href = '../index.html'; return; }
@@ -258,10 +174,8 @@
   document.getElementById('welcome-msg').textContent = `Bienvenido, ${user} · Nexora Tech`;
 })();
 
-/* ---- Load data ---- */
 async function loadDashboard() {
   try {
-    /* Empleados */
     const resEmp = await fetch(`${API_BASE}/empleados`);
     const emp    = await resEmp.json();
     document.getElementById('stat-empleados').textContent = emp.length ?? '—';
@@ -288,14 +202,12 @@ async function loadDashboard() {
   }
 
   try {
-    /* Departamentos */
     const resDept = await fetch(`${API_BASE}/departamentos`);
     const depts   = await resDept.json();
     document.getElementById('stat-depts').textContent = depts.length ?? '—';
   } catch(_) {}
 
   try {
-    /* Proyectos */
     const resProy = await fetch(`${API_BASE}/proyectos`);
     const proy    = await resProy.json();
     const activos = proy.filter(p => p.estado !== 'finalizado');
@@ -319,7 +231,6 @@ async function loadDashboard() {
   }
 
   try {
-    /* Nómina */
     const resNom = await fetch(`${API_BASE}/salarios/resumen`);
     const nom    = await resNom.json();
     document.getElementById('stat-nomina').textContent =

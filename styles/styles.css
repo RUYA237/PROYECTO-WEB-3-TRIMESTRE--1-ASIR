@@ -274,6 +274,7 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   border: 1px solid var(--cream-dark);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  padding: 5rem;
 }
 .card-header {
   padding: 22px 28px 16px;
