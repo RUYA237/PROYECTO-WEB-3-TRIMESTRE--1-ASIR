@@ -9,122 +9,138 @@
   <link rel="stylesheet" href="../styles/operaciones.css" />
 </head>
 <body class="app">
+
   <nav class="nav">
     <span class="nav-logo">Nexora</span>
-    <a class="nav-link" href="dashboard.html">Dashboard</a>
-    <a class="nav-link" href="directorio.html">Directorio</a>
+    <a class="nav-link"        href="dashboard.html">Dashboard</a>
+    <a class="nav-link"        href="directorio.html">Directorio</a>
     <a class="nav-link active" href="operaciones.html">Operaciones</a>
     <div class="nav-right">
       <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
-      <span class="nav-out" id="btn-salir">Salir</span>
+      <span class="nav-out"  id="btn-salir">Salir</span>
     </div>
   </nav>
 
-  <div class="app-content">
-    <div class="page">
-      <div class="page-header">
-        <h1>Operaciones</h1>
-        <p>Gestión de empleados y proyectos</p>
+  <div class="page">
+    <div class="page-header">
+      <h1>Operaciones Críticas</h1>
+      <p>Cada acción ejecuta una transacción atómica en la base de datos</p>
+    </div>
+
+    <div class="ops-grid">
+
+      <!-- ALTA -->
+      <div class="ops-card">
+        <h3>Alta de Empleado</h3>
+        <p>Transacción: INSERT en empleados + historial_salarial</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>DNI</label>
+            <input type="text" id="n-dni" placeholder="12345678A" />
+          </div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" id="n-nombre" placeholder="Sara" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Apellidos</label>
+            <input type="text" id="n-apellido" placeholder="Llopis García" />
+          </div>
+          <div class="form-group">
+            <label>Departamento</label>
+            <select id="n-dept">
+              <option value="1">Sistemas y Redes (IT)</option>
+              <option value="2">Desarrollo de Software</option>
+              <option value="3">Ciberseguridad y Riesgos</option>
+              <option value="4">Soporte y Atención al Cliente</option>
+              <option value="5">Recursos Humanos (HR)</option>
+              <option value="6">Administración y Finanzas</option>
+              <option value="7">Marketing y Ventas</option>
+              <option value="8">Operaciones y Logística</option>
+              <option value="9">I+D+i</option>
+              <option value="10">Asuntos Legales y Compliance</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email corporativo</label>
+            <input type="email" id="n-email" placeholder="sara@empresa.local" />
+          </div>
+          <div class="form-group">
+            <label>Salario anual (€)</label>
+            <input type="number" id="n-salario" placeholder="28000" />
+          </div>
+        </div>
+        <button class="btn btn-green" id="btn-alta" onclick="altaEmpleado()">Dar de Alta</button>
       </div>
-      <div class="ops-grid">
 
-        <div class="ops-card" id="card-alta">
-          <h3>Alta de Empleado</h3>
-          <p>Añade un nuevo empleado a la empresa.</p>
-          <div class="form-row">
-            <div class="form-group">
-              <label>DNI</label>
-              <input type="text" id="n-dni" placeholder="12345678A" />
-            </div>
-            <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" id="n-nombre" placeholder="Sara" />
-            </div>
+      <!-- BAJA -->
+      <div class="ops-card">
+        <h3>Baja de Empleado</h3>
+        <p>Transacción: desactiva credenciales, cierra proyectos y registra en auditoría</p>
+        <div class="form-row solo">
+          <div class="form-group">
+            <label>ID del Empleado</label>
+            <input type="number" id="b-id" placeholder="ID numérico (ej. 7)" />
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Apellidos</label>
-              <input type="text" id="n-apellido" placeholder="Llopis García" />
-            </div>
-            <div class="form-group">
-              <label>Departamento</label>
-              <select id="n-dept">
-                <option value="1">Desarrollo</option>
-                <option value="2">Marketing</option>
-                <option value="3">Soporte</option>
-                <option value="4">Dirección</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="n-email" placeholder="sara@nexora.io" />
-            </div>
-            <div class="form-group">
-              <label>Salario (€)</label>
-              <input type="number" id="n-salario" placeholder="30000" />
-            </div>
-          </div>
-          <button class="btn btn-green" onclick="altaEmpleado()">Dar de Alta</button>
         </div>
-
-        <div class="ops-card">
-          <h3>Baja de Empleado</h3>
-          <p>Desactiva un empleado de la empresa.</p>
-          <div class="form-row solo">
-            <div class="form-group">
-              <label>ID del Empleado</label>
-              <input type="number" id="b-id" placeholder="7" />
-            </div>
-          </div>
-          <button class="btn btn-red" onclick="bajaEmpleado()">Dar de Baja</button>
-        </div>
-
-        <div class="ops-card">
-          <h3>Cambio de Departamento</h3>
-          <p>Mueve un empleado a otro departamento.</p>
-          <div class="form-row">
-            <div class="form-group">
-              <label>ID Empleado</label>
-              <input type="number" id="t-emp" placeholder="ID" />
-            </div>
-            <div class="form-group">
-              <label>Destino</label>
-              <select id="t-dest">
-                <option value="1">Desarrollo</option>
-                <option value="2">Marketing</option>
-                <option value="3">Soporte</option>
-                <option value="4">Dirección</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn btn-blue" onclick="transferenciaDepto()">Transferir</button>
-        </div>
-
-        <div class="ops-card">
-          <h3>Cierre de Proyecto</h3>
-          <p>Marca un proyecto como finalizado.</p>
-          <div class="form-row">
-            <div class="form-group">
-              <label>ID Proyecto</label>
-              <input type="number" id="p-proyecto" placeholder="12" />
-            </div>
-            <div class="form-group">
-              <label>ID Empleado Responsable</label>
-              <input type="number" id="p-empleado" placeholder="5" />
-            </div>
-          </div>
-          <div class="form-row solo">
-            <div class="form-group">
-              <label>Incentivo (€)</label>
-              <input type="number" id="p-incentivo" placeholder="2000" />
-            </div>
-          </div>
-          <button class="btn btn-blue" onclick="cierreProyecto()">Cerrar Proyecto</button>
-        </div>
-
+        <button class="btn btn-red" id="btn-baja" onclick="bajaEmpleado()">Dar de Baja</button>
       </div>
+
+      <!-- TRASLADO -->
+      <div class="ops-card">
+        <h3>Cambio de Departamento</h3>
+        <p>Transacción: actualiza id_departamento y registra el cambio</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ID Empleado</label>
+            <input type="number" id="t-emp" placeholder="ID numérico" />
+          </div>
+          <div class="form-group">
+            <label>Departamento destino</label>
+            <select id="t-dest">
+              <option value="1">Sistemas y Redes (IT)</option>
+              <option value="2">Desarrollo de Software</option>
+              <option value="3">Ciberseguridad y Riesgos</option>
+              <option value="4">Soporte y Atención al Cliente</option>
+              <option value="5">Recursos Humanos (HR)</option>
+              <option value="6">Administración y Finanzas</option>
+              <option value="7">Marketing y Ventas</option>
+              <option value="8">Operaciones y Logística</option>
+              <option value="9">I+D+i</option>
+              <option value="10">Asuntos Legales y Compliance</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-blue" id="btn-traslado" onclick="transferenciaDepto()">Transferir</button>
+      </div>
+
+      <!-- CIERRE PROYECTO -->
+      <div class="ops-card">
+        <h3>Cierre de Proyecto</h3>
+        <p>Transacción: marca proyecto FINALIZADO y aplica incentivo al historial salarial</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ID Proyecto</label>
+            <input type="number" id="p-proyecto" placeholder="ID numérico" />
+          </div>
+          <div class="form-group">
+            <label>ID Empleado responsable</label>
+            <input type="number" id="p-empleado" placeholder="ID numérico" />
+          </div>
+        </div>
+        <div class="form-row solo">
+          <div class="form-group">
+            <label>Incentivo (€)</label>
+            <input type="number" id="p-incentivo" placeholder="2000" />
+          </div>
+        </div>
+        <button class="btn btn-blue" id="btn-cierre" onclick="cierreProyecto()">Cerrar Proyecto</button>
+      </div>
+
     </div>
   </div>
 

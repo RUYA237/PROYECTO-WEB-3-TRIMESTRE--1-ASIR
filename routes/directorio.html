@@ -9,36 +9,37 @@
   <link rel="stylesheet" href="../styles/directorio.css" />
 </head>
 <body class="app">
+
   <nav class="nav">
     <span class="nav-logo">Nexora</span>
-    <a class="nav-link" href="dashboard.html">Dashboard</a>
+    <a class="nav-link"        href="dashboard.html">Dashboard</a>
     <a class="nav-link active" href="directorio.html">Directorio</a>
-    <a class="nav-link" href="operaciones.html">Operaciones</a>
+    <a class="nav-link"        href="operaciones.html">Operaciones</a>
     <div class="nav-right">
       <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
-      <span class="nav-out" id="btn-salir">Salir</span>
+      <span class="nav-out"  id="btn-salir">Salir</span>
     </div>
   </nav>
 
-  <div class="app-content">
-    <div class="page">
-      <div class="page-header">
-        <h1>Directorio</h1>
-        <p>Busca empleados por nombre, cargo o departamento</p>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="buscar" placeholder="Buscar..." oninput="filtrarEmpleados()" />
-        <select id="filtro-depto" onchange="filtrarEmpleados()">
-          <option value="">Todos los departamentos</option>
-        </select>
-        <select id="filtro-estado" onchange="filtrarEmpleados()">
-          <option value="">Todos</option>
-          <option value="Activo">Activo</option>
-          <option value="Inactivo">Inactivo</option>
-        </select>
-      </div>
-      <div class="emp-grid" id="emp-grid"></div>
+  <div class="page">
+    <div class="page-header">
+      <h1>Directorio de Empleados</h1>
+      <p>Datos en tiempo real desde la tabla <code>empleados</code></p>
     </div>
+
+    <div class="search-bar">
+      <input  type="text" id="buscar"       placeholder="Buscar por nombre, cargo o depto…" oninput="filtrarEmpleados()" />
+      <select id="filtro-depto"  onchange="filtrarEmpleados()">
+        <option value="">Todos los departamentos</option>
+      </select>
+      <select id="filtro-estado" onchange="filtrarEmpleados()">
+        <option value="">Todos</option>
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+    </div>
+
+    <div class="emp-grid" id="emp-grid"></div>
   </div>
 
   <div id="toast"></div>

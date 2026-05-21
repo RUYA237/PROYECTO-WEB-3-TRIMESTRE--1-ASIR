@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexora Tech · Login</title>
+  <title>Nexora Tech · Acceso</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/styles.css" />
 </head>
 <body class="login">
+
   <div class="login-box">
     <div class="login-logo">
       <h1>Nexora Tech</h1>
@@ -19,30 +20,32 @@
     </div>
     <div class="form-group">
       <label>Contraseña</label>
-      <input type="password" id="login-pass" placeholder="••••••" autocomplete="current-password" />
+      <input type="password" id="login-pass" placeholder="••••" autocomplete="current-password" />
     </div>
-    <p id="login-error"></p>
-    <button class="btn btn-blue" id="btn-login" onclick="doLogin()">Entrar</button>
-    <p class="login-hint">Usa las credenciales de la base de datos</p>
+    <p id="login-error">Usuario o contraseña incorrectos.</p>
+    <button class="btn btn-blue" id="btn-entrar" onclick="doLogin()">Entrar</button>
+    <p class="login-hint">
+      Ejemplo: <span>cgomez</span> / <span>hash_auto_1</span>
+    </p>
   </div>
 
   <script>
-    var API_URL = "http://localhost:3000";
+    var API = "http://localhost:3000";
 
     document.getElementById("login-pass").addEventListener("keydown", function(e) {
       if (e.key === "Enter") doLogin();
     });
 
     async function doLogin() {
-      var username = document.getElementById("login-user").value.trim();
-      var password = document.getElementById("login-pass").value;
-      var errEl    = document.getElementById("login-error");
-      var btn      = document.getElementById("btn-login");
+      var user  = document.getElementById("login-user").value.trim();
+      var pass  = document.getElementById("login-pass").value;
+      var errEl = document.getElementById("login-error");
+      var btn   = document.getElementById("btn-entrar");
 
       errEl.style.display = "none";
 
-      if (!username || !password) {
-        errEl.textContent   = "Introduce usuario y contraseña.";
+      if (!user || !pass) {
+        errEl.textContent   = "Rellena los dos campos.";
         errEl.style.display = "block";
         return;
       }
@@ -51,24 +54,25 @@
       btn.disabled    = true;
 
       try {
-        var resp = await fetch(API_URL + "/api/login", {
+        var resp = await fetch(API + "/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username: user, password: pass }),
         });
 
         var data = await resp.json();
 
         if (data.exito) {
-          localStorage.setItem("nexora-user", data.datos.username);
-          localStorage.setItem("nexora-rol",  data.datos.rol);
-          localStorage.setItem("nexora-nombre", data.datos.nombre);
+          localStorage.setItem("nx-user",   data.datos.username);
+          localStorage.setItem("nx-rol",    data.datos.rol);
+          localStorage.setItem("nx-nombre", data.datos.nombre);
           window.location.href = "routes/dashboard.html";
         } else {
           errEl.textContent   = data.mensaje || "Credenciales incorrectas.";
           errEl.style.display = "block";
         }
-      } catch(e) {
+
+      } catch (e) {
         errEl.textContent   = "No se puede conectar con el servidor (localhost:3000).";
         errEl.style.display = "block";
       } finally {
@@ -77,5 +81,6 @@
       }
     }
   </script>
+
 </body>
 </html>
