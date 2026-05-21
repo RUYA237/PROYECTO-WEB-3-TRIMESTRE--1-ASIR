@@ -3,36 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexora Tech · Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/styles.css" />
+  <title>Nexora Tech · Acceso</title>
+  <link rel="stylesheet" href="styles/login.css" />
 </head>
-<body class="login">
+<body>
 
-  <div class="login-box">
-    <div class="login-logo">
-      <h1>Nexora Tech</h1>
-      <p>Sistema de Gestión Interna</p>
+<div class="login-split">
+
+  <!-- Panel visual izquierdo -->
+  <div class="login-visual">
+    <img
+      src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      alt="Equipo Nexora Tech"
+    />
+    <div class="login-visual-overlay">
+      <p class="login-visual-quote">
+        La gestión eficiente<br>
+        comienza con los <em>datos correctos.</em>
+      </p>
+      <p class="login-visual-sub">Nexora Tech · Sistema de Gestión Interna</p>
     </div>
-
-    <div class="form-group">
-      <label>Usuario</label>
-      <input type="text" id="login-user" value="admin" placeholder="usuario" />
-    </div>
-
-    <div class="form-group">
-      <label>Contraseña</label>
-      <input type="password" id="login-pass" value="1234" placeholder="••••••" />
-    </div>
-
-    <p id="login-error">Usuario o contraseña incorrectos.</p>
-
-    <button class="btn btn-blue" onclick="doLogin()">Entrar</button>
-
-    <p class="login-hint">Demo: <span>admin / 1234</span> · <span>rrhh / 1234</span></p>
   </div>
 
-  <script src="js/api.js"></script>
+  <!-- Panel de formulario -->
+  <div class="login-panel">
 
+    <div class="login-brand">
+      <div class="login-brand-name">Nexora<span>.</span>Tech</div>
+      <div class="login-brand-sub">Intranet Corporativa</div>
+    </div>
+
+    <h1 class="login-heading">Bienvenido</h1>
+    <p class="login-subheading">Introduce tus credenciales para acceder al sistema.</p>
+
+    <div class="form-group">
+      <label class="form-label" for="login-user">Usuario</label>
+      <input
+        class="form-input"
+        type="text"
+        id="login-user"
+        value="admin"
+        placeholder="usuario@nexora.com"
+        autocomplete="username"
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="login-pass">Contraseña</label>
+      <input
+        class="form-input"
+        type="password"
+        id="login-pass"
+        value="1234"
+        placeholder="••••••••"
+        autocomplete="current-password"
+      />
+    </div>
+
+    <div class="login-error" id="login-error">
+      ⚠ Usuario o contraseña incorrectos. Inténtalo de nuevo.
+    </div>
+
+    <button class="btn-login" onclick="doLogin()">
+      Acceder al sistema
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+
+    <div class="login-hint">
+      <strong>Usuarios demo</strong>
+      <span>admin</span> / <span>1234</span> &nbsp;·&nbsp;
+      <span>rrhh</span> / <span>1234</span>
+    </div>
+
+    <div class="login-footer">
+      © 2024 Nexora Tech · Todos los derechos reservados
+    </div>
+
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+  document.getElementById('login-pass').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  function doLogin() {
+    const u   = document.getElementById('login-user').value.trim().toLowerCase();
+    const p   = document.getElementById('login-pass').value;
+    const err = document.getElementById('login-error');
+    err.classList.remove('show');
+
+    if (USUARIOS[u] && USUARIOS[u].pass === p) {
+      localStorage.setItem('nexora-user', u);
+      localStorage.setItem('nexora-rol',  USUARIOS[u].rol);
+      window.location.href = 'routes/dashboard.html';
+    } else {
+      err.classList.add('show');
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+    }
+  }
+</script>
 </body>
 </html>

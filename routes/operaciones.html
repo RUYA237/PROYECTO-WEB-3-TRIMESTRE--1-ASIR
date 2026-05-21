@@ -3,149 +3,561 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexora Tech · Operaciones</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Nexora Tech · Operaciones Críticas</title>
   <link rel="stylesheet" href="../styles/styles.css" />
-  <link rel="stylesheet" href="../styles/operaciones.css" />
+  <style>
+    /* Tabs */
+    .ops-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--cream-dark);
+      margin-bottom: 32px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+    .ops-tab {
+      padding: 12px 20px;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .ops-tab:hover { color: var(--terracotta); }
+    .ops-tab.active { color: var(--terracotta); border-bottom-color: var(--terracotta); }
+
+    .ops-panel { display: none; }
+    .ops-panel.active { display: block; }
+
+    /* Transaction card */
+    .tx-card {
+      background: var(--warm-white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .tx-card-header {
+      background: var(--cream);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .tx-number {
+      width: 32px; height: 32px;
+      background: var(--terracotta);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tx-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+    }
+    .tx-card-subtitle {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .tx-card-body { padding: 24px; }
+    .tx-result {
+      margin-top: 16px;
+      display: none;
+    }
+    .tx-result.show { display: block; }
+  </style>
 </head>
-<body class="app">
+<body>
 
-  <nav class="nav">
-    <span class="nav-logo">Nexora</span>
-    <a class="nav-link"        href="dashboard.html">Dashboard</a>
-    <a class="nav-link"        href="directorio.html">Directorio</a>
-    <a class="nav-link active" href="operaciones.html">Operaciones</a>
-    <div class="nav-right">
-      <span class="nav-user">Sesión: <span id="nav-user-name"></span></span>
-      <span class="nav-out"  id="btn-salir">Salir</span>
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="brand-name">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
+      <div class="brand-sub">Intranet Corporativa</div>
     </div>
-  </nav>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a class="nav-item" href="dashboard.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" href="empleados.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+        Empleados
+      </a>
+      <a class="nav-item" href="proyectos.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h20M2 12h20M2 17h20"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        Proyectos
+      </a>
+      <a class="nav-item" href="departamentos.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Departamentos
+      </a>
+      <div class="nav-section-label">Operaciones</div>
+      <a class="nav-item active" href="operaciones.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07"/><path d="M4.93 4.93A10 10 0 0 0 19.07 19.07"/></svg>
+        Operaciones Críticas
+      </a>
+      <a class="nav-item" href="accesos.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Control de Accesos
+      </a>
+      <div class="nav-section-label">Sistema</div>
+      <a class="nav-item" href="salarios.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Historial Salarial
+      </a>
+      <a class="nav-item" href="auditoria.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Auditoría
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sb-avatar">AD</div>
+        <div class="sidebar-user-info">
+          <div class="user-name" id="sb-username">Admin</div>
+          <div class="user-role" id="sb-role">Administrador</div>
+        </div>
+        <a class="sidebar-logout-btn" href="../index.html" title="Cerrar sesión">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
 
-  <div class="page">
-    <div class="page-header">
-      <h1>Operaciones Críticas</h1>
-      <p>Cada acción ejecuta una transacción atómica en la base de datos</p>
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="topbar">
+      <div class="topbar-title">Operaciones Críticas</div>
+      <div class="topbar-actions">
+        <span style="font-size:.82rem;color:var(--text-muted)">Cada operación ejecuta una transacción SQL atómica</span>
+      </div>
     </div>
 
-    <div class="ops-grid">
+    <div class="page-content">
 
-      <!-- ALTA -->
-      <div class="ops-card">
-        <h3>Alta de Empleado</h3>
-        <p>Transacción: INSERT en empleados + historial_salarial</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>DNI</label>
-            <input type="text" id="n-dni" placeholder="12345678A" />
-          </div>
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" id="n-nombre" placeholder="Sara" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Apellidos</label>
-            <input type="text" id="n-apellido" placeholder="Llopis García" />
-          </div>
-          <div class="form-group">
-            <label>Departamento</label>
-            <select id="n-dept">
-              <option value="1">Sistemas y Redes (IT)</option>
-              <option value="2">Desarrollo de Software</option>
-              <option value="3">Ciberseguridad y Riesgos</option>
-              <option value="4">Soporte y Atención al Cliente</option>
-              <option value="5">Recursos Humanos (HR)</option>
-              <option value="6">Administración y Finanzas</option>
-              <option value="7">Marketing y Ventas</option>
-              <option value="8">Operaciones y Logística</option>
-              <option value="9">I+D+i</option>
-              <option value="10">Asuntos Legales y Compliance</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Email corporativo</label>
-            <input type="email" id="n-email" placeholder="sara@empresa.local" />
-          </div>
-          <div class="form-group">
-            <label>Salario anual (€)</label>
-            <input type="number" id="n-salario" placeholder="28000" />
-          </div>
-        </div>
-        <button class="btn btn-green" id="btn-alta" onclick="altaEmpleado()">Dar de Alta</button>
+      <div class="section-heading fade-in">
+        <h2>Panel de Transacciones</h2>
+        <div class="section-divider"></div>
+        <p>Operaciones que afectan a múltiples tablas con control de integridad (START TRANSACTION · COMMIT · ROLLBACK).</p>
       </div>
 
-      <!-- BAJA -->
-      <div class="ops-card">
-        <h3>Baja de Empleado</h3>
-        <p>Transacción: desactiva credenciales, cierra proyectos y registra en auditoría</p>
-        <div class="form-row solo">
-          <div class="form-group">
-            <label>ID del Empleado</label>
-            <input type="number" id="b-id" placeholder="ID numérico (ej. 7)" />
-          </div>
-        </div>
-        <button class="btn btn-red" id="btn-baja" onclick="bajaEmpleado()">Dar de Baja</button>
+      <!-- Tabs -->
+      <div class="ops-tabs fade-in delay-1">
+        <button class="ops-tab active" onclick="showTab('personal')">👤 Personal</button>
+        <button class="ops-tab" onclick="showTab('proyectos')">📋 Proyectos</button>
+        <button class="ops-tab" onclick="showTab('nomina')">💰 Nómina</button>
+        <button class="ops-tab" onclick="showTab('sistema')">⚙️ Sistema</button>
       </div>
 
-      <!-- TRASLADO -->
-      <div class="ops-card">
-        <h3>Cambio de Departamento</h3>
-        <p>Transacción: actualiza id_departamento y registra el cambio</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>ID Empleado</label>
-            <input type="number" id="t-emp" placeholder="ID numérico" />
+      <!-- ==================== PERSONAL ==================== -->
+      <div class="ops-panel active fade-in" id="panel-personal">
+
+        <!-- TX1: Contratación Completa -->
+        <div class="tx-card" id="contratar">
+          <div class="tx-card-header">
+            <div class="tx-number">1</div>
+            <div>
+              <div class="tx-card-title">Contratación Completa</div>
+              <div class="tx-card-subtitle">Tablas: Empleados → ControlAccesos → Departamentos_Empleados → HistorialSalarios</div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Departamento destino</label>
-            <select id="t-dest">
-              <option value="1">Sistemas y Redes (IT)</option>
-              <option value="2">Desarrollo de Software</option>
-              <option value="3">Ciberseguridad y Riesgos</option>
-              <option value="4">Soporte y Atención al Cliente</option>
-              <option value="5">Recursos Humanos (HR)</option>
-              <option value="6">Administración y Finanzas</option>
-              <option value="7">Marketing y Ventas</option>
-              <option value="8">Operaciones y Logística</option>
-              <option value="9">I+D+i</option>
-              <option value="10">Asuntos Legales y Compliance</option>
-            </select>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Nombre</label>
+                <input class="form-input" id="c-nombre" placeholder="Nombre" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Apellidos</label>
+                <input class="form-input" id="c-apellidos" placeholder="Apellidos" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-input" type="email" id="c-email" placeholder="email@nexora.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cargo</label>
+                <input class="form-input" id="c-cargo" placeholder="Ej: Analista de Datos" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Departamento</label>
+                <input class="form-input" type="number" id="c-dept" placeholder="ID del departamento" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Salario inicial (€/mes)</label>
+                <input class="form-input" type="number" id="c-salario" placeholder="2000" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Usuario de acceso</label>
+              <input class="form-input" id="c-usuario" placeholder="usuario.apellido" />
+            </div>
+            <button class="btn btn-primary" onclick="tx_contratar()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Ejecutar Contratación
+            </button>
+            <div class="tx-result" id="res-contratar"></div>
           </div>
         </div>
-        <button class="btn btn-blue" id="btn-traslado" onclick="transferenciaDepto()">Transferir</button>
-      </div>
 
-      <!-- CIERRE PROYECTO -->
-      <div class="ops-card">
-        <h3>Cierre de Proyecto</h3>
-        <p>Transacción: marca proyecto FINALIZADO y aplica incentivo al historial salarial</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>ID Proyecto</label>
-            <input type="number" id="p-proyecto" placeholder="ID numérico" />
+        <!-- TX2: Transferencia de Departamento -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">2</div>
+            <div>
+              <div class="tx-card-title">Transferencia de Departamento</div>
+              <div class="tx-card-subtitle">Tablas: Departamentos_Empleados → Asignaciones</div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>ID Empleado responsable</label>
-            <input type="number" id="p-empleado" placeholder="ID numérico" />
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado</label>
+                <input class="form-input" type="number" id="t-emp" placeholder="ID del empleado" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">ID Nuevo Departamento</label>
+                <input class="form-input" type="number" id="t-dept-nuevo" placeholder="ID del nuevo departamento" />
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="tx_transferir()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              Ejecutar Transferencia
+            </button>
+            <div class="tx-result" id="res-transferir"></div>
           </div>
         </div>
-        <div class="form-row solo">
-          <div class="form-group">
-            <label>Incentivo (€)</label>
-            <input type="number" id="p-incentivo" placeholder="2000" />
+
+        <!-- TX4: Baja / Despido -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">4</div>
+            <div>
+              <div class="tx-card-title">Baja / Despido de Empleado</div>
+              <div class="tx-card-subtitle">Tablas: ControlAccesos → Asignaciones → Empleados → Auditoria</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado</label>
+                <input class="form-input" type="number" id="b-emp" placeholder="ID del empleado" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Motivo de baja</label>
+                <select class="form-select" id="b-motivo">
+                  <option value="despido">Despido</option>
+                  <option value="renuncia">Renuncia voluntaria</option>
+                  <option value="jubilacion">Jubilación</option>
+                  <option value="fin_contrato">Fin de contrato</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-danger" onclick="tx_baja()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+              Ejecutar Baja
+            </button>
+            <div class="tx-result" id="res-baja"></div>
           </div>
         </div>
-        <button class="btn btn-blue" id="btn-cierre" onclick="cierreProyecto()">Cerrar Proyecto</button>
-      </div>
 
-    </div>
-  </div>
+      </div><!-- /panel-personal -->
 
-  <div id="toast"></div>
-  <script src="../js/api.js"></script>
-  <script src="../js/operaciones.js"></script>
+      <!-- ==================== PROYECTOS ==================== -->
+      <div class="ops-panel" id="panel-proyectos">
+
+        <!-- TX3: Cierre de Proyecto -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">3</div>
+            <div>
+              <div class="tx-card-title">Cierre de Proyecto</div>
+              <div class="tx-card-subtitle">Tablas: Proyectos → Asignaciones → Departamentos (presupuesto)</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-group">
+              <label class="form-label">ID del Proyecto</label>
+              <input class="form-input" type="number" id="cp-proyecto" placeholder="ID del proyecto a cerrar" />
+            </div>
+            <button class="btn btn-primary" onclick="tx_cerrarProyecto()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Cerrar Proyecto
+            </button>
+            <div class="tx-result" id="res-cerrarProyecto"></div>
+          </div>
+        </div>
+
+        <!-- TX5: Asignar empleado a proyecto -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">5</div>
+            <div>
+              <div class="tx-card-title">Asignar Empleado a Proyecto</div>
+              <div class="tx-card-subtitle">Tablas: Asignaciones → Proyectos (coste)</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado</label>
+                <input class="form-input" type="number" id="as-emp" placeholder="ID del empleado" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">ID Proyecto</label>
+                <input class="form-input" type="number" id="as-proy" placeholder="ID del proyecto" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rol en el proyecto</label>
+              <input class="form-input" id="as-rol" placeholder="Ej: Desarrollador Backend" />
+            </div>
+            <button class="btn btn-primary" onclick="tx_asignar()">Asignar al Proyecto</button>
+            <div class="tx-result" id="res-asignar"></div>
+          </div>
+        </div>
+
+      </div><!-- /panel-proyectos -->
+
+      <!-- ==================== NÓMINA ==================== -->
+      <div class="ops-panel" id="panel-nomina">
+
+        <!-- TX6: Actualización Salarial -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">6</div>
+            <div>
+              <div class="tx-card-title">Actualización Salarial</div>
+              <div class="tx-card-subtitle">Tablas: HistorialSalarios → Empleados</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado</label>
+                <input class="form-input" type="number" id="sal-emp" placeholder="ID del empleado" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nuevo Salario (€/mes)</label>
+                <input class="form-input" type="number" id="sal-nuevo" placeholder="2500" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Motivo del ajuste</label>
+              <input class="form-input" id="sal-motivo" placeholder="Ej: Revisión anual 2024" />
+            </div>
+            <button class="btn btn-primary" onclick="tx_actualizarSalario()">
+              Aplicar Revisión Salarial
+            </button>
+            <div class="tx-result" id="res-salario"></div>
+          </div>
+        </div>
+
+        <!-- TX7: Nómina Mensual -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">7</div>
+            <div>
+              <div class="tx-card-title">Generación de Nómina Mensual</div>
+              <div class="tx-card-subtitle">Tablas: HistorialSalarios → Empleados (lote)</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Mes</label>
+                <select class="form-select" id="nom-mes">
+                  <option value="1">Enero</option><option value="2">Febrero</option>
+                  <option value="3">Marzo</option><option value="4">Abril</option>
+                  <option value="5">Mayo</option><option value="6">Junio</option>
+                  <option value="7">Julio</option><option value="8">Agosto</option>
+                  <option value="9">Septiembre</option><option value="10">Octubre</option>
+                  <option value="11">Noviembre</option><option value="12">Diciembre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Año</label>
+                <input class="form-input" type="number" id="nom-anio" value="2024" />
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="tx_nomina()">Generar Nómina</button>
+            <div class="tx-result" id="res-nomina"></div>
+          </div>
+        </div>
+
+      </div><!-- /panel-nomina -->
+
+      <!-- ==================== SISTEMA ==================== -->
+      <div class="ops-panel" id="panel-sistema">
+
+        <!-- TX8: Renovar Credenciales -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">8</div>
+            <div>
+              <div class="tx-card-title">Renovación de Credenciales</div>
+              <div class="tx-card-subtitle">Tablas: ControlAccesos → Auditoria</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado</label>
+                <input class="form-input" type="number" id="cr-emp" placeholder="ID del empleado" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nueva Contraseña</label>
+                <input class="form-input" type="password" id="cr-pass" placeholder="••••••••" />
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="tx_renovarCredenciales()">Renovar Acceso</button>
+            <div class="tx-result" id="res-credenciales"></div>
+          </div>
+        </div>
+
+        <!-- TX9: Auditoría Manual -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">9</div>
+            <div>
+              <div class="tx-card-title">Registro de Auditoría Manual</div>
+              <div class="tx-card-subtitle">Tablas: Auditoria</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ID Empleado afectado</label>
+                <input class="form-input" type="number" id="aud-emp" placeholder="ID" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tipo de evento</label>
+                <select class="form-select" id="aud-tipo">
+                  <option>Acceso no autorizado</option>
+                  <option>Modificación crítica</option>
+                  <option>Incidencia de seguridad</option>
+                  <option>Revisión manual</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-textarea" id="aud-desc" placeholder="Describe el evento de auditoría…"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="tx_auditoria()">Registrar en Auditoría</button>
+            <div class="tx-result" id="res-auditoria"></div>
+          </div>
+        </div>
+
+        <!-- TX10: Limpieza de Accesos Caducados -->
+        <div class="tx-card">
+          <div class="tx-card-header">
+            <div class="tx-number">10</div>
+            <div>
+              <div class="tx-card-title">Limpieza de Accesos Caducados</div>
+              <div class="tx-card-subtitle">Tablas: ControlAccesos (empleados dados de baja hace +3 años)</div>
+            </div>
+          </div>
+          <div class="tx-card-body">
+            <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:16px">
+              Elimina los registros de control de acceso de empleados inactivos con más de 3 años desde su baja. Operación de mantenimiento periódico.
+            </p>
+            <button class="btn btn-danger" onclick="tx_limpiezaAccesos()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+              Ejecutar Limpieza
+            </button>
+            <div class="tx-result" id="res-limpieza"></div>
+          </div>
+        </div>
+
+      </div><!-- /panel-sistema -->
+
+    </div><!-- /page-content -->
+  </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script>
+/* Auth guard */
+(function() {
+  const user = localStorage.getItem('nexora-user');
+  if (!user) { window.location.href = '../index.html'; return; }
+  document.getElementById('sb-username').textContent = user.charAt(0).toUpperCase() + user.slice(1);
+  document.getElementById('sb-avatar').textContent   = user.slice(0,2).toUpperCase();
+  document.getElementById('sb-role').textContent     = localStorage.getItem('nexora-rol') || 'Usuario';
+})();
+
+/* Tabs */
+function showTab(id) {
+  document.querySelectorAll('.ops-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ops-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+/* ---- Helper para mostrar resultado ---- */
+function showResult(elId, ok, msg) {
+  const el = document.getElementById(elId);
+  el.className = `tx-result show alert ${ok ? 'alert-success show' : 'alert-error show'}`;
+  el.textContent = msg;
+}
+
+/* ---- Helper para llamadas a la API ---- */
+async function callAPI(endpoint, payload, resultId, btnEl) {
+  const orig = btnEl.textContent;
+  btnEl.disabled = true;
+  btnEl.innerHTML = '<span class="spinner"></span>';
+  try {
+    const res  = await fetch(`${API_BASE}${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.ok) showResult(resultId, true,  '✓ ' + (data.mensaje || 'Transacción completada con éxito.'));
+    else        showResult(resultId, false, '⚠ Error: ' + (data.error || 'Transacción fallida. ROLLBACK ejecutado.'));
+  } catch(err) {
+    showResult(resultId, false, '⚠ Error de conexión con la API.');
+  }
+  btnEl.disabled = false;
+  btnEl.textContent = orig;
+}
+
+/* ---- Transacciones ---- */
+function tx_contratar()   { callAPI('/transacciones/contratar',    { nombre: document.getElementById('c-nombre').value, apellidos: document.getElementById('c-apellidos').value, email: document.getElementById('c-email').value, cargo: document.getElementById('c-cargo').value, id_departamento: document.getElementById('c-dept').value, salario: document.getElementById('c-salario').value, usuario: document.getElementById('c-usuario').value }, 'res-contratar', event.currentTarget); }
+function tx_transferir()  { callAPI('/transacciones/transferir',   { id_empleado: document.getElementById('t-emp').value, id_departamento_nuevo: document.getElementById('t-dept-nuevo').value }, 'res-transferir', event.currentTarget); }
+function tx_baja()        { if (!confirm('¿Confirmar baja de empleado? Esta acción es irreversible.')) return; callAPI('/transacciones/baja', { id_empleado: document.getElementById('b-emp').value, motivo: document.getElementById('b-motivo').value }, 'res-baja', event.currentTarget); }
+function tx_cerrarProyecto() { callAPI('/transacciones/cerrar-proyecto', { id_proyecto: document.getElementById('cp-proyecto').value }, 'res-cerrarProyecto', event.currentTarget); }
+function tx_asignar()     { callAPI('/transacciones/asignar-proyecto', { id_empleado: document.getElementById('as-emp').value, id_proyecto: document.getElementById('as-proy').value, rol: document.getElementById('as-rol').value }, 'res-asignar', event.currentTarget); }
+function tx_actualizarSalario() { callAPI('/transacciones/actualizar-salario', { id_empleado: document.getElementById('sal-emp').value, nuevo_salario: document.getElementById('sal-nuevo').value, motivo: document.getElementById('sal-motivo').value }, 'res-salario', event.currentTarget); }
+function tx_nomina()      { callAPI('/transacciones/nomina-mensual', { mes: document.getElementById('nom-mes').value, anio: document.getElementById('nom-anio').value }, 'res-nomina', event.currentTarget); }
+function tx_renovarCredenciales() { callAPI('/transacciones/renovar-credenciales', { id_empleado: document.getElementById('cr-emp').value, nueva_password: document.getElementById('cr-pass').value }, 'res-credenciales', event.currentTarget); }
+function tx_auditoria()   { callAPI('/transacciones/auditoria', { id_empleado: document.getElementById('aud-emp').value, tipo: document.getElementById('aud-tipo').value, descripcion: document.getElementById('aud-desc').value }, 'res-auditoria', event.currentTarget); }
+function tx_limpiezaAccesos() { if(!confirm('¿Ejecutar limpieza de accesos caducados?')) return; callAPI('/transacciones/limpieza-accesos', {}, 'res-limpieza', event.currentTarget); }
+
+/* Hash navigation */
+if (window.location.hash === '#contratar') {
+  document.getElementById('contratar').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </body>
 </html>

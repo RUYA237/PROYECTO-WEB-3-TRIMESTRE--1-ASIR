@@ -1,0 +1,211 @@
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  -webkit-font-smoothing: antialiased;
+  background: #1E120A;
+}
+
+/* ---- Split layout ---- */
+.login-split {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ---- Left — image panel ---- */
+.login-visual {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: none;
+}
+@media (min-width: 900px) { .login-visual { display: block; } }
+
+.login-visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.7);
+}
+.login-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(30,18,10,.7) 0%, rgba(92,51,32,.4) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px 52px;
+}
+.login-visual-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #F4EDE4;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  max-width: 420px;
+}
+.login-visual-quote em { font-style: italic; color: #D4784F; }
+.login-visual-sub {
+  font-size: .85rem;
+  color: rgba(244,237,228,.6);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ---- Right — form panel ---- */
+.login-panel {
+  width: 100%;
+  max-width: 480px;
+  background: #FDFAF6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 52px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .login-panel { max-width: 100%; padding: 40px 28px; }
+}
+
+.login-brand {
+  margin-bottom: 44px;
+}
+.login-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1E120A;
+  letter-spacing: .01em;
+}
+.login-brand-name span { color: #B85C38; }
+.login-brand-sub {
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #8A7060;
+  margin-top: 4px;
+}
+
+.login-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #1E120A;
+  margin-bottom: 6px;
+}
+.login-subheading {
+  font-size: .88rem;
+  color: #8A7060;
+  margin-bottom: 36px;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: #5C3320;
+  margin-bottom: 8px;
+}
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: #F4EDE4;
+  border: 1.5px solid #E8DDD2;
+  border-radius: 10px;
+  color: #1E120A;
+  font-size: .95rem;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: .2s ease;
+}
+.form-input:focus {
+  border-color: #B85C38;
+  background: #FDFAF6;
+  box-shadow: 0 0 0 3px rgba(184,92,56,.12);
+}
+.form-input::placeholder { color: #B8A090; }
+
+.login-error {
+  display: none;
+  background: #F5E8E8;
+  border-left: 3px solid #A84040;
+  color: #7A2020;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: .84rem;
+  margin-bottom: 20px;
+}
+.login-error.show { display: block; }
+
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: #B85C38;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s ease;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-login:hover { background: #5C3320; }
+.btn-login:active { transform: scale(.99); }
+
+.login-hint {
+  margin-top: 28px;
+  padding: 14px 16px;
+  background: #F4EDE4;
+  border-radius: 10px;
+  font-size: .8rem;
+  color: #8A7060;
+  line-height: 1.8;
+}
+.login-hint strong {
+  color: #5C3320;
+  display: block;
+  margin-bottom: 2px;
+  font-size: .72rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.login-hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #E8DDD2;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: .82rem;
+  color: #5C3320;
+  margin: 2px 3px 0;
+}
+
+.login-footer {
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: .76rem;
+  color: #B8A090;
+}
