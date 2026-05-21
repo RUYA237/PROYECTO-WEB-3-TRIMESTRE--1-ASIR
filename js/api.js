@@ -1,59 +1,156 @@
-var API_URL = "http://localhost:3000";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { 
+    verificarLogin,
+    obtenerListaEmpleados, 
+    obtenerDashboardStats, 
+    transaccionDespedirEmpleado,
+    transaccionTrasladarEmpleado,
+    transaccionCrearProyecto,
+    transaccionEntregarEquipo,
+    transaccionEliminarProyecto,
+    transaccionCrearDepartamento,
+    transaccionContratarConEquipo,
+    transaccionActualizarDepartamento,
+    transaccionContratarEmpleado,
+    transaccionCerrarProyecto
+} from './consultas_estudiantes.js';
 
-var USUARIOS = {
-  admin: { pass: "1234", rol: "Administrador" },
-  rrhh:  { pass: "1234", rol: "Recursos Humanos" },
-};
+dotenv.config();
+const app = express();
 
-var METRICAS = [
-  { label: "Empleados Activos", valor: "38",   sub: "en plantilla",  cambio: "+2 este mes" },
-  { label: "Departamentos",     valor: "4",    sub: "áreas activas", cambio: null           },
-  { label: "Proyectos",         valor: "9",    sub: "en curso",      cambio: "+1 nuevo"      },
-  { label: "Ingresos Mes",      valor: "€62K", sub: "brutos",        cambio: "+5.1%"         },
-];
+// Middlewares obligatorios
+app.use(cors()); // Permite que la web HTML conecte con la API
+app.use(express.json()); // Permite recibir datos por POST en formato JSON
 
-var ACTIVIDAD = [
-  { texto: "Nóminas de mayo procesadas",          tiempo: "hace 1 h" },
-  { texto: "Alta de empleado: Sara Llopis",        tiempo: "hace 3 h" },
-  { texto: "Proyecto «App Móvil» marcado activo", tiempo: "hace 1 d" },
-  { texto: "Backup nocturno completado",           tiempo: "hace 1 d" },
-  { texto: "Transferencia: Raúl → Desarrollo",    tiempo: "hace 2 d" },
-];
+// ==========================================
+// RUTAS (ENDPOINTS) DE LA API
+// ==========================================
 
-var DEPTOS = [
-  { nombre: "Desarrollo", empleados: 15 },
-  { nombre: "Marketing",  empleados: 9  },
-  { nombre: "Soporte",    empleados: 8  },
-  { nombre: "Dirección",  empleados: 6  },
-];
+// Ruta GET: Obtener todos los empleados (Para la cuadrícula de la Intranet)
+app.get('/api/empleados', async (req, res) => {
+    try {
+        const datos = await obtenerListaEmpleados();
+        res.json({ exito: true, datos: datos });
+    } catch (error) {
+        console.error("Error en API /api/empleados:", error);
+        res.status(500).json({ exito: false, mensaje: "Error interno del servidor", error: error.message });
+    }
+});
 
-var EMPLEADOS = [
-  { nombre: "Sara Llopis",  cargo: "Frontend Dev",      depto: "Desarrollo", email: "s.llopis@nexora.io", activo: true  },
-  { nombre: "Raúl Medina",  cargo: "Backend Dev",       depto: "Desarrollo", email: "r.medina@nexora.io", activo: true  },
-  { nombre: "Lucía Vega",   cargo: "UX Designer",       depto: "Marketing",  email: "l.vega@nexora.io",   activo: true  },
-  { nombre: "Carlos Ramos", cargo: "Tech Lead",         depto: "Desarrollo", email: "c.ramos@nexora.io",  activo: true  },
-  { nombre: "Elena Pons",   cargo: "Agente Soporte",    depto: "Soporte",    email: "e.pons@nexora.io",   activo: true  },
-  { nombre: "Marcos Gil",   cargo: "Marketing Manager", depto: "Marketing",  email: "m.gil@nexora.io",    activo: false },
-  { nombre: "Ana Ferrer",   cargo: "CEO",               depto: "Dirección",  email: "a.ferrer@nexora.io", activo: true  },
-  { nombre: "Tomás Ibáñez", cargo: "DevOps",            depto: "Desarrollo", email: "t.ibanez@nexora.io", activo: true  },
-];
+// Ruta GET: Obtener contadores para el Dashboard
+app.get('/api/dashboard', async (req, res) => {
+    try {
+        const stats = await obtenerDashboardStats();
+        res.json({ exito: true, datos: stats });
+    } catch (error) {
+        res.status(500).json({ exito: false, error: error.message });
+    }
+});
 
-function checkAuth() {
-  if (!localStorage.getItem("nexora-user")) {
-    window.location.href = "../index.html";
-  }
-}
+// Ruta POST: Ejecutar Transacción Crítica (Ej: Despido)
+app.post('/api/transaccion/despedir', async (req, res) => {
+    // La intranet enviará el ID del empleado por POST
+    const { id_empleado, id_admin_ejecutor } = req.body;
 
-function showToast(msg, tipo) {
-  var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.className = "show " + (tipo || "success");
-  setTimeout(function() { t.className = ""; }, 3000);
-}
+    if (!id_empleado) {
+        return res.status(400).json({ exito: false, mensaje: "Falta el ID del empleado" });
+    }
 
-async function apiFetch(path, opciones) {
-  var resp = await fetch(API_URL + path, opciones);
-  var data = await resp.json();
-  if (!resp.ok) throw new Error(data.mensaje || "Error " + resp.status);
-  return data;
-}
+    try {
+        await transaccionDespedirEmpleado(id_empleado, id_admin_ejecutor);
+        res.json({ exito: true, mensaje: "Transacción de despido ejecutada y guardada correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Trasladar empleado a otro departamento
+app.post('/api/transaccion/trasladar', async (req, res) => {
+    const { id_empleado, id_departamento_nuevo } = req.body;
+    if (!id_empleado || !id_departamento_nuevo) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionTrasladarEmpleado(id_empleado, id_departamento_nuevo);
+        res.json({ exito: true, mensaje: "Empleado trasladado correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Crear nuevo proyecto
+app.post('/api/transaccion/crear-proyecto', async (req, res) => {
+    const { nombre_proyecto, presupuesto, id_departamento } = req.body;
+    if (!nombre_proyecto || !presupuesto || !id_departamento) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionCrearProyecto(nombre_proyecto, presupuesto, id_departamento);
+        res.json({ exito: true, mensaje: "Proyecto creado correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Contratar nuevo empleado
+app.post('/api/transaccion/contratar', async (req, res) => {
+    const { dni, nombre, apellidos, id_departamento, email, salario } = req.body;
+    if (!dni || !nombre || !apellidos || !id_departamento || !email || !salario) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        const resultado = await transaccionContratarEmpleado(dni, nombre, apellidos, id_departamento, email, salario);
+        res.json({ exito: true, mensaje: "Empleado contratado correctamente.", datos: resultado });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Cerrar proyecto con incentivo
+app.post('/api/transaccion/cerrar-proyecto', async (req, res) => {
+    const { id_proyecto, id_empleado, incentivo } = req.body;
+    if (!id_proyecto || !id_empleado || !incentivo) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionCerrarProyecto(id_proyecto, id_empleado, incentivo);
+        res.json({ exito: true, mensaje: "Proyecto cerrado correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Login con credenciales de la base de datos
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).json({ exito: false, mensaje: 'Faltan credenciales' });
+    }
+    try {
+        const user = await verificarLogin(username, password);
+        if (!user) {
+            return res.status(401).json({ exito: false, mensaje: 'Usuario o contraseña incorrectos' });
+        }
+        res.json({ exito: true, datos: user });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: 'Error interno', error: error.message });
+    }
+});
+
+// ==========================================
+// RUTA RAÍZ (Para evitar el Cannot GET /)
+// ==========================================
+app.get('/', (req, res) => {
+    res.send('🚀 El servidor de la API está funcionando perfectamente. Usa los endpoints como /api/empleados');
+});
+
+// ==========================================
+// ARRANQUE DEL SERVIDOR
+// ==========================================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor API de la Empresa corriendo en: http://localhost:${PORT}`);
+    console.log(`🔌 Conectando a Base de Datos en: ${process.env.DB_HOST}...`);
+});
