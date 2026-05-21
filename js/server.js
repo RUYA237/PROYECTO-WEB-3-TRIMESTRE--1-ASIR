@@ -15,6 +15,7 @@ import {
     transaccionContratarEmpleado,
     transaccionCerrarProyecto
 } from '../consultas_estudiantes.js';
+import authRoutes from './index.js';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,9 @@ const app = express();
 // Middlewares obligatorios
 app.use(cors()); // Permite que la web HTML conecte con la API
 app.use(express.json()); // Permite recibir datos por POST en formato JSON
+
+// Rutas de autenticación (login)
+app.use('/api/auth', authRoutes);
 
 // ==========================================
 // RUTAS (ENDPOINTS) DE LA API
