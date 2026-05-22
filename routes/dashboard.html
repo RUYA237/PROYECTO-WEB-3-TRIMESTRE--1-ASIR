@@ -9,42 +9,42 @@
 </head>
 <body>
 
-<div class="app-layout">
+<div class="diseno-aplicacion">
 
-  <div class="sidebar" id="sidebar">
+  <div class="barra-lateral" id="sidebar">
 
-    <div class="sidebar-logo">
-      <div class="brand-name">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
-      <div class="brand-sub">Intranet Corporativa</div>
+    <div class="barra-lateral-logo">
+      <div class="marca-nombre">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
+      <div class="marca-sub">Intranet Corporativa</div>
     </div>
 
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Principal</div>
-      <a class="nav-item active" href="dashboard.html">
+    <nav class="barra-lateral-nav">
+      <div class="nav-etiqueta-seccion">Principal</div>
+      <a class="nav-elemento activo" href="dashboard.html">
         Dashboard
       </a>
-      <a class="nav-item" href="empleados.html">
+      <a class="nav-elemento" href="empleados.html">
         Empleados
       </a>
 
-      <div class="nav-section-label">Operaciones</div>
-      <a class="nav-item" href="operaciones.html">
+      <div class="nav-etiqueta-seccion">Operaciones</div>
+      <a class="nav-elemento" href="operaciones.html">
         Operaciones Críticas
       </a>
 
-      <div class="nav-section-label">Sistema</div>
-      <a class="nav-item" href="salarios.html">
+      <div class="nav-etiqueta-seccion">Sistema</div>
+      <a class="nav-elemento" href="salarios.html">
         Historial Salarial
       </a>
     </nav>
 
-    <div class="sidebar-footer">
-      <div class="sidebar-user">
-        <div class="sidebar-avatar" id="sb-avatar">AD</div>
-        <div class="sidebar-user-info">
-          <div class="user-name" id="sb-username">Admin</div>
+    <div class="barra-lateral-pie">
+      <div class="barra-lateral-usuario">
+        <div class="barra-lateral-avatar" id="sb-avatar">AD</div>
+        <div class="barra-lateral-info-usuario">
+          <div class="usuario-nombre" id="sb-username">Admin</div>
         </div>
-        <a class="sidebar-logout-btn" href="../index.html" title="Cerrar sesión">
+        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">
   Log out
 </a>
       </a>
@@ -52,78 +52,78 @@
     </div>
   </div>
 
-  <main class="main-content">
+  <main class="contenido-principal">
 
-    <div class="topbar">
-      <div class="topbar-title">Dashboard</div>
-      <div class="topbar-actions">
-        <a href="operaciones.html" class="btn btn-primary btn-sm">+ Nueva operación</a>
+    <div class="barra-superior">
+      <div class="barra-superior-titulo">Dashboard</div>
+      <div class="barra-superior-acciones">
+        <a href="operaciones.html" class="btn btn-primario btn-pequeno">+ Nueva operación</a>
       </div>
     </div>
 
-    <div class="page-content">
+    <div class="contenido-pagina">
 
-      <div class="hero-banner">
+      <div class="banner-principal">
         <img
           src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=400&dpr=1"
           alt="Equipo Nexora"
         />
-        <div class="hero-overlay">
-          <div class="hero-text">
+        <div class="banner-superposicion">
+          <div class="banner-texto">
             <h1>Panel de Control Corporativo</h1>
             <p>Resumen general · Nexora Tech</p>
           </div>
         </div>
       </div>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Total Empleados</div>
-          <div class="stat-value" id="stat-empleados">—</div>
-          <div class="stat-change up">Activos en plantilla</div>
+      <div class="cuadricula-estadisticas">
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Total Empleados</div>
+          <div class="estadistica-valor" id="stat-empleados">—</div>
+          <div class="estadistica-cambio subida">Activos en plantilla</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Departamentos</div>
-          <div class="stat-value" id="stat-depts">—</div>
-          <div class="stat-change">Unidades de negocio</div>
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Departamentos</div>
+          <div class="estadistica-valor" id="stat-depts">—</div>
+          <div class="estadistica-cambio">Unidades de negocio</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Proyectos Activos</div>
-          <div class="stat-value" id="stat-proyectos">—</div>
-          <div class="stat-change">En ejecución</div>
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Proyectos Activos</div>
+          <div class="estadistica-valor" id="stat-proyectos">—</div>
+          <div class="estadistica-cambio">En ejecución</div>
         </div>
         </div>
       </div>
     <div> 
   </div>
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Actividad Reciente</span>
+        <div class="tarjeta">
+          <div class="tarjeta-cabecera">
+            <span class="tarjeta-titulo">Actividad Reciente</span>
           </div>
-          <div class="card-body">
+          <div class="tarjeta-cuerpo">
             <div id="activity-list">
-              <div class="activity-item">
+              <div class="elemento-actividad">
                 <div style="flex:1">
-                  <div class="activity-text">Nuevo empleado incorporado al sistema</div>
-                  <div class="activity-time">Hace 10 min</div>
+                  <div class="texto-actividad">Nuevo empleado incorporado al sistema</div>
+                  <div class="hora-actividad">Hace 10 min</div>
                 </div>
               </div>
-              <div class="activity-item">
+              <div class="elemento-actividad">
                 <div style="flex:1">
-                  <div class="activity-text">Transacción de nómina completada</div>
-                  <div class="activity-time">Hace 1 hora</div>
+                  <div class="texto-actividad">Transacción de nómina completada</div>
+                  <div class="hora-actividad">Hace 1 hora</div>
                 </div>
               </div>
-              <div class="activity-item">
+              <div class="elemento-actividad">
                 <div style="flex:1">
-                  <div class="activity-text">Proyecto Alpha marcado como finalizado</div>
-                  <div class="activity-time">Hace 3 horas</div>
+                  <div class="texto-actividad">Proyecto Alpha marcado como finalizado</div>
+                  <div class="hora-actividad">Hace 3 horas</div>
                 </div>
               </div>
-              <div class="activity-item">
+              <div class="elemento-actividad">
                 <div style="flex:1">
-                  <div class="activity-text">Baja de empleado registrada en auditoría</div>
-                  <div class="activity-time">Ayer, 09:15</div>
+                  <div class="texto-actividad">Baja de empleado registrada en auditoría</div>
+                  <div class="hora-actividad">Ayer, 09:15</div>
                 </div>
               </div>
             </div>
@@ -160,12 +160,12 @@ async function loadDashboard() {
       <tr>
         <td>
           <div class="td-flex">
-            <div class="avatar-sm">${(e.nombre||'?').slice(0,2).toUpperCase()}</div>
-            <span class="td-name">${e.nombre} ${e.apellidos || ''}</span>
+            <div class="avatar-pequeno">${(e.nombre||'?').slice(0,2).toUpperCase()}</div>
+            <span class="td-nombre">${e.nombre} ${e.apellidos || ''}</span>
           </div>
         </td>
         <td>${e.departamento || '—'}</td>
-        <td><span class="badge badge-${e.estado === 'activo' ? 'active' : 'inactive'}">${e.estado || 'activo'}</span></td>
+        <td><span class="insignia insignia-${e.estado === 'activo' ? 'activo' : 'inactivo'}">${e.estado || 'activo'}</span></td>
       </tr>
     `).join('');
     document.getElementById('loading-empleados').style.display = 'none';
@@ -190,11 +190,11 @@ async function loadDashboard() {
     const tbodyP = document.getElementById('tbody-proyectos');
     tbodyP.innerHTML = activos.slice(0, 8).map(p => `
       <tr>
-        <td class="td-name">${p.nombre || '—'}</td>
+        <td class="td-nombre">${p.nombre || '—'}</td>
         <td>${p.departamento || '—'}</td>
         <td>${p.presupuesto ? Number(p.presupuesto).toLocaleString('es-ES',{style:'currency',currency:'EUR'}) : '—'}</td>
-        <td><span class="badge badge-info">${p.estado || 'activo'}</span></td>
-        <td><a href="proyectos.html" class="btn btn-outline btn-sm">Ver</a></td>
+        <td><span class="insignia insignia-info">${p.estado || 'activo'}</span></td>
+        <td><a href="proyectos.html" class="btn btn-contorno btn-pequeno">Ver</a></td>
       </tr>
     `).join('');
     document.getElementById('loading-proyectos').style.display = 'none';

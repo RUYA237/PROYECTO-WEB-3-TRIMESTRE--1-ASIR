@@ -14,7 +14,7 @@ body {
 }
 
 /* --- Split layout --- */
-.login-split {
+.login-division {
   display: flex;
   width: 100%;
   min-height: 100vh;
@@ -34,7 +34,7 @@ body {
   object-fit: cover;
   filter: brightness(.7);
 }
-.login-visual-overlay {
+.login-visual-superposicion {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(30,18,10,.7) 0%, rgba(92,51,32,.4) 100%);
@@ -43,7 +43,7 @@ body {
   justify-content: flex-end;
   padding: 60px 52px;
 }
-.login-visual-quote {
+.login-visual-cita {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 600;
@@ -75,23 +75,23 @@ body {
 }
 
 /* --- Brand --- */
-.login-brand { margin-bottom: 44px; }
-.login-brand-name {
+.login-marca { margin-bottom: 44px; }
+.login-marca-nombre {
   font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
   font-weight: 700;
   color: #1E120A;
   letter-spacing: .01em;
 }
-.login-brand-name span { color: #B85C38; }
-.login-brand-sub {
+.login-marca-nombre span { color: #B85C38; }
+.login-marca-sub {
   font-size: .75rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: #8A7060;
   margin-top: 4px;
 }
-.login-dot {
+.login-punto {
   color: #B85C38;
   font-size: 1.8rem;
   line-height: 0;
@@ -101,22 +101,22 @@ body {
 }
 
 /* --- Headings --- */
-.login-heading {
+.login-titulo {
   font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
   font-weight: 600;
   color: #1E120A;
   margin-bottom: 6px;
 }
-.login-subheading {
+.login-subtitulo {
   font-size: .88rem;
   color: #8A7060;
   margin-bottom: 36px;
 }
 
 /* --- Form --- */
-.form-group { margin-bottom: 20px; }
-.form-label {
+.grupo-formulario { margin-bottom: 20px; }
+.etiqueta-formulario {
   display: block;
   font-size: .78rem;
   font-weight: 600;
@@ -125,7 +125,7 @@ body {
   color: #5C3320;
   margin-bottom: 8px;
 }
-.form-input {
+.entrada-formulario {
   width: 100%;
   padding: 13px 16px;
   background: #F4EDE4;
@@ -137,12 +137,12 @@ body {
   outline: none;
   transition: .2s ease;
 }
-.form-input:focus {
+.entrada-formulario:focus {
   border-color: #B85C38;
   background: #FDFAF6;
   box-shadow: 0 0 0 3px rgba(184,92,56,.12);
 }
-.form-input::placeholder { color: #B8A090; }
+.entrada-formulario::placeholder { color: #B8A090; }
 
 /* --- Error message --- */
 .login-error {
@@ -155,10 +155,10 @@ body {
   font-size: .84rem;
   margin-bottom: 20px;
 }
-.login-error.show { display: block; }
+.login-error.mostrar { display: block; }
 
 /* --- Login button --- */
-.btn-login {
+.btn-acceso {
   width: 100%;
   padding: 14px;
   background: #B85C38;
@@ -176,11 +176,11 @@ body {
   justify-content: center;
   gap: 8px;
 }
-.btn-login:hover  { background: #5C3320; }
-.btn-login:active { transform: scale(.99); }
+.btn-acceso:hover  { background: #5C3320; }
+.btn-acceso:active { transform: scale(.99); }
 
 /* --- Footer --- */
-.login-footer {
+.login-pie {
   margin-top: auto;
   padding-top: 40px;
   font-size: .76rem;

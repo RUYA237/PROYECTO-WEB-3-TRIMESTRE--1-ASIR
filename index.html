@@ -8,15 +8,15 @@
 </head>
 <body>
 
-<div class="login-split">
+<div class="login-division">
 
   <div class="login-visual">
     <img
       src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       alt="Equipo Nexora Tech"
     />
-    <div class="login-visual-overlay">
-      <p class="login-visual-quote">
+    <div class="login-visual-superposicion">
+      <p class="login-visual-cita">
         La gestión eficiente<br>
         comienza con los datos correctos.</p>
       <p class="login-visual-sub">Nexora Tech · Sistema de Gestión Interna</p>
@@ -24,28 +24,28 @@
   </div>
 
   <div class="login-panel">
-    <div class="login-brand">
-      <div class="login-brand-name">Nexora<span class="login-dot">.</span>Tech</div>
-      <div class="login-brand-sub">Intranet Corporativa</div>
+    <div class="login-marca">
+      <div class="login-marca-nombre">Nexora<span class="login-punto">.</span>Tech</div>
+      <div class="login-marca-sub">Intranet Corporativa</div>
     </div>
 
-    <h1 class="login-heading">Bienvenido</h1>
-    <p class="login-subheading">Introduce tus credenciales para acceder al sistema.</p>
+    <h1 class="login-titulo">Bienvenido</h1>
+    <p class="login-subtitulo">Introduce tus credenciales para acceder al sistema.</p>
 
-    <div class="form-group">
-      <label class="form-label">Usuario</label>
+    <div class="grupo-formulario">
+      <label class="etiqueta-formulario">Usuario</label>
       <input
-        class="form-input"
+        class="entrada-formulario"
         type="text"
         id="login-user"
         value="admin"
       />
     </div>
 
-    <div class="form-group">
-      <label class="form-label" for="login-pass">Contraseña</label>
+    <div class="grupo-formulario">
+      <label class="etiqueta-formulario" for="login-pass">Contraseña</label>
       <input
-        class="form-input"
+        class="entrada-formulario"
         type="password"
         id="login-pass"
         value="1234"
@@ -58,11 +58,11 @@
     Usuario o contraseña incorrectos. Inténtalo de nuevo.
     </div>
 
-    <button class="btn-login" onclick="doLogin()">
+    <button class="btn-acceso" onclick="doLogin()">
       Acceder al sistema
     </button>
 
-    <div class="login-footer">
+    <div class="login-pie">
       © 2026 Nexora Tech · Todos los derechos reservados
     </div>
 
@@ -79,14 +79,14 @@
     const u   = document.getElementById('login-user').value.trim().toLowerCase();
     const p   = document.getElementById('login-pass').value;
     const err = document.getElementById('login-error');
-    err.classList.remove('show');
+    err.classList.remove('mostrar');
 
     if (USUARIOS[u] && USUARIOS[u].pass === p) {
       localStorage.setItem('nexora-user', u);
       localStorage.setItem('nexora-rol',  USUARIOS[u].rol);
       window.location.href = 'routes/dashboard.html';
     } else {
-      err.classList.add('show');
+      err.classList.add('mostrar');
       document.getElementById('login-pass').value = '';
       document.getElementById('login-pass').focus();
     }

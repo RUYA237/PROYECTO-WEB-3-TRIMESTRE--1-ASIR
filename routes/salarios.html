@@ -9,42 +9,42 @@
 </head>
 <body>
 
-<div class="app-layout">
+<div class="diseno-aplicacion">
 
-  <div class="sidebar" id="sidebar">
+  <div class="barra-lateral" id="sidebar">
 
-    <div class="sidebar-logo">
-      <div class="brand-name">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
-      <div class="brand-sub">Intranet Corporativa</div>
+    <div class="barra-lateral-logo">
+      <div class="marca-nombre">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
+      <div class="marca-sub">Intranet Corporativa</div>
     </div>
 
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Principal</div>
-      <a class="nav-item" href="dashboard.html">
+    <nav class="barra-lateral-nav">
+      <div class="nav-etiqueta-seccion">Principal</div>
+      <a class="nav-elemento" href="dashboard.html">
         Dashboard
       </a>
-      <a class="nav-item" href="empleados.html">
+      <a class="nav-elemento" href="empleados.html">
         Empleados
       </a>
 
-      <div class="nav-section-label">Operaciones</div>
-      <a class="nav-item" href="operaciones.html">
+      <div class="nav-etiqueta-seccion">Operaciones</div>
+      <a class="nav-elemento" href="operaciones.html">
         Operaciones Críticas
       </a>
 
-      <div class="nav-section-label">Sistema</div>
-      <a class="nav-item active" href="salarios.html">
+      <div class="nav-etiqueta-seccion">Sistema</div>
+      <a class="nav-elemento activo" href="salarios.html">
         Historial Salarial
       </a>
     </nav>
 
-    <div class="sidebar-footer">
-      <div class="sidebar-user">
-        <div class="sidebar-avatar" id="sb-avatar">AD</div>
-        <div class="sidebar-user-info">
-          <div class="user-name" id="sb-username">Admin</div>
+    <div class="barra-lateral-pie">
+      <div class="barra-lateral-usuario">
+        <div class="barra-lateral-avatar" id="sb-avatar">AD</div>
+        <div class="barra-lateral-info-usuario">
+          <div class="usuario-nombre" id="sb-username">Admin</div>
         </div>
-        <a class="sidebar-logout-btn" href="../index.html" title="Cerrar sesión">
+        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">
   Log out
 </a>
       </a>
@@ -53,92 +53,92 @@
   </div>
 
   <!-- MAIN -->
-  <main class="main-content">
+  <main class="contenido-principal">
 
-    <div class="topbar">
-      <div class="topbar-title">Historial Salarial</div>
-      <div class="topbar-actions">
-        <div class="search-bar">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <div class="barra-superior">
+      <div class="barra-superior-titulo">Historial Salarial</div>
+      <div class="barra-superior-acciones">
+        <div class="barra-busqueda">
+          <svg class="icono-busqueda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="buscador" placeholder="Buscar por empleado…" oninput="filtrar()" />
         </div>
-        <a href="operaciones.html#nomina" class="btn btn-primary btn-sm">+ Procesar nómina</a>
+        <a href="operaciones.html#nomina" class="btn btn-primario btn-pequeno">+ Procesar nómina</a>
       </div>
     </div>
 
-    <div class="page-content">
+    <div class="contenido-pagina">
 
-      <div class="section-heading fade-in">
+      <div class="encabezado-seccion entrada-fundido">
         <h2>Historial Salarial</h2>
-        <div class="section-divider"></div>
+        <div class="divisor-seccion"></div>
         <p>Registro de todos los movimientos y actualizaciones salariales de la plantilla.</p>
       </div>
 
       <!-- KPIs -->
-      <div class="stats-grid fade-in delay-1">
-        <div class="stat-card">
-          <div class="stat-label">Masa salarial total</div>
-          <div class="stat-value" id="kpi-total">—</div>
-          <div class="stat-change">Coste mensual bruto</div>
-          <div class="stat-icon">
+      <div class="cuadricula-estadisticas entrada-fundido retraso-1">
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Masa salarial total</div>
+          <div class="estadistica-valor" id="kpi-total">—</div>
+          <div class="estadistica-cambio">Coste mensual bruto</div>
+          <div class="estadistica-icono">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Salario medio</div>
-          <div class="stat-value" id="kpi-media">—</div>
-          <div class="stat-change">Por empleado/mes</div>
-          <div class="stat-icon">
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Salario medio</div>
+          <div class="estadistica-valor" id="kpi-media">—</div>
+          <div class="estadistica-cambio">Por empleado/mes</div>
+          <div class="estadistica-icono">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Salario más alto</div>
-          <div class="stat-value" id="kpi-max">—</div>
-          <div class="stat-change">Máximo en plantilla</div>
-          <div class="stat-icon">
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Salario más alto</div>
+          <div class="estadistica-valor" id="kpi-max">—</div>
+          <div class="estadistica-cambio">Máximo en plantilla</div>
+          <div class="estadistica-icono">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Registros</div>
-          <div class="stat-value" id="kpi-registros">—</div>
-          <div class="stat-change">Entradas en historial</div>
-          <div class="stat-icon">
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Registros</div>
+          <div class="estadistica-valor" id="kpi-registros">—</div>
+          <div class="estadistica-cambio">Entradas en historial</div>
+          <div class="estadistica-icono">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
         </div>
       </div>
 
       <!-- Filtros -->
-      <div class="filter-bar fade-in delay-2">
-        <span class="sal-filter-label">Motivo:</span>
-        <button class="filter-chip active" onclick="setMotivo('todos', this)">Todos</button>
-        <button class="filter-chip" onclick="setMotivo('contratacion', this)">Contratación</button>
-        <button class="filter-chip" onclick="setMotivo('revision', this)">Revisión</button>
-        <button class="filter-chip" onclick="setMotivo('promocion', this)">Promoción</button>
+      <div class="barra-filtros entrada-fundido retraso-2">
+        <span class="sal-etiqueta-filtro">Motivo:</span>
+        <button class="chip-filtro activo" onclick="setMotivo('todos', this)">Todos</button>
+        <button class="chip-filtro" onclick="setMotivo('contratacion', this)">Contratación</button>
+        <button class="chip-filtro" onclick="setMotivo('revision', this)">Revisión</button>
+        <button class="chip-filtro" onclick="setMotivo('promocion', this)">Promoción</button>
         <div style="margin-left:auto">
-          <select class="form-select sal-select" id="filtro-dept" onchange="filtrar()">
+          <select class="seleccion-formulario sal-seleccion" id="filtro-dept" onchange="filtrar()">
             <option value="">Todos los departamentos</option>
           </select>
         </div>
       </div>
 
       <!-- Alerta -->
-      <div class="alert alert-error" id="alert-err">⚠ Error al cargar los datos.</div>
+      <div class="alerta alerta-error" id="alert-err">⚠ Error al cargar los datos.</div>
 
       <!-- Tabla -->
-      <div class="card sal-card fade-in delay-2">
-        <div class="card-body" style="padding:0">
-          <div id="loading-state" class="sal-loading">
-            <div class="spinner" style="margin:0 auto 12px"></div>
+      <div class="tarjeta sal-tarjeta entrada-fundido retraso-2">
+        <div class="tarjeta-cuerpo" style="padding:0">
+          <div id="loading-state" class="sal-cargando">
+            <div class="girador" style="margin:0 auto 12px"></div>
             Cargando historial…
           </div>
-          <div class="empty-state" id="empty-state" style="display:none">
+          <div class="estado-vacio" id="empty-state" style="display:none">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             <p>No se encontraron registros con esos criterios.</p>
           </div>
-          <table class="data-table" id="tabla-salarios" style="display:none">
+          <table class="tabla-datos" id="tabla-salarios" style="display:none">
             <thead>
               <tr>
                 <th>Empleado</th>
@@ -156,7 +156,7 @@
       </div>
 
       <!-- Paginación -->
-      <div id="pagination" class="sal-pagination"></div>
+      <div id="pagination" class="sal-paginacion"></div>
 
     </div>
   </main>
@@ -206,14 +206,14 @@ async function cargar() {
   } catch(e) {
     document.getElementById('loading-state').innerHTML =
       '<p style="color:var(--text-muted);font-size:.88rem">Error al conectar con la API.</p>';
-    document.getElementById('alert-err').classList.add('show');
+    document.getElementById('alert-err').classList.add('mostrar');
   }
 }
 
 function setMotivo(m, btn) {
   filtroMotivo = m;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.chip-filtro').forEach(c => c.classList.remove('activo'));
+  btn.classList.add('activo');
   pagina = 1; render();
 }
 
@@ -264,9 +264,9 @@ function render() {
       <tr>
         <td>
           <div class="td-flex">
-            <div class="avatar-sm">${ini}</div>
+            <div class="avatar-pequeno">${ini}</div>
             <div>
-              <div class="td-name">${nom}</div>
+              <div class="td-nombre">${nom}</div>
               <div style="font-size:.73rem;color:var(--text-muted)">ID: ${r.id_empleado||'—'}</div>
             </div>
           </div>
@@ -276,10 +276,10 @@ function render() {
         <td><strong style="color:var(--brown-dark)">${nuevoFmt}</strong></td>
         <td>
           ${variacion !== null
-            ? `<span class="variacion ${Number(variacion) >= 0 ? 'var-up' : 'var-down'}">${Number(variacion) >= 0 ? '▲' : '▼'} ${Math.abs(variacion)}%</span>`
+            ? `<span class="variacion ${Number(variacion) >= 0 ? 'var-subida' : 'var-bajada'}">${Number(variacion) >= 0 ? '▲' : '▼'} ${Math.abs(variacion)}%</span>`
             : '<span style="color:var(--text-muted);font-size:.82rem">—</span>'}
         </td>
-        <td><span class="sal-badge ${motivoClass}">${r.motivo || 'Contratación'}</span></td>
+        <td><span class="sal-insignia ${motivoClass}">${r.motivo || 'Contratación'}</span></td>
         <td style="font-size:.83rem;color:var(--text-muted)">${fecha}</td>
       </tr>`;
   }).join('');
@@ -290,7 +290,7 @@ function render() {
   pag.innerHTML = '';
   if (total > 1) {
     const prev = document.createElement('button');
-    prev.className = 'btn btn-outline btn-sm';
+    prev.className = 'btn btn-contorno btn-pequeno';
     prev.textContent = '‹';
     prev.disabled = pagina === 1;
     prev.onclick = () => { pagina--; render(); };
@@ -299,13 +299,13 @@ function render() {
     for (let i = 1; i <= total; i++) {
       const b = document.createElement('button');
       b.textContent = i;
-      b.className   = `btn btn-sm ${i === pagina ? 'btn-primary' : 'btn-outline'}`;
+      b.className   = `btn btn-pequeno ${i === pagina ? 'btn-primario' : 'btn-contorno'}`;
       b.onclick     = () => { pagina = i; render(); };
       pag.appendChild(b);
     }
 
     const next = document.createElement('button');
-    next.className = 'btn btn-outline btn-sm';
+    next.className = 'btn btn-contorno btn-pequeno';
     next.textContent = '›';
     next.disabled = pagina === total;
     next.onclick = () => { pagina++; render(); };

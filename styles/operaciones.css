@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* --- Main header --- */
-.main-header {
+.cabecera-principal {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,13 +13,13 @@
 }
 
 /* --- Ops tabs --- */
-.ops-tabs {
+.ops-pestanas {
   display: flex;
   gap: 8px;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
-.ops-tab {
+.ops-pestana {
   padding: 9px 20px;
   border-radius: var(--radius);
   font-size: .85rem;
@@ -30,8 +30,8 @@
   cursor: pointer;
   transition: var(--transition);
 }
-.ops-tab:hover,
-.ops-tab.active {
+.ops-pestana:hover,
+.ops-pestana.activo {
   border-color: var(--terracotta);
   color: var(--terracotta);
   background: rgba(184,92,56,.06);
@@ -39,18 +39,18 @@
 
 /* --- Ops panels --- */
 .ops-panel { display: none; }
-.ops-panel.active { display: block; }
+.ops-panel.activo { display: block; }
 
 /* --- Ops card grid --- */
-.ops-grid {
+.cuadricula-operaciones {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.25rem;
 }
 
 /* --- Form Elements --- */
-.form-group { margin-bottom: 20px; }
-.form-label {
+.grupo-formulario { margin-bottom: 20px; }
+.etiqueta-formulario {
   display: block;
   font-size: .8rem;
   font-weight: 500;
@@ -59,9 +59,9 @@
   color: var(--text-muted);
   margin-bottom: 7px;
 }
-.form-input,
-.form-select,
-.form-textarea {
+.entrada-formulario,
+.seleccion-formulario,
+.area-texto-formulario {
   width: 100%;
   padding: 11px 14px;
   background: var(--cream);
@@ -71,30 +71,30 @@
   transition: var(--transition);
   outline: none;
 }
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
+.entrada-formulario:focus,
+.seleccion-formulario:focus,
+.area-texto-formulario:focus {
   border-color: var(--terracotta);
   background: var(--warm-white);
   box-shadow: 0 0 0 3px rgba(184,92,56,.1);
 }
-.form-input::placeholder { color: var(--text-light); }
-.form-textarea { resize: vertical; min-height: 100px; }
-.form-row {
+.entrada-formulario::placeholder { color: var(--text-light); }
+.area-texto-formulario { resize: vertical; min-height: 100px; }
+.fila-formulario {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
 /* Parte abajo cuadrado blanco de Actividad */
-.tx-card {
+.tx-tarjeta {
   background: var(--warm-white);
   border: 1px solid var(--cream-dark);
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 20px;
 }
-.tx-card-header {
+.tx-tarjeta-cabecera {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -102,7 +102,7 @@
   border-bottom: 1px solid var(--cream-dark);
   background: var(--cream);
 }
-.tx-number {
+.tx-numero {
   width: 32px; height: 32px;
   border-radius: 50%;
   background: var(--terracotta);
@@ -112,32 +112,32 @@
   font-weight: 700;
   flex-shrink: 0;
 }
-.tx-card-title {
+.tx-tarjeta-titulo {
   font-size: .95rem;
   font-weight: 600;
   color: var(--brown-dark);
 }
-.tx-card-subtitle {
+.tx-tarjeta-subtitulo {
   font-size: .75rem;
   color: var(--text-muted);
   margin-top: 2px;
 }
-.tx-card-body { padding: 24px; }
-.tx-result {
+.tx-tarjeta-cuerpo { padding: 24px; }
+.tx-resultado {
   margin-top: 14px;
   display: none;
 }
-.tx-result.show { display: flex; }
+.tx-resultado.mostrar { display: flex; }
 
-.tx-card:hover {
+.tx-tarjeta:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-/* --- form-row modifier (solo columna) --- */
-.form-row.solo { grid-template-columns: 1fr; }
+/* --- fila-formulario modifier (solo columna) --- */
+.fila-formulario.solo { grid-template-columns: 1fr; }
 
 /* ---------- Sidebar ---------- */
-.sidebar {
+.barra-lateral {
   width: var(--sidebar-w);
   background: var(--sidebar-bg);
   display: flex;
@@ -148,37 +148,37 @@
   z-index: 100;
   overflow: hidden;
 }
-.sidebar-logo {
+.barra-lateral-logo {
   padding: 32px 24px 24px;
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
-.sidebar-logo .brand-name {
+.barra-lateral-logo .marca-nombre {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   color: var(--cream);
   letter-spacing: .02em;
   line-height: 1.2;
 }
-.sidebar-logo .brand-sub {
+.barra-lateral-logo .marca-sub {
   font-size: .72rem;
   color: var(--text-light);
   letter-spacing: .1em;
   text-transform: uppercase;
   margin-top: 3px;
 }
-.sidebar-nav {
+.barra-lateral-nav {
   flex: 1;
   padding: 20px 0;
   overflow-y: auto;
 }
-.nav-section-label {
+.nav-etiqueta-seccion {
   font-size: .68rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--text-muted);
   padding: 16px 24px 6px;
 }
-.nav-item {
+.nav-elemento {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -189,32 +189,32 @@
   border-left: 3px solid transparent;
   transition: var(--transition);
 }
-.nav-item:hover {
+.nav-elemento:hover {
   color: var(--cream);
   background: rgba(255,255,255,.05);
 }
-.nav-item.active {
+.nav-elemento.activo {
   color: var(--cream);
   border-left-color: var(--terracotta);
   background: rgba(184,92,56,.12);
 }
-.nav-item .nav-icon {
+.nav-elemento .nav-icono {
   width: 18px; height: 18px;
   opacity: .7;
   flex-shrink: 0;
 }
-.nav-item.active .nav-icon,
-.nav-item:hover .nav-icon { opacity: 1; }
-.sidebar-footer {
+.nav-elemento.activo .nav-icono,
+.nav-elemento:hover .nav-icono { opacity: 1; }
+.barra-lateral-pie {
   padding: 20px 24px;
   border-top: 1px solid rgba(255,255,255,.07);
 }
-.sidebar-user {
+.barra-lateral-usuario {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.sidebar-avatar {
+.barra-lateral-avatar {
   width: 36px; height: 36px;
   border-radius: 50%;
   background: var(--terracotta);
@@ -224,27 +224,27 @@
   color: white;
   flex-shrink: 0;
 }
-.sidebar-user-info .user-name {
+.barra-lateral-info-usuario .usuario-nombre {
   font-size: .82rem;
   font-weight: 600;
   color: var(--cream);
 }
-.sidebar-user-info .user-role {
+.barra-lateral-info-usuario .usuario-rol {
   font-size: .72rem;
   color: var(--text-muted);
 }
-.sidebar-logout-btn {
+.barra-lateral-btn-salir {
   margin-left: auto;
   color: var(--text-muted);
   padding: 6px;
   border-radius: 6px;
   transition: var(--transition);
 }
-.sidebar-logout-btn:hover { color: var(--orange); background: rgba(255,255,255,.06); }
+.barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
 
 
 /* --- Responsive --- */
 @media (max-width: 600px) {
-  .ops-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
+  .cuadricula-operaciones { grid-template-columns: 1fr; }
+  .fila-formulario { grid-template-columns: 1fr; }
 }
