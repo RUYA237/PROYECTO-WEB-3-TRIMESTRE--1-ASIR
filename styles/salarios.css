@@ -1,0 +1,92 @@
+/* ============================================================
+   NEXORA TECH — HISTORIAL SALARIAL (estilos exclusivos)
+   Todo lo compartido está en styles.css
+   ============================================================ */
+
+/* Loading state */
+.sal-loading {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .88rem;
+}
+
+/* Filter label */
+.sal-filter-label {
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Selector dentro del filtro */
+.sal-select {
+  width: auto;
+  padding: 8px 14px;
+  font-size: .85rem;
+}
+
+/* Card principal de la tabla */
+.sal-card {
+  padding: 0;
+}
+
+/* Paginación */
+.sal-pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* Badges de motivo */
+.sal-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.motivo-contratacion {
+  background: rgba(90, 138, 90, .12);
+  color: #3d6e3d;
+  border: 1px solid rgba(90, 138, 90, .25);
+}
+
+.motivo-revision {
+  background: rgba(184, 92, 56, .1);
+  color: var(--brown-mid);
+  border: 1px solid rgba(184, 92, 56, .2);
+}
+
+.motivo-promocion {
+  background: rgba(92, 51, 32, .1);
+  color: var(--brown-dark);
+  border: 1px solid rgba(92, 51, 32, .2);
+}
+
+/* Variación salarial */
+.variacion {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.var-up {
+  color: #3d6e3d;
+  background: rgba(90, 138, 90, .1);
+}
+
+.var-down {
+  color: #a84040;
+  background: rgba(168, 64, 64, .1);
+}
+
+/* Card sin padding extra para tabla */
+.card { padding: 0; }
