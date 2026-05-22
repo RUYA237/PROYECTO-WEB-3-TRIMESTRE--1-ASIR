@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexora Tech · Empleados</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/empleados.css" />
+</head>
+<body>
+
+<div class="app-layout">
+
+<div class="app-layout">
+
+  <div class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+      <div class="brand-name">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
+      <div class="brand-sub">Intranet Corporativa</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a class="nav-item" href="dashboard.html">
+        Dashboard
+      </a>
+      <a class="nav-item active" href="empleados.html">
+        Empleados
+      </a>
+
+      <div class="nav-section-label">Operaciones</div>
+      <a class="nav-item" href="operaciones.html">
+        Operaciones Críticas
+      </a>
+
+      <div class="nav-section-label">Sistema</div>
+      <a class="nav-item" href="salarios.html">
+        Historial Salarial
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sb-avatar">AD</div>
+        <div class="sidebar-user-info">
+          <div class="user-name" id="sb-username">Admin</div>
+        </div>
+        <a class="sidebar-logout-btn" href="../index.html" title="Cerrar sesión">
+  Log out
+</a>
+      </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="topbar">
+      <div class="topbar-title">Empleados</div>
+      <div class="topbar-actions">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="buscador" placeholder="Buscar por nombre, cargo…" oninput="filtrar()" />
+        </div>
+        <a href="operaciones.html#contratar" class="btn btn-primary btn-sm">+ Nuevo empleado</a>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <div class="section-heading fade-in">
+        <h2>Plantilla Corporativa</h2>
+        <div class="section-divider"></div>
+        <p>Consulta, busca y gestiona todos los empleados de Nexora Tech.</p>
+      </div>
+
+      <!-- Alertas -->
+      <div class="alert alert-success" id="alert-ok">✓ Operación completada correctamente.</div>
+      <div class="alert alert-error"   id="alert-err">⚠ Error al cargar los datos.</div>
+
+      <!-- KPIs rápidos -->
+      <div class="stats-grid fade-in delay-1">
+        <div class="stat-card">
+          <div class="stat-label">Total empleados</div>
+          <div class="stat-value" id="kpi-total">—</div>
+          <div class="stat-change up">En plantilla</div>
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Activos</div>
+          <div class="stat-value" id="kpi-activos">—</div>
+          <div class="stat-change up">Incorporados</div>
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Inactivos</div>
+          <div class="stat-value" id="kpi-inactivos">—</div>
+          <div class="stat-change">Bajas registradas</div>
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Departamentos</div>
+          <div class="stat-value" id="kpi-depts">—</div>
+          <div class="stat-change">Unidades activas</div>
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filter-bar fade-in delay-2">
+        <span class="filter-label">Estado:</span>
+        <button class="filter-chip active" onclick="setEstado('todos', this)">Todos</button>
+        <button class="filter-chip" onclick="setEstado('activo', this)">Activos</button>
+        <button class="filter-chip" onclick="setEstado('inactivo', this)">Inactivos</button>
+        <div class="filter-right">
+          <select class="form-select" id="filtro-dept" onchange="filtrar()">
+            <option value="">Todos los departamentos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="card fade-in delay-2">
+        <div class="card-body" style="padding:0">
+          <div id="loading-state" class="emp-loading">
+            <div class="spinner" style="margin:0 auto 12px"></div>
+            Cargando empleados…
+          </div>
+          <div class="empty-state" id="empty-state" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
+            <p>No se encontraron empleados con esos criterios.</p>
+          </div>
+          <table class="data-table" id="tabla-empleados" style="display:none">
+            <thead>
+              <tr>
+                <th>Empleado</th>
+                <th>Cargo</th>
+                <th>Departamento</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div id="pagination" class="pagination-bar"></div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script>
+/* Auth guard */
+(function() {
+  const u = localStorage.getItem('nexora-user');
+  if (!u) { window.location.href = '../index.html'; return; }
+  document.getElementById('sb-username').textContent = u.charAt(0).toUpperCase() + u.slice(1);
+  document.getElementById('sb-avatar').textContent   = u.slice(0,2).toUpperCase();
+  document.getElementById('sb-role').textContent     = localStorage.getItem('nexora-rol') || 'Usuario';
+})();
+
+let todos       = [];
+let filtroEstado = 'todos';
+const POR_PAG   = 10;
+let pagina      = 1;
+
+async function cargar() {
+  try {
+    const data = await fetch(`${API_BASE}/empleados`).then(r => r.json());
+    todos = data;
+
+    /* KPIs */
+    document.getElementById('kpi-total').textContent    = data.length;
+    document.getElementById('kpi-activos').textContent  = data.filter(e => (e.estado||'activo') === 'activo').length;
+    document.getElementById('kpi-inactivos').textContent= data.filter(e => e.estado === 'inactivo').length;
+    const depts = [...new Set(data.map(e => e.departamento).filter(Boolean))];
+    document.getElementById('kpi-depts').textContent    = depts.length;
+
+    /* Selector de departamento */
+    const sel = document.getElementById('filtro-dept');
+    depts.sort().forEach(d => {
+      const o = document.createElement('option');
+      o.value = d; o.textContent = d; sel.appendChild(o);
+    });
+
+    document.getElementById('loading-state').style.display = 'none';
+    render();
+  } catch(e) {
+    document.getElementById('loading-state').innerHTML =
+      '<p style="color:var(--text-muted);font-size:.88rem">Error al conectar con la API.</p>';
+    document.getElementById('alert-err').classList.add('show');
+  }
+}
+
+function setEstado(estado, btn) {
+  filtroEstado = estado;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  pagina = 1; render();
+}
+
+function filtrar() { pagina = 1; render(); }
+
+function filtered() {
+  const q    = (document.getElementById('buscador').value || '').toLowerCase();
+  const dept = document.getElementById('filtro-dept').value;
+  return todos.filter(e => {
+    const nom  = `${e.nombre||''} ${e.apellidos||''}`.toLowerCase();
+    const matchQ = !q || nom.includes(q) || (e.cargo||'').toLowerCase().includes(q) || (e.departamento||'').toLowerCase().includes(q);
+    const matchE = filtroEstado === 'todos' || (e.estado||'activo') === filtroEstado;
+    const matchD = !dept || e.departamento === dept;
+    return matchQ && matchE && matchD;
+  });
+}
+
+function render() {
+  const list  = filtered();
+  const start = (pagina - 1) * POR_PAG;
+  const page  = list.slice(start, start + POR_PAG);
+  const tabla = document.getElementById('tabla-empleados');
+  const empty = document.getElementById('empty-state');
+
+  if (page.length === 0) {
+    tabla.style.display = 'none'; empty.style.display = 'block';
+  } else {
+    tabla.style.display = 'table'; empty.style.display = 'none';
+  }
+
+  document.getElementById('tbody').innerHTML = page.map(e => {
+    const nom     = `${e.nombre||''} ${e.apellidos||''}`.trim() || '—';
+    const ini     = nom.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+    const estado  = e.estado || 'activo';
+    return `
+      <tr>
+        <td>
+          <div class="td-flex">
+            <div class="avatar-sm">${ini}</div>
+            <div>
+              <div class="td-name">${nom}</div>
+              <div style="font-size:.73rem;color:var(--text-muted)">ID: ${e.id_empleado||'—'}</div>
+            </div>
+          </div>
+        </td>
+        <td>${e.cargo || e.puesto || '—'}</td>
+        <td>
+          <span class="dept-chip">${e.departamento||'—'}</span>
+        </td>
+        <td style="font-size:.82rem;color:var(--text-muted)">${e.email||'—'}</td>
+        <td><span class="badge badge-${estado === 'activo' ? 'active' : 'inactive'}">${estado}</span></td>
+        <td>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-outline btn-sm" onclick="verDetalle(${e.id_empleado})">Ver</button>
+            <button class="btn btn-danger btn-sm"  onclick="darDeBaja(${e.id_empleado},'${nom}')">Baja</button>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+
+  /* Paginación */
+  const total = Math.ceil(list.length / POR_PAG);
+  const pag   = document.getElementById('pagination');
+  pag.innerHTML = '';
+  if (total > 1) {
+    const prev = document.createElement('button');
+    prev.className = 'btn btn-outline btn-sm';
+    prev.textContent = '‹';
+    prev.disabled = pagina === 1;
+    prev.onclick = () => { pagina--; render(); };
+    pag.appendChild(prev);
+
+    for (let i = 1; i <= total; i++) {
+      const b = document.createElement('button');
+      b.textContent = i;
+      b.className   = `btn btn-sm ${i === pagina ? 'btn-primary' : 'btn-outline'}`;
+      b.onclick     = () => { pagina = i; render(); };
+      pag.appendChild(b);
+    }
+
+    const next = document.createElement('button');
+    next.className = 'btn btn-outline btn-sm';
+    next.textContent = '›';
+    next.disabled = pagina === total;
+    next.onclick = () => { pagina++; render(); };
+    pag.appendChild(next);
+  }
+}
+
+function verDetalle(id) {
+  if (id) window.location.href = `empleado-detalle.html?id=${id}`;
+}
+
+async function darDeBaja(id, nom) {
+  if (!confirm(`¿Confirmar baja de ${nom}?`)) return;
+  try {
+    const res  = await fetch(`${API_BASE}/transacciones/baja`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ id_empleado: id })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('alert-ok').classList.add('show');
+      await cargar();
+    } else {
+      alert('Error: ' + (data.error || 'Transacción fallida'));
+    }
+  } catch(e) {
+    alert('Error de conexión con la API.');
+  }
+}
+
+cargar();
+</script>
+</body>
+</html>

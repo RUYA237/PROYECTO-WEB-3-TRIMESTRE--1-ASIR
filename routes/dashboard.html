@@ -11,7 +11,7 @@
 
 <div class="app-layout">
 
-  <aside class="sidebar" id="sidebar">
+  <div class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
       <div class="brand-name">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
@@ -26,28 +26,15 @@
       <a class="nav-item" href="empleados.html">
         Empleados
       </a>
-      <a class="nav-item" href="proyectos.html">
-        Proyectos
-      </a>
-      <a class="nav-item" href="departamentos.html">
-        Departamentos
-      </a>
 
       <div class="nav-section-label">Operaciones</div>
       <a class="nav-item" href="operaciones.html">
         Operaciones Críticas
       </a>
-      <a class="nav-item" href="accesos.html">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Control de Accesos
-      </a>
 
       <div class="nav-section-label">Sistema</div>
       <a class="nav-item" href="salarios.html">
         Historial Salarial
-      </a>
-      <a class="nav-item" href="auditoria.html">
-        Auditoría
       </a>
     </nav>
 
@@ -56,13 +43,14 @@
         <div class="sidebar-avatar" id="sb-avatar">AD</div>
         <div class="sidebar-user-info">
           <div class="user-name" id="sb-username">Admin</div>
-          <div class="user-role" id="sb-role">Administrador</div>
         </div>
         <a class="sidebar-logout-btn" href="../index.html" title="Cerrar sesión">
-        </a>
+  Log out
+</a>
+      </a>
       </div>
     </div>
-  </aside>
+  </div>
 
   <main class="main-content">
 
@@ -70,17 +58,13 @@
     <div class="topbar">
       <div class="topbar-title">Dashboard</div>
       <div class="topbar-actions">
-        <div class="search-bar">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Buscar empleado, proyecto…" />
-        </div>
         <a href="operaciones.html" class="btn btn-primary btn-sm">+ Nueva operación</a>
       </div>
     </div>
 
     <div class="page-content">
 
-      <div class="hero-banner fade-in">
+      <div class="hero-banner">
         <img
           src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=400&dpr=1"
           alt="Equipo Nexora"
@@ -88,41 +72,31 @@
         <div class="hero-overlay">
           <div class="hero-text">
             <h1>Panel de Control Corporativo</h1>
-            <p id="welcome-msg">Resumen general · Nexora Tech</p>
+            <p>Resumen general · Nexora Tech</p>
           </div>
         </div>
       </div>
 
       <div class="stats-grid">
-        <div class="stat-card fade-in delay-1">
+        <div class="stat-card">
           <div class="stat-label">Total Empleados</div>
           <div class="stat-value" id="stat-empleados">—</div>
-          <div class="stat-change up">↑ Activos en plantilla</div>
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
-          </div>
+          <div class="stat-change up">Activos en plantilla</div>
         </div>
-        <div class="stat-card fade-in delay-1">
+        <div class="stat-card">
           <div class="stat-label">Departamentos</div>
           <div class="stat-value" id="stat-depts">—</div>
           <div class="stat-change">Unidades de negocio</div>
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          </div>
         </div>
-        <div class="stat-card fade-in delay-2">
+        <div class="stat-card">
           <div class="stat-label">Proyectos Activos</div>
           <div class="stat-value" id="stat-proyectos">—</div>
           <div class="stat-change">En ejecución</div>
-          <div class="stat-icon">
-          </div>
         </div>
         </div>
       </div>
-
-      <div class="grid-2 fade-in delay-2">
-        </div>
-
+    <div> 
+  </div>
         <div class="card">
           <div class="card-header">
             <span class="card-title">Actividad Reciente</span>
@@ -153,6 +127,7 @@
                   <div class="activity-time">Ayer, 09:15</div>
   </main>
 </div>
+
 
 <script src="../js/api.js"></script>
 <script>

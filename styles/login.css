@@ -1,5 +1,5 @@
 /* ============================================================
-   LOGIN PAGE
+   NEXORA TECH — LOGIN (autocontenido, no depende de styles.css)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -13,14 +13,14 @@ body {
   background: #1E120A;
 }
 
-/* ---- Split layout ---- */
+/* --- Split layout --- */
 .login-split {
   display: flex;
   width: 100%;
   min-height: 100vh;
 }
 
-/* ---- Left — image panel ---- */
+/* --- Left: imagen --- */
 .login-visual {
   flex: 1;
   position: relative;
@@ -59,7 +59,7 @@ body {
   text-transform: uppercase;
 }
 
-/* ---- Right — form panel ---- */
+/* --- Right: formulario --- */
 .login-panel {
   width: 100%;
   max-width: 480px;
@@ -70,14 +70,12 @@ body {
   padding: 56px 52px;
   flex-shrink: 0;
 }
-
 @media (max-width: 900px) {
   .login-panel { max-width: 100%; padding: 40px 28px; }
 }
 
-.login-brand {
-  margin-bottom: 44px;
-}
+/* --- Brand --- */
+.login-brand { margin-bottom: 44px; }
 .login-brand-name {
   font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
@@ -93,7 +91,6 @@ body {
   color: #8A7060;
   margin-top: 4px;
 }
-
 .login-dot {
   color: #B85C38;
   font-size: 1.8rem;
@@ -103,6 +100,7 @@ body {
   margin: 0 4px;
 }
 
+/* --- Headings --- */
 .login-heading {
   font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
@@ -116,10 +114,8 @@ body {
   margin-bottom: 36px;
 }
 
-/* Form */
-.form-group {
-  margin-bottom: 20px;
-}
+/* --- Form --- */
+.form-group { margin-bottom: 20px; }
 .form-label {
   display: block;
   font-size: .78rem;
@@ -148,6 +144,7 @@ body {
 }
 .form-input::placeholder { color: #B8A090; }
 
+/* --- Error message --- */
 .login-error {
   display: none;
   background: #F5E8E8;
@@ -160,6 +157,7 @@ body {
 }
 .login-error.show { display: block; }
 
+/* --- Login button --- */
 .btn-login {
   width: 100%;
   padding: 14px;
@@ -178,39 +176,10 @@ body {
   justify-content: center;
   gap: 8px;
 }
-.btn-login:hover { background: #5C3320; }
+.btn-login:hover  { background: #5C3320; }
 .btn-login:active { transform: scale(.99); }
 
-.login-hint {
-  margin-top: 28px;
-  padding: 14px 16px;
-  background: #F4EDE4;
-  border-radius: 10px;
-  font-size: .8rem;
-  color: #8A7060;
-  line-height: 1.8;
-}
-.login-hint strong {
-  color: #5C3320;
-  display: block;
-  margin-bottom: 2px;
-  font-size: .72rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-.login-hint span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #E8DDD2;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: .82rem;
-  color: #5C3320;
-  margin: 2px 3px 0;
-}
-
+/* --- Footer --- */
 .login-footer {
   margin-top: auto;
   padding-top: 40px;
