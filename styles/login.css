@@ -52,11 +52,10 @@ body {
   margin-bottom: 16px;
   max-width: 420px;
 }
-.login-visual-quote em { font-style: italic; color: #D4784F; }
 .login-visual-sub {
-  font-size: .85rem;
-  color: rgba(244,237,228,.6);
-  letter-spacing: .06em;
+  font-size: .75rem;
+  color: #c6630c;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
 
@@ -93,6 +92,15 @@ body {
   text-transform: uppercase;
   color: #8A7060;
   margin-top: 4px;
+}
+
+.login-dot {
+  color: #B85C38;
+  font-size: 1.8rem;
+  line-height: 0;
+  position: relative;
+  top: -2px;
+  margin: 0 4px;
 }
 
 .login-heading {

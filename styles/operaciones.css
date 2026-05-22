@@ -1,43 +1,33 @@
-.main-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  border-bottom: 1px solid rgba(0,0,0,.05);
+/* --- Search Bar --- */
+.search-bar {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 50px;
+  outline: none;
+  font-size: .88rem;
+  color: var(--text-body);
+  transition: var(--transition);
+}
+.search-bar input:focus {
+  border-color: var(--terracotta);
+  background: var(--warm-white);
+}
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 16px; height: 16px;
+  pointer-events: none;
 }
 
-.ops-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.25rem;
-}
-
-.ops-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.ops-card h3 { font-size: 0.9rem; font-weight: 700; }
-.ops-card > p { font-size: 0.78rem; color: var(--muted); }
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.form-row.solo { grid-template-columns: 1fr; }
-
-
-
-/* ============================================================
-   LAYOUT — Sidebar + Main
-   ============================================================ */
 .app-layout {
   display: flex;
   min-height: 100vh;
@@ -152,9 +142,48 @@
   border-radius: 6px;
   transition: var(--transition);
 }
-.sidebar-logout-btn:hover { color: var(--terra-light); background: rgba(255,255,255,.06); }
+.sidebar-logout-btn:hover { color: var(--orange); background: rgba(255,255,255,.06); }
 
-/* ---------- Main Content ---------- */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.ops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.ops-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ops-card h3 { font-size: 0.9rem; font-weight: 700; }
+.ops-card > p { font-size: 0.78rem; color: var(--muted); }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-row.solo { grid-template-columns: 1fr; }
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  padding: 6rem;
+}
 .main-content {
   margin-left: var(--sidebar-w);
   flex: 1;
@@ -162,6 +191,59 @@
   background: var(--cream);
 }
 
+/* --- Form Elements --- */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 7px;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius);
+  color: var(--text-body);
+  transition: var(--transition);
+  outline: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--terracotta);
+  background: var(--warm-white);
+  box-shadow: 0 0 0 3px rgba(184,92,56,.1);
+}
+.form-input::placeholder { color: var(--text-light); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.badge-active  { background: #E8F0E8; color: #3A6B3A; }
+.badge-inactive{ background: #F0E8E8; color: #6B3A3A; }
+.badge-pending { background: #F0EDE0; color: #6B5A20; }
+.badge-info    { background: var(--cream-dark); color: var(--brown-mid); }
 
 @media (max-width: 600px) {
   .ops-grid { grid-template-columns: 1fr; }

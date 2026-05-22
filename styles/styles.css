@@ -10,7 +10,7 @@
   --brown-dark:   #1E120A;
   --brown-mid:    #5C3320;
   --terracotta:   #B85C38;
-  --terra-light:  #D4784F;
+  --orange:  #D4784F;
   --cream:        #F4EDE4;
   --cream-dark:   #E8DDD2;
   --cream-mid:    #EDE5DA;
@@ -73,7 +73,7 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--terracotta), var(--terra-light));
+  background: linear-gradient(90deg, var(--terracotta), var(--orange));
 }
 .stat-label {
   font-size: .75rem;
@@ -180,62 +180,6 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
 .btn-sm { padding: 7px 14px; font-size: .82rem; }
 .btn-danger { background: #A84040; color: white; }
 .btn-danger:hover { background: #882020; }
-
-/* --- Form Elements --- */
-.form-group {
-  margin-bottom: 20px;
-}
-.form-label {
-  display: block;
-  font-size: .8rem;
-  font-weight: 500;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 7px;
-}
-.form-input,
-.form-select,
-.form-textarea {
-  width: 100%;
-  padding: 11px 14px;
-  background: var(--cream);
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius);
-  color: var(--text-body);
-  transition: var(--transition);
-  outline: none;
-}
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
-  border-color: var(--terracotta);
-  background: var(--warm-white);
-  box-shadow: 0 0 0 3px rgba(184,92,56,.1);
-}
-.form-input::placeholder { color: var(--text-light); }
-.form-textarea { resize: vertical; min-height: 100px; }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-
-/* --- Badge --- */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 50px;
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .03em;
-}
-.badge-active  { background: #E8F0E8; color: #3A6B3A; }
-.badge-inactive{ background: #F0E8E8; color: #6B3A3A; }
-.badge-pending { background: #F0EDE0; color: #6B5A20; }
-.badge-info    { background: var(--cream-dark); color: var(--brown-mid); }
 
 /* --- Table --- */
 .data-table {
