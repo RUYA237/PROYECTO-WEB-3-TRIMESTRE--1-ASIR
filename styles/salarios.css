@@ -196,3 +196,32 @@
   transition: var(--transition);
 }
 .barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
+
+.barra-busqueda {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+}
+.barra-busqueda input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 50px;
+  outline: none;
+  font-size: .88rem;
+  color: var(--text-body);
+  transition: var(--transition);
+}
+.barra-busqueda input:focus {
+  border-color: var(--terracotta);
+  background: var(--warm-white);
+}
+.barra-busqueda .icono-busqueda {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 16px; height: 16px;
+  pointer-events: none;
+}
