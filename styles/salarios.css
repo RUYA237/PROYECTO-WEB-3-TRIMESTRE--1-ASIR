@@ -1,107 +1,10 @@
-/* ============================================================
-   NEXORA TECH — HISTORIAL SALARIAL (estilos exclusivos)
-   Todo lo compartido está en styles.css
-   ============================================================ */
-
-/* Loading state */
-.sal-cargando {
-  padding: 48px;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: .88rem;
-}
-
-/* Filter label */
-.sal-etiqueta-filtro {
-  font-size: .8rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-/* Selector dentro del filtro */
-.sal-seleccion {
-  width: auto;
-  padding: 8px 14px;
-  font-size: .85rem;
-}
-
-/* Card principal de la tabla */
-.sal-tarjeta {
-  padding: 0;
-}
-
-/* Paginación */
-.sal-paginacion {
-  display: flex;
-  gap: 6px;
-  justify-content: flex-end;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-/* Badges de motivo */
-.sal-insignia {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 50px;
-  font-size: .75rem;
-  font-weight: 500;
-}
-
-.motivo-contratacion {
-  background: rgba(90, 138, 90, .12);
-  color: #3d6e3d;
-  border: 1px solid rgba(90, 138, 90, .25);
-}
-
-.motivo-revision {
-  background: rgba(184, 92, 56, .1);
-  color: var(--brown-mid);
-  border: 1px solid rgba(184, 92, 56, .2);
-}
-
-.motivo-promocion {
-  background: rgba(92, 51, 32, .1);
-  color: var(--brown-dark);
-  border: 1px solid rgba(92, 51, 32, .2);
-}
-
-/* Variación salarial */
-.variacion {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: .82rem;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 6px;
-}
-
-.var-subida {
-  color: #3d6e3d;
-  background: rgba(90, 138, 90, .1);
-}
-
-.var-bajada {
-  color: #a84040;
-  background: rgba(168, 64, 64, .1);
-}
-
-/* Card sin padding extra para tabla */
-.tarjeta { padding: 0; }
-
-/* ---------- Sidebar ---------- */
 .barra-lateral {
   width: var(--sidebar-w);
   background: var(--sidebar-bg);
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0; left: 0;
   height: 100vh;
-  z-index: 100;
-  overflow: hidden;
 }
 .barra-lateral-logo {
   padding: 32px 24px 24px;
@@ -111,20 +14,19 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   color: var(--cream);
-  letter-spacing: .02em;
+  letter-spacing: 0.02rem;
   line-height: 1.2;
 }
 .barra-lateral-logo .marca-sub {
   font-size: .72rem;
   color: var(--text-light);
-  letter-spacing: .1em;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
   margin-top: 3px;
 }
 .barra-lateral-nav {
   flex: 1;
   padding: 20px 0;
-  overflow-y: auto;
 }
 .nav-etiqueta-seccion {
   font-size: .68rem;
@@ -153,13 +55,7 @@
   border-left-color: var(--terracotta);
   background: rgba(184,92,56,.12);
 }
-.nav-elemento .nav-icono {
-  width: 18px; height: 18px;
-  opacity: .7;
-  flex-shrink: 0;
-}
-.nav-elemento.activo .nav-icono,
-.nav-elemento:hover .nav-icono { opacity: 1; }
+
 .barra-lateral-pie {
   padding: 20px 24px;
   border-top: 1px solid rgba(255,255,255,.07);
@@ -174,18 +70,17 @@
   border-radius: 50%;
   background: var(--terracotta);
   display: flex; align-items: center; justify-content: center;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: white;
-  flex-shrink: 0;
 }
 .barra-lateral-info-usuario .usuario-nombre {
-  font-size: .82rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--cream);
 }
 .barra-lateral-info-usuario .usuario-rol {
-  font-size: .72rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
 }
 .barra-lateral-btn-salir {
@@ -193,7 +88,6 @@
   color: var(--text-muted);
   padding: 6px;
   border-radius: 6px;
-  transition: var(--transition);
 }
 .barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
 
@@ -224,4 +118,17 @@
   color: var(--text-muted);
   width: 16px; height: 16px;
   pointer-events: none;
+}
+
+.sal-cargando {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .88rem;
+}
+
+.sal-seleccion {
+  width: auto;
+  padding: 8px 14px;
+  font-size: .85rem;
 }

@@ -1,9 +1,96 @@
-/* ============================================================
-   NEXORA TECH — OPERACIONES CRÍTICAS (estilos exclusivos)
-   Todo lo compartido está en styles.css
-   ============================================================ */
+.barra-lateral {
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+.barra-lateral-logo {
+  padding: 32px 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.barra-lateral-logo .marca-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--cream);
+  letter-spacing: 0.02rem;
+  line-height: 1.2;
+}
+.barra-lateral-logo .marca-sub {
+  font-size: .72rem;
+  color: var(--text-light);
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.barra-lateral-nav {
+  flex: 1;
+  padding: 20px 0;
+}
+.nav-etiqueta-seccion {
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 24px 6px;
+}
+.nav-elemento {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 24px;
+  color: rgba(244,237,228,.65);
+  font-size: .88rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: var(--transition);
+}
+.nav-elemento:hover {
+  color: var(--cream);
+  background: rgba(255,255,255,.05);
+}
+.nav-elemento.activo {
+  color: var(--cream);
+  border-left-color: var(--terracotta);
+  background: rgba(184,92,56,.12);
+}
 
-/* --- Main header --- */
+.barra-lateral-pie {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.barra-lateral-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.barra-lateral-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+}
+.barra-lateral-info-usuario .usuario-nombre {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cream);
+}
+.barra-lateral-info-usuario .usuario-rol {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.barra-lateral-btn-salir {
+  margin-left: auto;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: 6px;
+}
+.barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
+
 .cabecera-principal {
   display: flex;
   align-items: center;
@@ -133,117 +220,9 @@
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-/* --- fila-formulario modifier (solo columna) --- */
+
 .fila-formulario.solo { grid-template-columns: 1fr; }
 
-/* ---------- Sidebar ---------- */
-.barra-lateral {
-  width: var(--sidebar-w);
-  background: var(--sidebar-bg);
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0;
-  height: 100vh;
-  z-index: 100;
-  overflow: hidden;
-}
-.barra-lateral-logo {
-  padding: 32px 24px 24px;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-.barra-lateral-logo .marca-nombre {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  color: var(--cream);
-  letter-spacing: .02em;
-  line-height: 1.2;
-}
-.barra-lateral-logo .marca-sub {
-  font-size: .72rem;
-  color: var(--text-light);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-top: 3px;
-}
-.barra-lateral-nav {
-  flex: 1;
-  padding: 20px 0;
-  overflow-y: auto;
-}
-.nav-etiqueta-seccion {
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 16px 24px 6px;
-}
-.nav-elemento {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 24px;
-  color: rgba(244,237,228,.65);
-  font-size: .88rem;
-  font-weight: 500;
-  border-left: 3px solid transparent;
-  transition: var(--transition);
-}
-.nav-elemento:hover {
-  color: var(--cream);
-  background: rgba(255,255,255,.05);
-}
-.nav-elemento.activo {
-  color: var(--cream);
-  border-left-color: var(--terracotta);
-  background: rgba(184,92,56,.12);
-}
-.nav-elemento .nav-icono {
-  width: 18px; height: 18px;
-  opacity: .7;
-  flex-shrink: 0;
-}
-.nav-elemento.activo .nav-icono,
-.nav-elemento:hover .nav-icono { opacity: 1; }
-.barra-lateral-pie {
-  padding: 20px 24px;
-  border-top: 1px solid rgba(255,255,255,.07);
-}
-.barra-lateral-usuario {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.barra-lateral-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--terracotta);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .8rem;
-  font-weight: 600;
-  color: white;
-  flex-shrink: 0;
-}
-.barra-lateral-info-usuario .usuario-nombre {
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--cream);
-}
-.barra-lateral-info-usuario .usuario-rol {
-  font-size: .72rem;
-  color: var(--text-muted);
-}
-.barra-lateral-btn-salir {
-  margin-left: auto;
-  color: var(--text-muted);
-  padding: 6px;
-  border-radius: 6px;
-  transition: var(--transition);
-}
-.barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
-
-
-/* --- Responsive --- */
 @media (max-width: 600px) {
   .cuadricula-operaciones { grid-template-columns: 1fr; }
   .fila-formulario { grid-template-columns: 1fr; }
