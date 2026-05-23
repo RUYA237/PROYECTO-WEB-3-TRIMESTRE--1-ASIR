@@ -27,7 +27,6 @@ body {
   overflow: hidden;
   display: none;
 }
-@media (min-width: 900px) { .login-visual { display: block; } }
 
 .login-visual img {
   width: 100%; height: 100%;
@@ -70,10 +69,6 @@ body {
   padding: 56px 52px;
   flex-shrink: 0;
 }
-@media (max-width: 900px) {
-  .login-panel { max-width: 100%; padding: 40px 28px; }
-}
-
 /* --- Brand --- */
 .login-marca { margin-bottom: 44px; }
 .login-marca-nombre {
@@ -100,7 +95,6 @@ body {
   margin: 4px;
 }
 
-/* --- Headings --- */
 .login-titulo {
   font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
@@ -186,3 +180,9 @@ body {
   font-size: .76rem;
   color: #B8A090;
 }
+
+@media (max-width: 900px) {
+  .login-panel { max-width: 100%; padding: 40px 28px; }
+}
+
+@media (min-width: 900px) { .login-visual { display: block; } }
