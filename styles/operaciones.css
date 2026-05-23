@@ -79,10 +79,6 @@
   font-weight: 600;
   color: var(--cream);
 }
-.barra-lateral-info-usuario .usuario-rol {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
 .barra-lateral-btn-salir {
   margin-left: auto;
   color: var(--text-muted);
@@ -91,58 +87,13 @@
 }
 .barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
 
-.cabecera-principal {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  border-bottom: 1px solid rgba(0,0,0,.05);
-}
-
-/* --- Ops tabs --- */
-.ops-pestañas {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.ops-pestaña {
-  padding: 9px 20px;
-  border-radius: var(--radius);
-  font-size: .85rem;
-  font-weight: 500;
-  border: 1.5px solid var(--cream-dark);
-  color: var(--text-muted);
-  background: var(--warm-white);
-  cursor: pointer;
-  transition: var(--transition);
-}
-.ops-pestaña:hover,
-.ops-pestaña.activo {
-  border-color: var(--terracotta);
-  color: var(--terracotta);
-  background: rgba(184,92,56,.06);
-}
-
-/* --- Ops panels --- */
-.ops-panel { display: none; }
-.ops-panel.activo { display: block; }
-
-/* --- Ops card grid --- */
-.cuadricula-operaciones {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.25rem;
-}
-
-/* Parte abajo cuadrado blanco de Actividad */
+/* Tarjetas */
 .tx-tarjeta {
   background: var(--warm-white);
   border: 1px solid var(--cream-dark);
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 20px;
-  
 }
 .tx-tarjeta-cabecera {
   display: flex;
@@ -160,15 +111,14 @@
   display: flex; align-items: center; justify-content: center;
   font-size: .82rem;
   font-weight: 700;
-  flex-shrink: 0;
 }
 .tx-tarjeta-titulo {
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--brown-dark);
 }
 .tx-tarjeta-subtitulo {
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   margin-top: 2px;
 }
@@ -184,26 +134,17 @@
   box-shadow: var(--shadow-md);
 }
 
-.fila-formulario.solo { grid-template-columns: 1fr; }
-.barra-lateral-pie {
-  padding: 20px 24px;
-  border-top: 1px solid rgba(255,255,255,.07);
-}
-
-/* --- Form Elements --- */
 .grupo-formulario { margin-bottom: 20px; }
 .etiqueta-formulario {
   display: block;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: .05em;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: 7px;
 }
-.entrada-formulario,
-.seleccion-formulario,
-.area-texto-formulario {
+.entrada-formulario, .seleccion-formulario {
   width: 100%;
   padding: 11px 14px;
   background: var(--cream);
@@ -211,17 +152,14 @@
   border-radius: var(--radius);
   color: var(--text-body);
   transition: var(--transition);
-  outline: none;
 }
 .entrada-formulario:focus,
-.seleccion-formulario:focus,
-.area-texto-formulario:focus {
+.seleccion-formulario:focus {
   border-color: var(--terracotta);
   background: var(--warm-white);
   box-shadow: 0 0 0 3px rgba(184,92,56,.1);
 }
 .entrada-formulario::placeholder { color: var(--text-light); }
-.area-texto-formulario { resize: vertical; min-height: 100px; }
 .fila-formulario {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -229,6 +167,5 @@
 }
 
 @media (max-width: 600px) {
-  .cuadricula-operaciones { grid-template-columns: 1fr; }
   .fila-formulario { grid-template-columns: 1fr; }
 }
