@@ -60,7 +60,7 @@
         <div class="barra-busqueda">
           <input type="text" id="buscador" placeholder="Buscar por nombre, cargo…" oninput="filtrar()" />
         </div>
-        <a href="operaciones.html#contratar" class="btn btn-primario btn-pequeno">+ Nuevo empleado</a>
+        <a href="/routes/operaciones.html" class="btn btn-primario btn-pequeno">+ Nuevo empleado</a>
       </div>
     </div>
 
@@ -71,26 +71,24 @@
         <div class="divisor-seccion"></div>
         <p>Consulta, busca y gestiona todos los empleados de Nexora Tech.</p>
       </div>
+      <div class="alerta alerta-exito" id="alert-ok">Operación completada correctamente.</div>
+      <div class="alerta alerta-error"   id="alert-err">Error al cargar los datos.</div>
 
-      <div class="alerta alerta-exito" id="alert-ok">✓ Operación completada correctamente.</div>
-      <div class="alerta alerta-error"   id="alert-err">⚠ Error al cargar los datos.</div>
 
-      <!-- KPIs rápidos -->
+
       <div class="cuadricula-estadisticas entrada-fundido retraso-1">
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Total empleados</div>
           <div class="estadistica-valor" id="kpi-total">—</div>
-          <div class="estadistica-cambio subida">En plantilla</div>
+          <div class="estadistica-cambio">En plantilla</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Activos</div>
           <div class="estadistica-valor" id="kpi-activos">—</div>
-          <div class="estadistica-cambio subida">Incorporados</div>
+          <div class="estadistica-cambio">Incorporados</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
@@ -98,7 +96,6 @@
           <div class="estadistica-valor" id="kpi-inactivos">—</div>
           <div class="estadistica-cambio">Bajas registradas</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
@@ -106,61 +103,44 @@
           <div class="estadistica-valor" id="kpi-depts">—</div>
           <div class="estadistica-cambio">Unidades activas</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
           </div>
         </div>
       </div>
 
-      <!-- Filtros -->
+
       <div class="barra-filtros entrada-fundido retraso-2">
-        <span class="etiqueta-filtro">Estado:</span>
-        <button class="chip-filtro activo" onclick="setEstado('todos', this)">Todos</button>
-        <button class="chip-filtro" onclick="setEstado('activo', this)">Activos</button>
-        <button class="chip-filtro" onclick="setEstado('inactivo', this)">Inactivos</button>
+        <span class="etiqueta-filtro">Estado: Todos, Inactivos y Activos</span>
         <div class="filtro-derecha">
           <select class="seleccion-formulario" id="filtro-dept" onchange="filtrar()">
             <option value="">Todos los departamentos</option>
+            <option value="Desarrollo">Desarrollo</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Ventas">Ventas</option>
+            <option value="Recursos Humanos">Recursos Humanos</option>
+            <option value="IT">IT</option>
           </select>
         </div>
       </div>
 
-      <!-- Tabla -->
-      <div class="tarjeta entrada-fundido retraso-2">
-        <div class="tarjeta-cuerpo" style="padding:0">
+
+
+      <div class="tarjeta entrada-fundido">
           <div id="loading-state" class="emp-cargando">
-            <div class="girador" style="margin:0 auto 12px"></div>
+            <div class="girador"></div>
             Cargando empleados…
           </div>
-          <div class="estado-vacio" id="empty-state" style="display:none">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
+          <div class="estado-vacio" id="empty-state">
             <p>No se encontraron empleados con esos criterios.</p>
           </div>
-          <table class="tabla-datos" id="tabla-empleados" style="display:none">
-            <thead>
-              <tr>
-                <th>Empleado</th>
-                <th>Cargo</th>
-                <th>Departamento</th>
-                <th>Email</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
         </div>
       </div>
-
-      <!-- Paginación -->
-      <div id="pagination" class="barra-paginacion"></div>
-
     </div>
   </main>
 </div>
 
 <script src="../js/api.js"></script>
 <script>
-/* Auth guard */
+
 (function() {
   const u = localStorage.getItem('nexora-user');
   if (!u) { window.location.href = '../index.html'; return; }
