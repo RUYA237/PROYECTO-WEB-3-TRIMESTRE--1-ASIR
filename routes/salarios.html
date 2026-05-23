@@ -52,14 +52,12 @@
     </div>
   </div>
 
-  <!-- MAIN -->
   <main class="contenido-principal">
 
     <div class="barra-superior">
       <div class="barra-superior-titulo">Historial Salarial</div>
       <div class="barra-superior-acciones">
         <div class="barra-busqueda">
-          <svg class="icono-busqueda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="buscador" placeholder="Buscar por empleado…" oninput="filtrar()" />
         </div>
         <a href="operaciones.html#nomina" class="btn btn-primario btn-pequeno">+ Procesar nómina</a>
@@ -74,14 +72,12 @@
         <p>Registro de todos los movimientos y actualizaciones salariales de la plantilla.</p>
       </div>
 
-      <!-- KPIs -->
       <div class="cuadricula-estadisticas entrada-fundido retraso-1">
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Masa salarial total</div>
           <div class="estadistica-valor" id="kpi-total">—</div>
           <div class="estadistica-cambio">Coste mensual bruto</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
@@ -89,7 +85,6 @@
           <div class="estadistica-valor" id="kpi-media">—</div>
           <div class="estadistica-cambio">Por empleado/mes</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
@@ -97,7 +92,6 @@
           <div class="estadistica-valor" id="kpi-max">—</div>
           <div class="estadistica-cambio">Máximo en plantilla</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
           </div>
         </div>
         <div class="tarjeta-estadistica">
@@ -105,215 +99,31 @@
           <div class="estadistica-valor" id="kpi-registros">—</div>
           <div class="estadistica-cambio">Entradas en historial</div>
           <div class="estadistica-icono">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
         </div>
       </div>
 
-      <!-- Filtros -->
-      <div class="barra-filtros entrada-fundido retraso-2">
-        <span class="sal-etiqueta-filtro">Motivo:</span>
-        <button class="chip-filtro activo" onclick="setMotivo('todos', this)">Todos</button>
-        <button class="chip-filtro" onclick="setMotivo('contratacion', this)">Contratación</button>
-        <button class="chip-filtro" onclick="setMotivo('revision', this)">Revisión</button>
-        <button class="chip-filtro" onclick="setMotivo('promocion', this)">Promoción</button>
         <div style="margin-left:auto">
           <select class="seleccion-formulario sal-seleccion" id="filtro-dept" onchange="filtrar()">
             <option value="">Todos los departamentos</option>
+            <option value="Desarrollo">Desarrollo</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Ventas">Ventas</option>
+            <option value="Recursos Humanos">Recursos Humanos</option>
+            <option value="IT">IT</option>
           </select>
         </div>
-      </div>
 
-      <!-- Alerta -->
-      <div class="alerta alerta-error" id="alert-err">⚠ Error al cargar los datos.</div>
-
-      <!-- Tabla -->
-      <div class="tarjeta sal-tarjeta entrada-fundido retraso-2">
-        <div class="tarjeta-cuerpo" style="padding:0">
           <div id="loading-state" class="sal-cargando">
             <div class="girador" style="margin:0 auto 12px"></div>
             Cargando historial…
           </div>
-          <div class="estado-vacio" id="empty-state" style="display:none">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            <p>No se encontraron registros con esos criterios.</p>
-          </div>
-          <table class="tabla-datos" id="tabla-salarios" style="display:none">
-            <thead>
-              <tr>
-                <th>Empleado</th>
-                <th>Departamento</th>
-                <th>Salario anterior</th>
-                <th>Salario nuevo</th>
-                <th>Variación</th>
-                <th>Motivo</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Paginación -->
-      <div id="pagination" class="sal-paginacion"></div>
-
     </div>
   </main>
 </div>
 
 <script src="../js/api.js"></script>
 <script>
-/* Auth guard */
-(function() {
-  const u = localStorage.getItem('nexora-user');
-  if (!u) { window.location.href = '../index.html'; return; }
-  document.getElementById('sb-username').textContent = u.charAt(0).toUpperCase() + u.slice(1);
-  document.getElementById('sb-avatar').textContent   = u.slice(0,2).toUpperCase();
-  document.getElementById('sb-role').textContent     = localStorage.getItem('nexora-rol') || 'Usuario';
-})();
-
-const fmt = n => Number(n).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
-
-let todos        = [];
-let filtroMotivo = 'todos';
-const POR_PAG    = 12;
-let pagina       = 1;
-
-async function cargar() {
-  try {
-    const data = await fetch(`${API_BASE}/salarios`).then(r => r.json());
-    todos = data;
-
-    /* KPIs */
-    const salarios = data.map(r => Number(r.salario_nuevo || r.salario || 0)).filter(Boolean);
-    const suma     = salarios.reduce((a, b) => a + b, 0);
-    document.getElementById('kpi-total').textContent    = fmt(suma);
-    document.getElementById('kpi-media').textContent    = salarios.length ? fmt(suma / salarios.length) : '—';
-    document.getElementById('kpi-max').textContent      = salarios.length ? fmt(Math.max(...salarios)) : '—';
-    document.getElementById('kpi-registros').textContent = data.length;
-
-    /* Selector dept */
-    const depts = [...new Set(data.map(r => r.departamento).filter(Boolean))].sort();
-    const sel   = document.getElementById('filtro-dept');
-    depts.forEach(d => {
-      const o = document.createElement('option');
-      o.value = d; o.textContent = d; sel.appendChild(o);
-    });
-
-    document.getElementById('loading-state').style.display = 'none';
-    render();
-  } catch(e) {
-    document.getElementById('loading-state').innerHTML =
-      '<p style="color:var(--text-muted);font-size:.88rem">Error al conectar con la API.</p>';
-    document.getElementById('alert-err').classList.add('mostrar');
-  }
-}
-
-function setMotivo(m, btn) {
-  filtroMotivo = m;
-  document.querySelectorAll('.chip-filtro').forEach(c => c.classList.remove('activo'));
-  btn.classList.add('activo');
-  pagina = 1; render();
-}
-
-function filtrar() { pagina = 1; render(); }
-
-function filtered() {
-  const q    = (document.getElementById('buscador').value || '').toLowerCase();
-  const dept = document.getElementById('filtro-dept').value;
-  return todos.filter(r => {
-    const nom   = `${r.nombre||''} ${r.apellidos||''}`.toLowerCase();
-    const matchQ = !q || nom.includes(q) || (r.id_empleado||'').toString().includes(q);
-    const matchM = filtroMotivo === 'todos' || (r.motivo||'').toLowerCase().includes(filtroMotivo);
-    const matchD = !dept || r.departamento === dept;
-    return matchQ && matchM && matchD;
-  });
-}
-
-function render() {
-  const list  = filtered();
-  const start = (pagina - 1) * POR_PAG;
-  const page  = list.slice(start, start + POR_PAG);
-  const tabla = document.getElementById('tabla-salarios');
-  const empty = document.getElementById('empty-state');
-
-  if (page.length === 0) {
-    tabla.style.display = 'none'; empty.style.display = 'block';
-  } else {
-    tabla.style.display = 'table'; empty.style.display = 'none';
-  }
-
-  document.getElementById('tbody').innerHTML = page.map(r => {
-    const nom      = `${r.nombre||''} ${r.apellidos||''}`.trim() || `Empleado #${r.id_empleado}`;
-    const ini      = nom.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
-    const anterior = r.salario_anterior ? fmt(r.salario_anterior) : '—';
-    const nuevo    = r.salario_nuevo || r.salario;
-    const nuevoFmt = nuevo ? fmt(nuevo) : '—';
-    const variacion = r.salario_anterior && nuevo
-      ? ((nuevo - r.salario_anterior) / r.salario_anterior * 100).toFixed(1)
-      : null;
-    const fecha = r.fecha_inicio || r.fecha
-      ? new Date(r.fecha_inicio || r.fecha).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' })
-      : '—';
-    const motivoRaw   = (r.motivo || 'contratación').toLowerCase();
-    const motivoClass = motivoRaw.includes('promocion') || motivoRaw.includes('promoción') ? 'motivo-promocion'
-                      : motivoRaw.includes('revision')  || motivoRaw.includes('revisión')  ? 'motivo-revision'
-                      : 'motivo-contratacion';
-    return `
-      <tr>
-        <td>
-          <div class="td-flex">
-            <div class="avatar-pequeno">${ini}</div>
-            <div>
-              <div class="td-nombre">${nom}</div>
-              <div style="font-size:.73rem;color:var(--text-muted)">ID: ${r.id_empleado||'—'}</div>
-            </div>
-          </div>
-        </td>
-        <td style="font-size:.83rem;color:var(--text-muted)">${r.departamento||'—'}</td>
-        <td style="font-size:.85rem">${anterior}</td>
-        <td><strong style="color:var(--brown-dark)">${nuevoFmt}</strong></td>
-        <td>
-          ${variacion !== null
-            ? `<span class="variacion ${Number(variacion) >= 0 ? 'var-subida' : 'var-bajada'}">${Number(variacion) >= 0 ? '▲' : '▼'} ${Math.abs(variacion)}%</span>`
-            : '<span style="color:var(--text-muted);font-size:.82rem">—</span>'}
-        </td>
-        <td><span class="sal-insignia ${motivoClass}">${r.motivo || 'Contratación'}</span></td>
-        <td style="font-size:.83rem;color:var(--text-muted)">${fecha}</td>
-      </tr>`;
-  }).join('');
-
-  /* Paginación */
-  const total = Math.ceil(list.length / POR_PAG);
-  const pag   = document.getElementById('pagination');
-  pag.innerHTML = '';
-  if (total > 1) {
-    const prev = document.createElement('button');
-    prev.className = 'btn btn-contorno btn-pequeno';
-    prev.textContent = '‹';
-    prev.disabled = pagina === 1;
-    prev.onclick = () => { pagina--; render(); };
-    pag.appendChild(prev);
-
-    for (let i = 1; i <= total; i++) {
-      const b = document.createElement('button');
-      b.textContent = i;
-      b.className   = `btn btn-pequeno ${i === pagina ? 'btn-primario' : 'btn-contorno'}`;
-      b.onclick     = () => { pagina = i; render(); };
-      pag.appendChild(b);
-    }
-
-    const next = document.createElement('button');
-    next.className = 'btn btn-contorno btn-pequeno';
-    next.textContent = '›';
-    next.disabled = pagina === total;
-    next.onclick = () => { pagina++; render(); };
-    pag.appendChild(next);
-  }
-}
-
-cargar();
 </script>
 </body>
 </html>
