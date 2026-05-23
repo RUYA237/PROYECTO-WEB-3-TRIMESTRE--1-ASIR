@@ -11,8 +11,6 @@
 </head>
 <body>
 
-<div class="diseno-aplicacion">
-
   <div class="barra-lateral" id="sidebar">
 
     <div class="barra-lateral-logo">
@@ -54,7 +52,6 @@
     </div>
   </div>
 
-  <!-- MAIN -->
   <main class="contenido-principal">
 
     <div class="barra-superior">
@@ -68,117 +65,102 @@
       <div class="encabezado-seccion entrada-fundido">
         <h2>Panel de Transacciones</h2>
         <div class="divisor-seccion"></div>
-        <p>Operaciones que afectan a múltiples tablas con control de integridad (START TRANSACTION · COMMIT · ROLLBACK).</p>
+        <p>Operaciones que afectan a múltiples tablas con control de integridad.</p>
       </div>
 
-      <!-- Tabs -->
-      <div class="ops-pestanas entrada-fundido retraso-1">
-        <button class="ops-pestana activo" onclick="showTab('personal')">Personal</button>
-        <button class="ops-pestana" onclick="showTab('proyectos')">Proyectos</button>
-        <button class="ops-pestana" onclick="showTab('nomina')">Nómina</button>
-        <button class="ops-pestana" onclick="showTab('sistema')">Sistema</button>
-      </div>
 
-      <!-- ==================== PERSONAL ==================== -->
-      <div class="ops-panel activo entrada-fundido" id="panel-personal">
-
-        <!-- TX1: Contratación Completa -->
         <div class="tx-tarjeta" id="contratar">
           <div class="tx-tarjeta-cabecera">
             <div class="tx-numero">1</div>
             <div>
               <div class="tx-tarjeta-titulo">Contratación Completa</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: Empleados → ControlAccesos → Departamentos_Empleados → HistorialSalarios</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Nombre</label>
+                <p class="etiqueta-formulario">Nombre</p>
                 <input class="entrada-formulario" id="c-nombre" placeholder="Nombre" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Apellidos</label>
+                <p class="etiqueta-formulario">Apellidos</p>
                 <input class="entrada-formulario" id="c-apellidos" placeholder="Apellidos" />
               </div>
             </div>
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Email</label>
+                <p class="etiqueta-formulario">Email</p>
                 <input class="entrada-formulario" type="email" id="c-email" placeholder="email@nexora.com" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Cargo</label>
+                <p class="etiqueta-formulario">Cargo</p>
                 <input class="entrada-formulario" id="c-cargo" placeholder="Ej: Analista de Datos" />
               </div>
             </div>
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Departamento</label>
+                <p class="etiqueta-formulario">ID Departamento</p>
                 <input class="entrada-formulario" type="number" id="c-dept" placeholder="ID del departamento" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Salario inicial (€/mes)</label>
+                <p class="etiqueta-formulario">Salario inicial (€/mes)</p>
                 <input class="entrada-formulario" type="number" id="c-salario" placeholder="2000" />
               </div>
             </div>
             <div class="grupo-formulario">
-              <label class="etiqueta-formulario">Usuario de acceso</label>
+              <p class="etiqueta-formulario">Usuario de acceso</p>
               <input class="entrada-formulario" id="c-usuario" placeholder="usuario.apellido" />
             </div>
             <button class="btn btn-primario" onclick="tx_contratar()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
               Ejecutar Contratación
             </button>
             <div class="tx-resultado" id="res-contratar"></div>
           </div>
         </div>
 
-        <!-- TX2: Transferencia de Departamento -->
+
+
+
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
             <div class="tx-numero">2</div>
             <div>
               <div class="tx-tarjeta-titulo">Transferencia de Departamento</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: Departamentos_Empleados → Asignaciones</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado</label>
+                <p class="etiqueta-formulario">ID Empleado</p>
                 <input class="entrada-formulario" type="number" id="t-emp" placeholder="ID del empleado" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Nuevo Departamento</label>
+                <p class="etiqueta-formulario">ID Nuevo Departamento</p>
                 <input class="entrada-formulario" type="number" id="t-dept-nuevo" placeholder="ID del nuevo departamento" />
               </div>
             </div>
             <button class="btn btn-primario" onclick="tx_transferir()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
               Ejecutar Transferencia
             </button>
             <div class="tx-resultado" id="res-transferir"></div>
           </div>
         </div>
 
-        <!-- TX4: Baja / Despido -->
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
-            <div class="tx-numero">4</div>
+            <div class="tx-numero">3</div>
             <div>
               <div class="tx-tarjeta-titulo">Baja / Despido de Empleado</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: ControlAccesos → Asignaciones → Empleados → Auditoria</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado</label>
+                <p class="etiqueta-formulario">ID Empleado</p>
                 <input class="entrada-formulario" type="number" id="b-emp" placeholder="ID del empleado" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Motivo de baja</label>
+                <p class="etiqueta-formulario">Motivo de baja</p>
                 <select class="seleccion-formulario" id="b-motivo">
                   <option value="despido">Despido</option>
                   <option value="renuncia">Renuncia voluntaria</option>
@@ -188,62 +170,56 @@
               </div>
             </div>
             <button class="btn btn-peligro" onclick="tx_baja()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
               Ejecutar Baja
             </button>
             <div class="tx-resultado" id="res-baja"></div>
           </div>
         </div>
 
-      </div><!-- /panel-personal -->
+      </div>
 
-      <!-- ==================== PROYECTOS ==================== -->
-      <div class="ops-panel" id="panel-proyectos">
 
-        <!-- TX3: Cierre de Proyecto -->
+
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
-            <div class="tx-numero">3</div>
+            <div class="tx-numero">4</div>
             <div>
               <div class="tx-tarjeta-titulo">Cierre de Proyecto</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: Proyectos → Asignaciones → Departamentos (presupuesto)</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="grupo-formulario">
-              <label class="etiqueta-formulario">ID del Proyecto</label>
+              <p class="etiqueta-formulario">ID del Proyecto</p>
               <input class="entrada-formulario" type="number" id="cp-proyecto" placeholder="ID del proyecto a cerrar" />
             </div>
             <button class="btn btn-primario" onclick="tx_cerrarProyecto()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
               Cerrar Proyecto
             </button>
             <div class="tx-resultado" id="res-cerrarProyecto"></div>
           </div>
         </div>
 
-        <!-- TX5: Asignar empleado a proyecto -->
+
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
             <div class="tx-numero">5</div>
             <div>
               <div class="tx-tarjeta-titulo">Asignar Empleado a Proyecto</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: Asignaciones → Proyectos (coste)</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado</label>
+                <p class="etiqueta-formulario">ID Empleado</p>
                 <input class="entrada-formulario" type="number" id="as-emp" placeholder="ID del empleado" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Proyecto</label>
+                <p class="etiqueta-formulario">ID Proyecto</p>
                 <input class="entrada-formulario" type="number" id="as-proy" placeholder="ID del proyecto" />
               </div>
             </div>
             <div class="grupo-formulario">
-              <label class="etiqueta-formulario">Rol en el proyecto</label>
+              <p class="etiqueta-formulario">Rol en el proyecto</p>
               <input class="entrada-formulario" id="as-rol" placeholder="Ej: Desarrollador Backend" />
             </div>
             <button class="btn btn-primario" onclick="tx_asignar()">Asignar al Proyecto</button>
@@ -251,33 +227,26 @@
           </div>
         </div>
 
-      </div><!-- /panel-proyectos -->
-
-      <!-- ==================== NÓMINA ==================== -->
-      <div class="ops-panel" id="panel-nomina">
-
-        <!-- TX6: Actualización Salarial -->
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
             <div class="tx-numero">6</div>
             <div>
               <div class="tx-tarjeta-titulo">Actualización Salarial</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: HistorialSalarios → Empleados</div>
             </div>
           </div>
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado</label>
+                <p class="etiqueta-formulario">ID Empleado</p>
                 <input class="entrada-formulario" type="number" id="sal-emp" placeholder="ID del empleado" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Nuevo Salario (€/mes)</label>
+                <p class="etiqueta-formulario">Nuevo Salario (€/mes)</p>
                 <input class="entrada-formulario" type="number" id="sal-nuevo" placeholder="2500" />
               </div>
             </div>
             <div class="grupo-formulario">
-              <label class="etiqueta-formulario">Motivo del ajuste</label>
+              <p class="etiqueta-formulario">Motivo del ajuste</p>
               <input class="entrada-formulario" id="sal-motivo" placeholder="Ej: Revisión anual 2024" />
             </div>
             <button class="btn btn-primario" onclick="tx_actualizarSalario()">
@@ -287,47 +256,10 @@
           </div>
         </div>
 
-        <!-- TX7: Nómina Mensual -->
+
         <div class="tx-tarjeta">
           <div class="tx-tarjeta-cabecera">
             <div class="tx-numero">7</div>
-            <div>
-              <div class="tx-tarjeta-titulo">Generación de Nómina Mensual</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: HistorialSalarios → Empleados (lote)</div>
-            </div>
-          </div>
-          <div class="tx-tarjeta-cuerpo">
-            <div class="fila-formulario">
-              <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Mes</label>
-                <select class="seleccion-formulario" id="nom-mes">
-                  <option value="1">Enero</option><option value="2">Febrero</option>
-                  <option value="3">Marzo</option><option value="4">Abril</option>
-                  <option value="5">Mayo</option><option value="6">Junio</option>
-                  <option value="7">Julio</option><option value="8">Agosto</option>
-                  <option value="9">Septiembre</option><option value="10">Octubre</option>
-                  <option value="11">Noviembre</option><option value="12">Diciembre</option>
-                </select>
-              </div>
-              <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Año</label>
-                <input class="entrada-formulario" type="number" id="nom-anio" value="2024" />
-              </div>
-            </div>
-            <button class="btn btn-primario" onclick="tx_nomina()">Generar Nómina</button>
-            <div class="tx-resultado" id="res-nomina"></div>
-          </div>
-        </div>
-
-      </div><!-- /panel-nomina -->
-
-      <!-- ==================== SISTEMA ==================== -->
-      <div class="ops-panel" id="panel-sistema">
-
-        <!-- TX8: Renovar Credenciales -->
-        <div class="tx-tarjeta">
-          <div class="tx-tarjeta-cabecera">
-            <div class="tx-numero">8</div>
             <div>
               <div class="tx-tarjeta-titulo">Renovación de Credenciales</div>
               <div class="tx-tarjeta-subtitulo">Tablas: ControlAccesos → Auditoria</div>
@@ -336,11 +268,11 @@
           <div class="tx-tarjeta-cuerpo">
             <div class="fila-formulario">
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado</label>
+                <p class="etiqueta-formulario">ID Empleado</p>
                 <input class="entrada-formulario" type="number" id="cr-emp" placeholder="ID del empleado" />
               </div>
               <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Nueva Contraseña</label>
+                <p class="etiqueta-formulario">Nueva Contraseña</p>
                 <input class="entrada-formulario" type="password" id="cr-pass" placeholder="••••••••" />
               </div>
             </div>
@@ -348,131 +280,11 @@
             <div class="tx-resultado" id="res-credenciales"></div>
           </div>
         </div>
-
-        <!-- TX9: Auditoría Manual -->
-        <div class="tx-tarjeta">
-          <div class="tx-tarjeta-cabecera">
-            <div class="tx-numero">9</div>
-            <div>
-              <div class="tx-tarjeta-titulo">Registro de Auditoría Manual</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: Auditoria</div>
-            </div>
-          </div>
-          <div class="tx-tarjeta-cuerpo">
-            <div class="fila-formulario">
-              <div class="grupo-formulario">
-                <label class="etiqueta-formulario">ID Empleado afectado</label>
-                <input class="entrada-formulario" type="number" id="aud-emp" placeholder="ID" />
-              </div>
-              <div class="grupo-formulario">
-                <label class="etiqueta-formulario">Tipo de evento</label>
-                <select class="seleccion-formulario" id="aud-tipo">
-                  <option>Acceso no autorizado</option>
-                  <option>Modificación crítica</option>
-                  <option>Incidencia de seguridad</option>
-                  <option>Revisión manual</option>
-                </select>
-              </div>
-            </div>
-            <div class="grupo-formulario">
-              <label class="etiqueta-formulario">Descripción</label>
-              <textarea class="area-texto-formulario" id="aud-desc" placeholder="Describe el evento de auditoría…"></textarea>
-            </div>
-            <button class="btn btn-primario" onclick="tx_auditoria()">Registrar en Auditoría</button>
-            <div class="tx-resultado" id="res-auditoria"></div>
-          </div>
-        </div>
-
-        <!-- TX10: Limpieza de Accesos Caducados -->
-        <div class="tx-tarjeta">
-          <div class="tx-tarjeta-cabecera">
-            <div class="tx-numero">10</div>
-            <div>
-              <div class="tx-tarjeta-titulo">Limpieza de Accesos Caducados</div>
-              <div class="tx-tarjeta-subtitulo">Tablas: ControlAccesos (empleados dados de baja hace +3 años)</div>
-            </div>
-          </div>
-          <div class="tx-tarjeta-cuerpo">
-            <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:16px">
-              Elimina los registros de control de acceso de empleados inactivos con más de 3 años desde su baja. Operación de mantenimiento periódico.
-            </p>
-            <button class="btn btn-peligro" onclick="tx_limpiezaAccesos()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-              Ejecutar Limpieza
-            </button>
-            <div class="tx-resultado" id="res-limpieza"></div>
-          </div>
-        </div>
-
-      </div><!-- /panel-sistema -->
-
-    </div><!-- /contenido-pagina -->
   </main>
 </div>
 
 <script src="../js/api.js"></script>
 <script>
-/* Auth guard */
-(function() {
-  const user = localStorage.getItem('nexora-user');
-  if (!user) { window.location.href = '../index.html'; return; }
-  document.getElementById('sb-username').textContent = user.charAt(0).toUpperCase() + user.slice(1);
-  document.getElementById('sb-avatar').textContent   = user.slice(0,2).toUpperCase();
-  document.getElementById('sb-role').textContent     = localStorage.getItem('nexora-rol') || 'Usuario';
-})();
-
-/* Tabs */
-function showTab(id) {
-  document.querySelectorAll('.ops-panel').forEach(p => p.classList.remove('activo'));
-  document.querySelectorAll('.ops-pestana').forEach(t => t.classList.remove('activo'));
-  document.getElementById('panel-' + id).classList.add('activo');
-  event.currentTarget.classList.add('activo');
-}
-
-/* ---- Helper para mostrar resultado ---- */
-function showResult(elId, ok, msg) {
-  const el = document.getElementById(elId);
-  el.className = `tx-resultado mostrar alerta ${ok ? 'alerta-exito mostrar' : 'alerta-error mostrar'}`;
-  el.textContent = msg;
-}
-
-/* ---- Helper para llamadas a la API ---- */
-async function callAPI(endpoint, payload, resultId, btnEl) {
-  const orig = btnEl.textContent;
-  btnEl.disabled = true;
-  btnEl.innerHTML = '<span class="girador"></span>';
-  try {
-    const res  = await fetch(`${API_BASE}${endpoint}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (res.ok) showResult(resultId, true,  '✓ ' + (data.mensaje || 'Transacción completada con éxito.'));
-    else        showResult(resultId, false, '⚠ Error: ' + (data.error || 'Transacción fallida. ROLLBACK ejecutado.'));
-  } catch(err) {
-    showResult(resultId, false, '⚠ Error de conexión con la API.');
-  }
-  btnEl.disabled = false;
-  btnEl.textContent = orig;
-}
-
-/* ---- Transacciones ---- */
-function tx_contratar()   { callAPI('/transacciones/contratar',    { nombre: document.getElementById('c-nombre').value, apellidos: document.getElementById('c-apellidos').value, email: document.getElementById('c-email').value, cargo: document.getElementById('c-cargo').value, id_departamento: document.getElementById('c-dept').value, salario: document.getElementById('c-salario').value, usuario: document.getElementById('c-usuario').value }, 'res-contratar', event.currentTarget); }
-function tx_transferir()  { callAPI('/transacciones/transferir',   { id_empleado: document.getElementById('t-emp').value, id_departamento_nuevo: document.getElementById('t-dept-nuevo').value }, 'res-transferir', event.currentTarget); }
-function tx_baja()        { if (!confirm('¿Confirmar baja de empleado? Esta acción es irreversible.')) return; callAPI('/transacciones/baja', { id_empleado: document.getElementById('b-emp').value, motivo: document.getElementById('b-motivo').value }, 'res-baja', event.currentTarget); }
-function tx_cerrarProyecto() { callAPI('/transacciones/cerrar-proyecto', { id_proyecto: document.getElementById('cp-proyecto').value }, 'res-cerrarProyecto', event.currentTarget); }
-function tx_asignar()     { callAPI('/transacciones/asignar-proyecto', { id_empleado: document.getElementById('as-emp').value, id_proyecto: document.getElementById('as-proy').value, rol: document.getElementById('as-rol').value }, 'res-asignar', event.currentTarget); }
-function tx_actualizarSalario() { callAPI('/transacciones/actualizar-salario', { id_empleado: document.getElementById('sal-emp').value, nuevo_salario: document.getElementById('sal-nuevo').value, motivo: document.getElementById('sal-motivo').value }, 'res-salario', event.currentTarget); }
-function tx_nomina()      { callAPI('/transacciones/nomina-mensual', { mes: document.getElementById('nom-mes').value, anio: document.getElementById('nom-anio').value }, 'res-nomina', event.currentTarget); }
-function tx_renovarCredenciales() { callAPI('/transacciones/renovar-credenciales', { id_empleado: document.getElementById('cr-emp').value, nueva_password: document.getElementById('cr-pass').value }, 'res-credenciales', event.currentTarget); }
-function tx_auditoria()   { callAPI('/transacciones/auditoria', { id_empleado: document.getElementById('aud-emp').value, tipo: document.getElementById('aud-tipo').value, descripcion: document.getElementById('aud-desc').value }, 'res-auditoria', event.currentTarget); }
-function tx_limpiezaAccesos() { if(!confirm('¿Ejecutar limpieza de accesos caducados?')) return; callAPI('/transacciones/limpieza-accesos', {}, 'res-limpieza', event.currentTarget); }
-
-/* Hash navigation */
-if (window.location.hash === '#contratar') {
-  document.getElementById('contratar').scrollIntoView({ behavior: 'smooth' });
-}
 </script>
 </body>
 </html>

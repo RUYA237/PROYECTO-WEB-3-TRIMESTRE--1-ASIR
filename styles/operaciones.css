@@ -100,13 +100,13 @@
 }
 
 /* --- Ops tabs --- */
-.ops-pestanas {
+.ops-pestañas {
   display: flex;
   gap: 8px;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
-.ops-pestana {
+.ops-pestaña {
   padding: 9px 20px;
   border-radius: var(--radius);
   font-size: .85rem;
@@ -117,8 +117,8 @@
   cursor: pointer;
   transition: var(--transition);
 }
-.ops-pestana:hover,
-.ops-pestana.activo {
+.ops-pestaña:hover,
+.ops-pestaña.activo {
   border-color: var(--terracotta);
   color: var(--terracotta);
   background: rgba(184,92,56,.06);
@@ -135,44 +135,6 @@
   gap: 1.25rem;
 }
 
-/* --- Form Elements --- */
-.grupo-formulario { margin-bottom: 20px; }
-.etiqueta-formulario {
-  display: block;
-  font-size: .8rem;
-  font-weight: 500;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 7px;
-}
-.entrada-formulario,
-.seleccion-formulario,
-.area-texto-formulario {
-  width: 100%;
-  padding: 11px 14px;
-  background: var(--cream);
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius);
-  color: var(--text-body);
-  transition: var(--transition);
-  outline: none;
-}
-.entrada-formulario:focus,
-.seleccion-formulario:focus,
-.area-texto-formulario:focus {
-  border-color: var(--terracotta);
-  background: var(--warm-white);
-  box-shadow: 0 0 0 3px rgba(184,92,56,.1);
-}
-.entrada-formulario::placeholder { color: var(--text-light); }
-.area-texto-formulario { resize: vertical; min-height: 100px; }
-.fila-formulario {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
 /* Parte abajo cuadrado blanco de Actividad */
 .tx-tarjeta {
   background: var(--warm-white);
@@ -180,6 +142,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 20px;
+  
 }
 .tx-tarjeta-cabecera {
   display: flex;
@@ -222,6 +185,48 @@
 }
 
 .fila-formulario.solo { grid-template-columns: 1fr; }
+.barra-lateral-pie {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+/* --- Form Elements --- */
+.grupo-formulario { margin-bottom: 20px; }
+.etiqueta-formulario {
+  display: block;
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 7px;
+}
+.entrada-formulario,
+.seleccion-formulario,
+.area-texto-formulario {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius);
+  color: var(--text-body);
+  transition: var(--transition);
+  outline: none;
+}
+.entrada-formulario:focus,
+.seleccion-formulario:focus,
+.area-texto-formulario:focus {
+  border-color: var(--terracotta);
+  background: var(--warm-white);
+  box-shadow: 0 0 0 3px rgba(184,92,56,.1);
+}
+.entrada-formulario::placeholder { color: var(--text-light); }
+.area-texto-formulario { resize: vertical; min-height: 100px; }
+.fila-formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 
 @media (max-width: 600px) {
   .cuadricula-operaciones { grid-template-columns: 1fr; }
