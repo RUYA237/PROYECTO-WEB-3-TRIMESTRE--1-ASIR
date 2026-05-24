@@ -142,13 +142,9 @@ async function cargarTablaEmpleados() {
   `;
 
   empleados.forEach(emp => {
-    // Los campos pueden venir como 'nombre', 'titulo', y el segundo 'nombre' (dept)
-    // MySQL2 devuelve columnas duplicadas como arrays o con el último valor
-    // Usamos Object.values para acceder por posición si hay conflicto de nombres
-    const vals = Object.values(emp);
-    const nombre = vals[0] || '—';
-    const puesto = vals[1] || '—';
-    const depto  = vals[2] || '—';
+    const nombre = emp.nombre || '—';
+    const puesto = emp.puesto || '—';
+    const depto  = emp.departamento || '—';
 
     html += `
       <tr style="border-bottom:1px solid var(--border,#f0f0f0);">

@@ -136,7 +136,7 @@ async function inicializar() {
   todosLosEmpleados = empleados;
 
   // Rellenar el select de departamentos dinámicamente
-  const deptos = [...new Set(empleados.map(e => Object.values(e)[2]).filter(Boolean))].sort();
+  const deptos = [...new Set(empleados.map(e => e.departamento).filter(Boolean))].sort();
   const select = document.getElementById('filtro-dept');
   deptos.forEach(d => {
     const opt = document.createElement('option');
@@ -173,10 +173,9 @@ function renderTabla(lista) {
   `;
 
   lista.forEach((emp, i) => {
-    const vals   = Object.values(emp);
-    const nombre = vals[0] || '—';
-    const puesto = vals[1] || '—';
-    const depto  = vals[2] || '—';
+    const nombre = emp.nombre || '—';
+    const puesto = emp.puesto || '—';
+    const depto  = emp.departamento || '—';
     html += `
       <tr style="border-bottom:1px solid var(--border,#f0f0f0);">
         <td style="padding:10px 14px;color:var(--muted,#888);font-size:0.85rem;">${i + 1}</td>
@@ -198,10 +197,9 @@ function filtrar() {
   const dept  = document.getElementById('filtro-dept').value.toLowerCase();
 
   const filtrados = todosLosEmpleados.filter(emp => {
-    const vals   = Object.values(emp);
-    const nombre = (vals[0] || '').toLowerCase();
-    const puesto = (vals[1] || '').toLowerCase();
-    const depto  = (vals[2] || '').toLowerCase();
+    const nombre = (emp.nombre || '').toLowerCase();
+    const puesto = (emp.puesto || '').toLowerCase();
+    const depto  = (emp.departamento || '').toLowerCase();
 
     const coincideTexto = !texto || nombre.includes(texto) || puesto.includes(texto);
     const coincideDept  = !dept  || depto.includes(dept);

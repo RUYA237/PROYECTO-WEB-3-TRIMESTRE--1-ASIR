@@ -46,6 +46,7 @@
         <div class="barra-busqueda">
           <input type="text" id="buscador" placeholder="Buscar por empleado…" oninput="filtrar()" />
         </div>
+        <button class="btn btn-primario btn-pequeno" onclick="alert('Función de nómina no implementada aún.')">+ Procesar nómina</button>
       </div>
     </div>
 
@@ -81,6 +82,11 @@
       </div>
 
       <div class="tarjeta">
+        <div style="padding: 12px 16px; border-bottom: 1px solid var(--border, #e0e0e0);">
+          <select class="seleccion-formulario" id="filtro-dept-sal" onchange="filtrar()" style="min-width:220px;">
+            <option value="">Todos los departamentos</option>
+          </select>
+        </div>
         <div id="loading-state" class="sal-cargando">Cargando historial…</div>
         <div id="tabla-salarios"></div>
       </div>
@@ -105,7 +111,7 @@ function formatEur(num) {
 async function inicializar() {
   // Usamos el endpoint de salarios
   try {
-    const resp = await fetch('/api/salarios');
+    const resp = await fetch(`${API_BASE_URL}/salarios`);
     const data = await resp.json();
     document.getElementById('loading-state').style.display = 'none';
 
@@ -115,6 +121,15 @@ async function inicializar() {
     }
 
     todosLosSalarios = data.datos;
+
+    // Rellenar select de departamentos
+    const deptos = [...new Set(data.datos.map(r => r.departamento).filter(Boolean))].sort();
+    const sel = document.getElementById('filtro-dept-sal');
+    deptos.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d; opt.textContent = d;
+      sel.appendChild(opt);
+    });
 
     // KPIs
     const salarios = todosLosSalarios.map(r => parseFloat(r.salario_anual) || 0);
@@ -169,9 +184,11 @@ function renderTabla(lista) {
 
 function filtrar() {
   const texto = document.getElementById('buscador').value.toLowerCase();
+  const dept  = document.getElementById('filtro-dept-sal').value.toLowerCase();
   const filtrados = todosLosSalarios.filter(r =>
-    (r.nombre || '').toLowerCase().includes(texto) ||
-    (r.email_corporativo || '').toLowerCase().includes(texto)
+    ((r.nombre || '').toLowerCase().includes(texto) ||
+    (r.email_corporativo || '').toLowerCase().includes(texto)) &&
+    (!dept || (r.departamento || '').toLowerCase() === dept)
   );
   renderTabla(filtrados);
 }

@@ -42,10 +42,11 @@ export async function consulta3EmpleadosPlanta1() {
 // (Función requerida por server.js para la ruta /api/empleados)
 export async function obtenerListaEmpleados() {
     const sql = `
-        SELECT empleados.nombre, puestos.titulo, departamentos.nombre FROM empleados 
+        SELECT empleados.nombre AS nombre, puestos.titulo AS puesto, departamentos.nombre AS departamento FROM empleados 
         INNER JOIN puestos ON empleados.id_puesto = puestos.id_puesto 
         INNER JOIN departamentos ON empleados.id_departamento = departamentos.id_departamento 
-        WHERE empleados.estado = 'ACTIVO';
+        WHERE empleados.estado = 'ACTIVO'
+        ORDER BY departamentos.nombre ASC, empleados.nombre ASC;
     `;
     const [filas] = await pool.query(sql);
     return filas;
@@ -182,9 +183,10 @@ export async function consulta15PresupuestoTotalPorDepartamento() {
 // Historial salarial: nombre, email y salario actual de cada empleado activo
 export async function obtenerHistorialSalarial() {
     const sql = `
-        SELECT empleados.nombre, empleados.email_corporativo, historial_salarial.salario_anual
+        SELECT empleados.nombre AS nombre, empleados.email_corporativo, historial_salarial.salario_anual, departamentos.nombre AS departamento
         FROM empleados
         INNER JOIN historial_salarial ON empleados.id_empleado = historial_salarial.id_empleado
+        INNER JOIN departamentos ON empleados.id_departamento = departamentos.id_departamento
         WHERE historial_salarial.fecha_fin IS NULL
         AND empleados.estado = 'ACTIVO'
         ORDER BY historial_salarial.salario_anual DESC;
