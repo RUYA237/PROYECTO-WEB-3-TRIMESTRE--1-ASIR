@@ -26,12 +26,10 @@
       <a class="nav-elemento" href="empleados.html">
         Empleados
       </a>
-
       <div class="nav-etiqueta-seccion">Operaciones</div>
       <a class="nav-elemento" href="operaciones.html">
         Operaciones Críticas
       </a>
-
       <div class="nav-etiqueta-seccion">Sistema</div>
       <a class="nav-elemento activo" href="salarios.html">
         Historial Salarial
@@ -66,13 +64,13 @@
 
     <div class="contenido-pagina">
 
-      <div class="encabezado-seccion entrada-fundido">
+      <div class="encabezado-seccion">
         <h2>Historial Salarial</h2>
         <div class="divisor-seccion"></div>
         <p>Registro de todos los movimientos y actualizaciones salariales de la plantilla.</p>
       </div>
 
-      <div class="cuadricula-estadisticas entrada-fundido retraso-1">
+      <div class="cuadricula-estadisticas retraso-1">
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Masa salarial total</div>
           <div class="estadistica-valor" id="kpi-total">—</div>
@@ -80,13 +78,15 @@
           <div class="estadistica-icono">
           </div>
         </div>
+
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Salario medio</div>
           <div class="estadistica-valor" id="kpi-media">—</div>
-          <div class="estadistica-cambio">Por empleado/mes</div>
+          <div class="estadistica-cambio">Por empleado al mes</div>
           <div class="estadistica-icono">
           </div>
         </div>
+
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Salario más alto</div>
           <div class="estadistica-valor" id="kpi-max">—</div>
@@ -94,6 +94,7 @@
           <div class="estadistica-icono">
           </div>
         </div>
+
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Registros</div>
           <div class="estadistica-valor" id="kpi-registros">—</div>
@@ -103,7 +104,7 @@
         </div>
       </div>
 
-        <div style="margin-left:auto">
+        <div>
           <select class="seleccion-formulario sal-seleccion" id="filtro-dept" onchange="filtrar()">
             <option value="">Todos los departamentos</option>
             <option value="Desarrollo">Desarrollo</option>
@@ -115,7 +116,6 @@
         </div>
 
           <div id="loading-state" class="sal-cargando">
-            <div class="girador" style="margin:0 auto 12px"></div>
             Cargando historial…
           </div>
     </div>
