@@ -126,9 +126,6 @@
   color: var(--text-muted);
   font-size: .88rem;
 }
-.filtro-derecha {
-  margin-left: auto;
-}
 .filtro-derecha .seleccion-formulario {
   width: auto;
   padding: 8px 14px;
