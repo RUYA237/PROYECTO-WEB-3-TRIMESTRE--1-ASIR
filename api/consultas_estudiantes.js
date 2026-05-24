@@ -179,6 +179,21 @@ export async function consulta15PresupuestoTotalPorDepartamento() {
 }
 
 
+// Historial salarial: nombre, email y salario actual de cada empleado activo
+export async function obtenerHistorialSalarial() {
+    const sql = `
+        SELECT empleados.nombre, empleados.email_corporativo, historial_salarial.salario_anual
+        FROM empleados
+        INNER JOIN historial_salarial ON empleados.id_empleado = historial_salarial.id_empleado
+        WHERE historial_salarial.fecha_fin IS NULL
+        AND empleados.estado = 'ACTIVO'
+        ORDER BY historial_salarial.salario_anual DESC;
+    `;
+    const [filas] = await pool.query(sql);
+    return filas;
+}
+
+
 /**
  * =================================================================
  * BLOQUE B: TRANSACCIONES CON LOS NOMBRES EXACTOS DE SERVER.JS

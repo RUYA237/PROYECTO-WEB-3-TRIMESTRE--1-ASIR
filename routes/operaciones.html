@@ -298,6 +298,129 @@
 
 <script src="../js/api.js"></script>
 <script>
+// Usuario en sidebar
+const usuario = localStorage.getItem('nexora-user') || 'admin';
+document.getElementById('sb-username').textContent = usuario.charAt(0).toUpperCase() + usuario.slice(1);
+document.getElementById('sb-avatar').textContent = usuario.slice(0, 2).toUpperCase();
+
+function mostrarResultado(id, exito, mensaje) {
+  const el = document.getElementById(id);
+  el.textContent = mensaje;
+  el.style.color = exito ? 'green' : 'red';
+  el.style.marginTop = '10px';
+  el.style.fontWeight = '500';
+}
+
+// 1. Contratar empleado
+async function tx_contratar() {
+  const dni       = document.getElementById('c-nombre').value.trim().slice(0,8) + 'X'; // DNI auto
+  const nombre    = document.getElementById('c-nombre').value.trim();
+  const apellidos = document.getElementById('c-apellidos').value.trim();
+  const email     = document.getElementById('c-email').value.trim();
+  const id_dept   = document.getElementById('c-dept').value;
+  const salario   = document.getElementById('c-salario').value;
+
+  if (!nombre || !apellidos || !email || !id_dept || !salario) {
+    mostrarResultado('res-contratar', false, '⚠ Rellena todos los campos.');
+    return;
+  }
+
+  const dniGen = nombre.slice(0,1).toUpperCase() + apellidos.slice(0,1).toUpperCase() + Math.floor(Math.random()*90000+10000) + 'Z';
+
+  try {
+    const resp = await fetch('/api/transaccion/contratar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dni: dniGen, nombre, apellidos, id_departamento: id_dept, email, salario })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-contratar', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-contratar', false, '❌ Error de red.');
+  }
+}
+
+// 2. Transferir empleado de departamento
+async function tx_transferir() {
+  const id_empleado = document.getElementById('t-emp').value;
+  const id_dept_nuevo = document.getElementById('t-dept-nuevo').value;
+
+  if (!id_empleado || !id_dept_nuevo) {
+    mostrarResultado('res-transferir', false, '⚠ Rellena todos los campos.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/transaccion/trasladar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_empleado, id_departamento_nuevo: id_dept_nuevo })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-transferir', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-transferir', false, '❌ Error de red.');
+  }
+}
+
+// 3. Dar de baja / despedir empleado
+async function tx_baja() {
+  const id_empleado = document.getElementById('b-emp').value;
+  if (!id_empleado) {
+    mostrarResultado('res-baja', false, '⚠ Introduce el ID del empleado.');
+    return;
+  }
+
+  if (!confirm(`¿Seguro que quieres dar de baja al empleado ID ${id_empleado}?`)) return;
+
+  try {
+    const resp = await fetch('/api/transaccion/despedir', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_empleado, id_admin_ejecutor: 1 })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-baja', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-baja', false, '❌ Error de red.');
+  }
+}
+
+// 4. Cerrar proyecto
+async function tx_cerrarProyecto() {
+  const id_proyecto = document.getElementById('cp-proyecto').value;
+  if (!id_proyecto) {
+    mostrarResultado('res-cerrarProyecto', false, '⚠ Introduce el ID del proyecto.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/transaccion/cerrar-proyecto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_proyecto, id_empleado: 1, incentivo: 0 })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-cerrarProyecto', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-cerrarProyecto', false, '❌ Error de red.');
+  }
+}
+
+// 5. Asignar empleado a proyecto (placeholder — endpoint no definido en server.js)
+async function tx_asignar() {
+  mostrarResultado('res-asignar', false, '⚠ Esta operación aún no está implementada en el servidor.');
+}
+
+// 6. Actualizar salario
+async function tx_actualizarSalario() {
+  mostrarResultado('res-salario', false, '⚠ Esta operación aún no está implementada en el servidor.');
+}
+
+// 7. Renovar credenciales (placeholder)
+async function tx_renovarCredenciales() {
+  mostrarResultado('res-credenciales', false, '⚠ Esta operación aún no está implementada en el servidor.');
+}
 </script>
 </body>
 </html>

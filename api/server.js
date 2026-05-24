@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { 
     obtenerListaEmpleados, 
-    obtenerDashboardStats, 
+    obtenerDashboardStats,
+    obtenerHistorialSalarial,
     transaccionDespedirEmpleado,
     transaccionTrasladarEmpleado,
     transaccionCrearProyecto,
@@ -128,6 +129,16 @@ app.post('/api/transaccion/cerrar-proyecto', async (req, res) => {
         res.json({ exito: true, mensaje: "Proyecto cerrado correctamente." });
     } catch (error) {
         res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta GET: Historial salarial (para la página de Salarios)
+app.get('/api/salarios', async (req, res) => {
+    try {
+        const datos = await obtenerHistorialSalarial();
+        res.json({ exito: true, datos: datos });
+    } catch (error) {
+        res.status(500).json({ exito: false, error: error.message });
     }
 });
 

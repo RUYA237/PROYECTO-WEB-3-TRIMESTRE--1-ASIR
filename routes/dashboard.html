@@ -20,22 +20,12 @@
 
     <nav class="barra-lateral-nav">
       <div class="nav-etiqueta-seccion">Principal</div>
-      <a class="nav-elemento activo" href="dashboard.html">
-        Dashboard
-      </a>
-      <a class="nav-elemento" href="empleados.html">
-        Empleados
-      </a>
-
+      <a class="nav-elemento activo" href="dashboard.html">Dashboard</a>
+      <a class="nav-elemento" href="empleados.html">Empleados</a>
       <div class="nav-etiqueta-seccion">Operaciones</div>
-      <a class="nav-elemento" href="operaciones.html">
-        Operaciones Críticas
-      </a>
-
+      <a class="nav-elemento" href="operaciones.html">Operaciones Críticas</a>
       <div class="nav-etiqueta-seccion">Sistema</div>
-      <a class="nav-elemento" href="salarios.html">
-        Historial Salarial
-      </a>
+      <a class="nav-elemento" href="salarios.html">Historial Salarial</a>
     </nav>
 
     <div class="barra-lateral-pie">
@@ -44,10 +34,7 @@
         <div class="barra-lateral-info-usuario">
           <div class="usuario-nombre" id="sb-username">Admin</div>
         </div>
-        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">
-  Log out
-</a>
-      </a>
+        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">Log out</a>
       </div>
     </div>
   </div>
@@ -83,60 +70,102 @@
           <div class="estadistica-cambio subida">Activos en plantilla</div>
         </div>
         <div class="tarjeta-estadistica">
-          <div class="estadistica-etiqueta">Departamentos</div>
-          <div class="estadistica-valor" id="stat-depts">—</div>
-          <div class="estadistica-cambio">Unidades de negocio</div>
-        </div>
-        <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Proyectos Activos</div>
           <div class="estadistica-valor" id="stat-proyectos">—</div>
           <div class="estadistica-cambio">En ejecución</div>
         </div>
+        <div class="tarjeta-estadistica">
+          <div class="estadistica-etiqueta">Tickets Abiertos</div>
+          <div class="estadistica-valor" id="stat-tickets">—</div>
+          <div class="estadistica-cambio">Incidencias activas</div>
         </div>
       </div>
-    <div> 
-  </div>
-        <div class="tarjeta">
-          <div class="tarjeta-cabecera">
-            <span class="tarjeta-titulo">Actividad Reciente</span>
-          </div>
-          <div class="tarjeta-cuerpo">
-            <div id="activity-list">
-              <div class="elemento-actividad">
-                <div style="flex:1">
-                  <div class="texto-actividad">- Nuevo empleado incorporado al sistema</div>
-                  <div class="hora-actividad">Hace 10 min</div>
-                </div>
-              </div>
-              <div class="elemento-actividad">
-                <div style="flex:1">
-                  <div class="texto-actividad">- Transacción de nómina completada</div>
-                  <div class="hora-actividad">Hace 1 hora</div>
-                </div>
-              </div>
-              <div class="elemento-actividad">
-                <div style="flex:1">
-                  <div class="texto-actividad">-Proyecto Alpha marcado como finalizado</div>
-                  <div class="hora-actividad">Hace 3 horas</div>
-                </div>
-              </div>
-              <div class="elemento-actividad">
-                <div style="flex:1">
-                  <div class="texto-actividad">- Baja de empleado registrada en auditoría</div>
-                  <div class="hora-actividad">Ayer a las09:15</div>
-                </div>
-              </div>
-            </div>
+
+      <div class="tarjeta">
+        <div class="tarjeta-cabecera">
+          <span class="tarjeta-titulo">Empleados Activos</span>
+        </div>
+        <div class="tarjeta-cuerpo">
+          <div id="tabla-empleados-container">
+            <p style="color:var(--muted)">Cargando empleados...</p>
           </div>
         </div>
       </div>
+
     </div>
   </main>
 </div>
 
-
 <script src="../js/api.js"></script>
 <script>
+// Mostrar nombre de usuario del localStorage
+const usuario = localStorage.getItem('nexora-user') || 'admin';
+document.getElementById('sb-username').textContent = usuario.charAt(0).toUpperCase() + usuario.slice(1);
+document.getElementById('sb-avatar').textContent = usuario.slice(0, 2).toUpperCase();
+
+// Cargar estadísticas del dashboard
+async function cargarDashboard() {
+  const stats = await obtenerDashboardStats();
+  if (stats) {
+    document.getElementById('stat-empleados').textContent = stats.total_empleados;
+    document.getElementById('stat-proyectos').textContent = stats.proyectos_activos;
+    document.getElementById('stat-tickets').textContent  = stats.tickets_abiertos;
+  } else {
+    document.getElementById('stat-empleados').textContent = 'Error';
+    document.getElementById('stat-proyectos').textContent = 'Error';
+    document.getElementById('stat-tickets').textContent  = 'Error';
+  }
+}
+
+// Cargar tabla de empleados activos
+async function cargarTablaEmpleados() {
+  const empleados = await obtenerEmpleados();
+  const contenedor = document.getElementById('tabla-empleados-container');
+
+  if (!empleados || empleados.length === 0) {
+    contenedor.innerHTML = '<p style="color:var(--muted)">No hay empleados activos.</p>';
+    return;
+  }
+
+  // La API devuelve: nombre, titulo (puesto), nombre (departamento)
+  // Usamos las claves tal como vienen del JOIN en consultas_estudiantes.js
+  let html = `
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border,#e0e0e0);text-align:left;">
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Nombre</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Puesto</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Departamento</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  empleados.forEach(emp => {
+    // Los campos pueden venir como 'nombre', 'titulo', y el segundo 'nombre' (dept)
+    // MySQL2 devuelve columnas duplicadas como arrays o con el último valor
+    // Usamos Object.values para acceder por posición si hay conflicto de nombres
+    const vals = Object.values(emp);
+    const nombre = vals[0] || '—';
+    const puesto = vals[1] || '—';
+    const depto  = vals[2] || '—';
+
+    html += `
+      <tr style="border-bottom:1px solid var(--border,#f0f0f0);">
+        <td style="padding:10px 14px;">${nombre}</td>
+        <td style="padding:10px 14px;">${puesto}</td>
+        <td style="padding:10px 14px;">${depto}</td>
+      </tr>
+    `;
+  });
+
+  html += '</tbody></table>';
+  contenedor.innerHTML = html;
+}
+
+// Ejecutar al cargar la página
+cargarDashboard();
+cargarTablaEmpleados();
 </script>
 </body>
 </html>

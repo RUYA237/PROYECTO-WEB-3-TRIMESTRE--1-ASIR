@@ -9,8 +9,9 @@
 </head>
 <body>
 
+  <div class="diseno-aplicacion">
+
   <div class="barra-lateral" id="sidebar">
-    
     <div class="barra-lateral-logo">
       <div class="marca-nombre">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
       <div class="marca-sub">Intranet Corporativa</div>
@@ -18,22 +19,12 @@
 
     <nav class="barra-lateral-nav">
       <div class="nav-etiqueta-seccion">Principal</div>
-      <a class="nav-elemento" href="dashboard.html">
-        Dashboard
-      </a>
-      <a class="nav-elemento activo" href="empleados.html">
-        Empleados
-      </a>
-
+      <a class="nav-elemento" href="dashboard.html">Dashboard</a>
+      <a class="nav-elemento activo" href="empleados.html">Empleados</a>
       <div class="nav-etiqueta-seccion">Operaciones</div>
-      <a class="nav-elemento" href="operaciones.html">
-        Operaciones Críticas
-      </a>
-
+      <a class="nav-elemento" href="operaciones.html">Operaciones Críticas</a>
       <div class="nav-etiqueta-seccion">Sistema</div>
-      <a class="nav-elemento" href="salarios.html">
-        Historial Salarial
-      </a>
+      <a class="nav-elemento" href="salarios.html">Historial Salarial</a>
     </nav>
 
     <div class="barra-lateral-pie">
@@ -42,10 +33,7 @@
         <div class="barra-lateral-info-usuario">
           <div class="usuario-nombre" id="sb-username">Admin</div>
         </div>
-        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">
-  Log out
-</a>
-      </a>
+        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">Log out</a>
       </div>
     </div>
   </div>
@@ -58,7 +46,7 @@
         <div class="barra-busqueda">
           <input type="text" id="buscador" placeholder="Buscar por nombre, cargo…" oninput="filtrar()" />
         </div>
-        <a href="/routes/operaciones.html" class="btn btn-primario btn-pequeno">+ Nuevo empleado</a>
+        <a href="operaciones.html" class="btn btn-primario btn-pequeno">+ Nuevo empleado</a>
       </div>
     </div>
 
@@ -69,75 +57,161 @@
         <div class="divisor-seccion"></div>
         <p>Consulta, busca y gestiona todos los empleados de Nexora Tech.</p>
       </div>
-      <div class="alerta alerta-exito" id="alert-ok">Operación completada correctamente.</div>
-      <div class="alerta alerta-error"   id="alert-err">Error al cargar los datos.</div>
-
-
 
       <div class="cuadricula-estadisticas retraso-1">
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Total empleados</div>
           <div class="estadistica-valor" id="kpi-total">—</div>
           <div class="estadistica-cambio">En plantilla</div>
-          <div class="estadistica-icono">
-          </div>
         </div>
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Activos</div>
           <div class="estadistica-valor" id="kpi-activos">—</div>
           <div class="estadistica-cambio">Incorporados</div>
-          <div class="estadistica-icono">
-          </div>
         </div>
         <div class="tarjeta-estadistica">
-          <div class="estadistica-etiqueta">Inactivos</div>
-          <div class="estadistica-valor" id="kpi-inactivos">—</div>
-          <div class="estadistica-cambio">Bajas registradas</div>
-          <div class="estadistica-icono">
-          </div>
+          <div class="estadistica-etiqueta">Proyectos Activos</div>
+          <div class="estadistica-valor" id="kpi-proyectos">—</div>
+          <div class="estadistica-cambio">En ejecución</div>
         </div>
         <div class="tarjeta-estadistica">
-          <div class="estadistica-etiqueta">Departamentos</div>
-          <div class="estadistica-valor" id="kpi-depts">—</div>
-          <div class="estadistica-cambio">Unidades activas</div>
-          <div class="estadistica-icono">
-          </div>
+          <div class="estadistica-etiqueta">Tickets Abiertos</div>
+          <div class="estadistica-valor" id="kpi-tickets">—</div>
+          <div class="estadistica-cambio">Incidencias activas</div>
         </div>
       </div>
 
-
       <div class="barra-filtros retraso-2">
-        <span class="etiqueta-filtro">Estado: Todos, Inactivos y Activos</span>
+        <span class="etiqueta-filtro">Filtra por departamento:</span>
         <div class="filtro-derecha">
           <select class="seleccion-formulario" id="filtro-dept" onchange="filtrar()">
             <option value="">Todos los departamentos</option>
-            <option value="Desarrollo">Desarrollo</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Ventas">Ventas</option>
-            <option value="Recursos Humanos">Recursos Humanos</option>
-            <option value="IT">IT</option>
           </select>
         </div>
       </div>
 
-
-
       <div class="tarjeta">
-          <div id="loading-state" class="emp-cargando">
-            <div class="girador"></div>
-            Cargando empleados…
-          </div>
-          <div class="estado-vacio" id="empty-state">
-            <p>No se encontraron empleados con esos criterios.</p>
-          </div>
+        <div id="loading-state" class="emp-cargando">
+          <div class="girador"></div>
+          Cargando empleados…
         </div>
+        <div class="estado-vacio" id="empty-state" style="display:none">
+          <p>No se encontraron empleados con esos criterios.</p>
+        </div>
+        <div id="tabla-empleados"></div>
       </div>
+
     </div>
   </main>
-</div>
+  </div>
 
 <script src="../js/api.js"></script>
 <script>
+// Usuario en sidebar
+const usuario = localStorage.getItem('nexora-user') || 'admin';
+document.getElementById('sb-username').textContent = usuario.charAt(0).toUpperCase() + usuario.slice(1);
+document.getElementById('sb-avatar').textContent = usuario.slice(0, 2).toUpperCase();
+
+let todosLosEmpleados = [];
+
+async function inicializar() {
+  // Cargar KPIs
+  const stats = await obtenerDashboardStats();
+  if (stats) {
+    document.getElementById('kpi-total').textContent    = stats.total_empleados;
+    document.getElementById('kpi-activos').textContent  = stats.total_empleados;
+    document.getElementById('kpi-proyectos').textContent = stats.proyectos_activos;
+    document.getElementById('kpi-tickets').textContent  = stats.tickets_abiertos;
+  }
+
+  // Cargar empleados
+  const empleados = await obtenerEmpleados();
+  document.getElementById('loading-state').style.display = 'none';
+
+  if (!empleados || empleados.length === 0) {
+    document.getElementById('empty-state').style.display = 'block';
+    return;
+  }
+
+  todosLosEmpleados = empleados;
+
+  // Rellenar el select de departamentos dinámicamente
+  const deptos = [...new Set(empleados.map(e => Object.values(e)[2]).filter(Boolean))].sort();
+  const select = document.getElementById('filtro-dept');
+  deptos.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    select.appendChild(opt);
+  });
+
+  renderTabla(todosLosEmpleados);
+}
+
+function renderTabla(lista) {
+  const contenedor = document.getElementById('tabla-empleados');
+  const empty = document.getElementById('empty-state');
+
+  if (!lista || lista.length === 0) {
+    contenedor.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  let html = `
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border,#e0e0e0);text-align:left;">
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">#</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Nombre</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Puesto</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;">Departamento</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  lista.forEach((emp, i) => {
+    const vals   = Object.values(emp);
+    const nombre = vals[0] || '—';
+    const puesto = vals[1] || '—';
+    const depto  = vals[2] || '—';
+    html += `
+      <tr style="border-bottom:1px solid var(--border,#f0f0f0);">
+        <td style="padding:10px 14px;color:var(--muted,#888);font-size:0.85rem;">${i + 1}</td>
+        <td style="padding:10px 14px;font-weight:500;">${nombre}</td>
+        <td style="padding:10px 14px;">${puesto}</td>
+        <td style="padding:10px 14px;">
+          <span style="background:var(--accent-light,#f0e8e0);color:var(--terracotta,#8b4513);padding:2px 10px;border-radius:999px;font-size:0.82rem;">${depto}</span>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += '</tbody></table>';
+  contenedor.innerHTML = html;
+}
+
+function filtrar() {
+  const texto = document.getElementById('buscador').value.toLowerCase();
+  const dept  = document.getElementById('filtro-dept').value.toLowerCase();
+
+  const filtrados = todosLosEmpleados.filter(emp => {
+    const vals   = Object.values(emp);
+    const nombre = (vals[0] || '').toLowerCase();
+    const puesto = (vals[1] || '').toLowerCase();
+    const depto  = (vals[2] || '').toLowerCase();
+
+    const coincideTexto = !texto || nombre.includes(texto) || puesto.includes(texto);
+    const coincideDept  = !dept  || depto.includes(dept);
+    return coincideTexto && coincideDept;
+  });
+
+  renderTabla(filtrados);
+}
+
+inicializar();
 </script>
 </body>
 </html>

@@ -12,7 +12,6 @@
 <div class="diseno-aplicacion">
 
   <div class="barra-lateral" id="sidebar">
-
     <div class="barra-lateral-logo">
       <div class="marca-nombre">Nexora<span style="color:var(--terracotta)">.</span>Tech</div>
       <div class="marca-sub">Intranet Corporativa</div>
@@ -20,20 +19,12 @@
 
     <nav class="barra-lateral-nav">
       <div class="nav-etiqueta-seccion">Principal</div>
-      <a class="nav-elemento" href="dashboard.html">
-        Dashboard
-      </a>
-      <a class="nav-elemento" href="empleados.html">
-        Empleados
-      </a>
+      <a class="nav-elemento" href="dashboard.html">Dashboard</a>
+      <a class="nav-elemento" href="empleados.html">Empleados</a>
       <div class="nav-etiqueta-seccion">Operaciones</div>
-      <a class="nav-elemento" href="operaciones.html">
-        Operaciones Críticas
-      </a>
+      <a class="nav-elemento" href="operaciones.html">Operaciones Críticas</a>
       <div class="nav-etiqueta-seccion">Sistema</div>
-      <a class="nav-elemento activo" href="salarios.html">
-        Historial Salarial
-      </a>
+      <a class="nav-elemento activo" href="salarios.html">Historial Salarial</a>
     </nav>
 
     <div class="barra-lateral-pie">
@@ -42,10 +33,7 @@
         <div class="barra-lateral-info-usuario">
           <div class="usuario-nombre" id="sb-username">Admin</div>
         </div>
-        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">
-  Log out
-</a>
-      </a>
+        <a class="barra-lateral-btn-salir" href="../index.html" title="Cerrar sesión">Log out</a>
       </div>
     </div>
   </div>
@@ -58,7 +46,6 @@
         <div class="barra-busqueda">
           <input type="text" id="buscador" placeholder="Buscar por empleado…" oninput="filtrar()" />
         </div>
-        <a href="operaciones.html#nomina" class="btn btn-primario btn-pequeno">+ Procesar nómina</a>
       </div>
     </div>
 
@@ -74,56 +61,122 @@
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Masa salarial total</div>
           <div class="estadistica-valor" id="kpi-total">—</div>
-          <div class="estadistica-cambio">Coste mensual bruto</div>
-          <div class="estadistica-icono">
-          </div>
+          <div class="estadistica-cambio">Coste anual bruto</div>
         </div>
-
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Salario medio</div>
           <div class="estadistica-valor" id="kpi-media">—</div>
-          <div class="estadistica-cambio">Por empleado al mes</div>
-          <div class="estadistica-icono">
-          </div>
+          <div class="estadistica-cambio">Por empleado al año</div>
         </div>
-
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Salario más alto</div>
           <div class="estadistica-valor" id="kpi-max">—</div>
           <div class="estadistica-cambio">Máximo en plantilla</div>
-          <div class="estadistica-icono">
-          </div>
         </div>
-
         <div class="tarjeta-estadistica">
           <div class="estadistica-etiqueta">Registros</div>
           <div class="estadistica-valor" id="kpi-registros">—</div>
           <div class="estadistica-cambio">Entradas en historial</div>
-          <div class="estadistica-icono">
-          </div>
         </div>
       </div>
 
-        <div>
-          <select class="seleccion-formulario sal-seleccion" id="filtro-dept" onchange="filtrar()">
-            <option value="">Todos los departamentos</option>
-            <option value="Desarrollo">Desarrollo</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Ventas">Ventas</option>
-            <option value="Recursos Humanos">Recursos Humanos</option>
-            <option value="IT">IT</option>
-          </select>
-        </div>
+      <div class="tarjeta">
+        <div id="loading-state" class="sal-cargando">Cargando historial…</div>
+        <div id="tabla-salarios"></div>
+      </div>
 
-          <div id="loading-state" class="sal-cargando">
-            Cargando historial…
-          </div>
     </div>
   </main>
 </div>
 
 <script src="../js/api.js"></script>
 <script>
+// Usuario en sidebar
+const usuario = localStorage.getItem('nexora-user') || 'admin';
+document.getElementById('sb-username').textContent = usuario.charAt(0).toUpperCase() + usuario.slice(1);
+document.getElementById('sb-avatar').textContent = usuario.slice(0, 2).toUpperCase();
+
+let todosLosSalarios = [];
+
+function formatEur(num) {
+  return Number(num).toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+}
+
+async function inicializar() {
+  // Usamos el endpoint de salarios
+  try {
+    const resp = await fetch('/api/salarios');
+    const data = await resp.json();
+    document.getElementById('loading-state').style.display = 'none';
+
+    if (!data.exito || !data.datos || data.datos.length === 0) {
+      document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:var(--muted)">No hay registros salariales.</p>';
+      return;
+    }
+
+    todosLosSalarios = data.datos;
+
+    // KPIs
+    const salarios = todosLosSalarios.map(r => parseFloat(r.salario_anual) || 0);
+    const total    = salarios.reduce((a, b) => a + b, 0);
+    const media    = total / salarios.length;
+    const maximo   = Math.max(...salarios);
+
+    document.getElementById('kpi-total').textContent    = formatEur(total);
+    document.getElementById('kpi-media').textContent    = formatEur(media);
+    document.getElementById('kpi-max').textContent      = formatEur(maximo);
+    document.getElementById('kpi-registros').textContent = todosLosSalarios.length;
+
+    renderTabla(todosLosSalarios);
+
+  } catch (e) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:red">Error al cargar los datos salariales.</p>';
+  }
+}
+
+function renderTabla(lista) {
+  if (!lista || lista.length === 0) {
+    document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:var(--muted)">Sin resultados.</p>';
+    return;
+  }
+
+  let html = `
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border,#e0e0e0);text-align:left;">
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;">Empleado</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;">Email</th>
+          <th style="padding:10px 14px;font-size:0.78rem;text-transform:uppercase;">Salario Anual</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  lista.forEach(r => {
+    html += `
+      <tr style="border-bottom:1px solid var(--border,#f0f0f0);">
+        <td style="padding:10px 14px;font-weight:500;">${r.nombre || '—'}</td>
+        <td style="padding:10px 14px;color:var(--muted,#888);">${r.email_corporativo || '—'}</td>
+        <td style="padding:10px 14px;font-weight:600;">${formatEur(r.salario_anual)}</td>
+      </tr>
+    `;
+  });
+
+  html += '</tbody></table>';
+  document.getElementById('tabla-salarios').innerHTML = html;
+}
+
+function filtrar() {
+  const texto = document.getElementById('buscador').value.toLowerCase();
+  const filtrados = todosLosSalarios.filter(r =>
+    (r.nombre || '').toLowerCase().includes(texto) ||
+    (r.email_corporativo || '').toLowerCase().includes(texto)
+  );
+  renderTabla(filtrados);
+}
+
+inicializar();
 </script>
 </body>
 </html>
