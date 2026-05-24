@@ -1,9 +1,11 @@
 import express from 'express';
 const router = express.Router();
 
-// Lista simulada (o podrías consultar tu tabla de usuarios en la BBDD)
+// Usuarios válidos para el login
+// usuario: admin, contraseña: 1234
+// usuario: carlos, contraseña: 1234
 const usuariosValidos = {
-    "admin": { pass: "1234", rol: "admin" },
+    "admin":  { pass: "1234", rol: "admin" },
     "carlos": { pass: "1234", rol: "empleado" }
 };
 

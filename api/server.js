@@ -22,7 +22,9 @@ import authRoutes from './auth.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Carga el .env desde la raíz del proyecto (un nivel arriba de /servidor api/)
 dotenv.config({ path: join(__dirname, '../.env') });
+
 const app = express();
 
 // Middlewares obligatorios
@@ -31,6 +33,7 @@ app.use(express.json()); // Permite recibir datos por POST en formato JSON
 
 // Rutas de autenticación (login)
 app.use('/api/auth', authRoutes);
+
 // ==========================================
 // RUTAS (ENDPOINTS) DE LA API
 // ==========================================
@@ -58,7 +61,6 @@ app.get('/api/dashboard', async (req, res) => {
 
 // Ruta POST: Ejecutar Transacción Crítica (Ej: Despido)
 app.post('/api/transaccion/despedir', async (req, res) => {
-    // La intranet enviará el ID del empleado por POST
     const { id_empleado, id_admin_ejecutor } = req.body;
 
     if (!id_empleado) {

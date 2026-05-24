@@ -38,8 +38,8 @@ export async function consulta3EmpleadosPlanta1() {
     return filas;
 }
 
-// 4. Muestra el nombre del empleado, su puesto y su departamento. solo salgan los 'ACTIVO'.
-// (Es la función requerida por server.js para la ruta /api/empleados)
+// 4. Muestra el nombre del empleado, su puesto y su departamento. Solo los 'ACTIVO'.
+// (Función requerida por server.js para la ruta /api/empleados)
 export async function obtenerListaEmpleados() {
     const sql = `
         SELECT empleados.nombre, puestos.titulo, departamentos.nombre FROM empleados 
@@ -51,7 +51,7 @@ export async function obtenerListaEmpleados() {
     return filas;
 }
 
-// 5. Muestra el nombre de los empleados y que pertenezcan a el departamento de sistemas
+// 5. Muestra el nombre de los empleados y que pertenezcan al departamento de sistemas
 export async function consulta5EmpleadosSistemas() {
     const sql = `
         SELECT empleados.nombre, departamentos.nombre FROM empleados 
@@ -73,7 +73,7 @@ export async function consulta6EmpleadosYSalarios() {
     return filas;
 }
 
-// 7. empleados que están asignados al proyecto número 1. Muestra el nombre del proyecto y el nombre del empleado.
+// 7. Empleados asignados al proyecto número 1. Muestra el nombre del proyecto y el nombre del empleado.
 export async function consulta7EmpleadosProyecto1() {
     const sql = `
         SELECT proyectos.nombre_proyecto, empleados.nombre FROM proyectos 
@@ -95,7 +95,7 @@ export async function consulta8DepartamentosYProyectos() {
     return filas;
 }
 
-// 9. muestra el nombre y apellido de los empleados que tienen incidencias con estado 'EN_PROGRESO'.
+// 9. Muestra el nombre y apellido de los empleados que tienen incidencias con estado 'EN_PROGRESO'.
 export async function consulta9EmpleadosIncidenciasEnProgreso() {
     const sql = `
         SELECT empleados.nombre, empleados.apellidos FROM empleados WHERE empleados.id_empleado IN (
@@ -117,7 +117,7 @@ export async function consulta10EmpleadosDepartamentosYProyectos() {
     return filas;
 }
 
-// 11. Muestra el nombre de los proyectos que tienen un presupuesto mayor al presupuesto medio de todos los proyectos de la empresa.
+// 11. Muestra el nombre de los proyectos con presupuesto mayor a la media.
 export async function consulta11ProyectosPresupuestoMayorMedia() {
     const sql = `
         SELECT proyectos.nombre_proyecto, proyectos.presupuesto_asignado FROM proyectos 
@@ -127,7 +127,7 @@ export async function consulta11ProyectosPresupuestoMayorMedia() {
     return filas;
 }
 
-// 12. Empleados sin equipo informatico
+// 12. Empleados sin equipo informático
 export async function consulta12EmpleadosSinEquipo() {
     const sql = `
         SELECT empleados.id_empleado, empleados.nombre FROM empleados 
@@ -138,7 +138,7 @@ export async function consulta12EmpleadosSinEquipo() {
     return filas;
 }
 
-// 13. El empleado ID 2 quiere ver sus proyectos. Muestra el nombre del empleado, el proyecto, su fecha de inicio y el presupuesto.
+// 13. El empleado ID 2 quiere ver sus proyectos.
 export async function consulta13ProyectosEmpleado2() {
     const sql = `
         SELECT empleados.nombre, proyectos.nombre_proyecto, proyectos.fecha_inicio, proyectos.presupuesto_asignado 
@@ -149,8 +149,7 @@ export async function consulta13ProyectosEmpleado2() {
     return filas;
 }
 
-// 14. Muestra el Título de cada departamento y cuantos empleados tienen
-// (Es la función requerida por server.js para la ruta /api/dashboard)
+// 14. Función requerida por server.js para la ruta /api/dashboard
 export async function obtenerDashboardStats() {
     const [filas_empleados] = await pool.query(
         `SELECT COUNT(id_empleado) AS total FROM empleados WHERE estado = 'ACTIVO'`
@@ -169,7 +168,7 @@ export async function obtenerDashboardStats() {
     };
 }
 
-// 15. Muestra el nombre del departamento y la suma total del presupuesto de sus proyectos asociados
+// 15. Muestra el nombre del departamento y la suma total del presupuesto de sus proyectos
 export async function consulta15PresupuestoTotalPorDepartamento() {
     const sql = `
         SELECT departamentos.nombre, SUM(proyectos.presupuesto_asignado) AS PresupuestoTotal FROM departamentos 
@@ -262,7 +261,7 @@ export async function transaccionCrearProyecto(nombre_proyecto, presupuesto, id_
     }
 }
 
-// Transacción: Entregar Equipo (Requerida en los imports de server.js)
+// Transacción: Entregar Equipo
 export async function transaccionEntregarEquipo(marca_modelo, id_empleado, numero_serie) {
     const conexion = await pool.getConnection();
     try {
@@ -283,7 +282,7 @@ export async function transaccionEntregarEquipo(marca_modelo, id_empleado, numer
     }
 }
 
-// Transacción: Eliminar Proyecto (Requerida en los imports de server.js)
+// Transacción: Eliminar Proyecto
 export async function transaccionEliminarProyecto(id_proyecto) {
     const conexion = await pool.getConnection();
     try {
@@ -301,7 +300,7 @@ export async function transaccionEliminarProyecto(id_proyecto) {
     }
 }
 
-// Transacción: Crear Departamento (Requerida en los imports de server.js)
+// Transacción: Crear Departamento
 export async function transaccionCrearDepartamento(nombre, ubicacion, presupuesto_anual) {
     const conexion = await pool.getConnection();
     try {
@@ -321,7 +320,7 @@ export async function transaccionCrearDepartamento(nombre, ubicacion, presupuest
     }
 }
 
-// Transacción: Contratar Con Equipo (Requerida en los imports de server.js / Caso Ainhoa)
+// Transacción: Contratar Con Equipo (Caso Ainhoa)
 export async function transaccionContratarConEquipo(dni, nombre, apellidos, id_departamento, email, id_equipo) {
     const conexion = await pool.getConnection();
     try {
@@ -350,7 +349,7 @@ export async function transaccionContratarConEquipo(dni, nombre, apellidos, id_d
     }
 }
 
-// Transacción: Actualizar Departamento (Requerida en los imports de server.js)
+// Transacción: Actualizar Departamento
 export async function transaccionActualizarDepartamento(id_departamento, nueva_ubicacion) {
     const conexion = await pool.getConnection();
     try {
@@ -453,7 +452,7 @@ export async function edicion1BorrarAsignacionesSinPresupuesto() {
     } catch (error) { await conexion.rollback(); throw error; } finally { conexion.release(); }
 }
 
-// 2. Marcar como "En Revisión" los equipos de empleados contratados hoy 
+// 2. Marcar equipos de empleados contratados hoy como configurados
 export async function edicion2MarcarEquiposNuevos() {
     const conexion = await pool.getConnection();
     try {
@@ -466,7 +465,7 @@ export async function edicion2MarcarEquiposNuevos() {
     } catch (error) { await conexion.rollback(); throw error; } finally { conexion.release(); }
 }
 
-// 3. Quitar equipos a los empleados que están de baja temporal 
+// 3. Quitar equipos a los empleados que están de baja temporal
 export async function edicion3QuitarEquiposBajaTemporal() {
     const conexion = await pool.getConnection();
     try {
@@ -491,7 +490,7 @@ export async function edicion4LimpiarHistorialHuerfano() {
     } catch (error) { await conexion.rollback(); throw error; } finally { conexion.release(); }
 }
 
-// 5. Asignar un proyecto a los nuevos contratados 
+// 5. Asignar un proyecto a los nuevos contratados
 export async function edicion5AsignarProyectoNuevos() {
     const conexion = await pool.getConnection();
     try {

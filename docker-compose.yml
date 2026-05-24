@@ -4,48 +4,31 @@ services:
     container_name: empresa_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'An0n23#&s4'
+      MYSQL_ROOT_PASSWORD: '1234'
       MYSQL_DATABASE: 'empresa_core'
     ports:
-      - "3307:3306"  # Windows usará el 3307 para no chocar con tu MySQL local
+      - "3307:3306"  # Puerto 3307 en tu máquina para no chocar con MySQL local
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./empresa_core_DB.sql:/docker-entrypoint-initdb.d/empresa_core_DB.sql
     networks:
       - intranet_network
 
   api:
     build:
-      context: ./api
+      context: ./servidor api
     container_name: empresa_api
     restart: always
     environment:
       - PORT=3000
-      - DB_HOST=db
-      - DB_PORT=3306 # La API se conecta al contenedor internamente, aquí sigue siendo 3306
+      - DB_HOST=db           # Nombre del servicio de la BBDD dentro de Docker
+      - DB_PORT=3306         # Puerto interno de Docker (siempre 3306 entre contenedores)
       - DB_USER=root
-      - DB_PASSWORD=An0n23#&s4
+      - DB_PASSWORD=1234
       - DB_NAME=empresa_core
     ports:
       - "3000:3000"
     depends_on:
       - db
-    networks:
-      - intranet_network
-
-  web:
-    image: nginx:alpine
-    container_name: empresa_web
-    restart: always
-    ports:
-      - "80:80"
-    volumes:
-      - ./index.html:/usr/share/nginx/html/index.html
-      - ./js:/usr/share/nginx/html/js
-      - ./styles:/usr/share/nginx/html/styles
-      - ./routes:/usr/share/nginx/html/routes
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - api
     networks:
       - intranet_network
 
