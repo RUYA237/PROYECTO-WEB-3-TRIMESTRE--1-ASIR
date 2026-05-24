@@ -1,6 +1,6 @@
 .barra-lateral {
-  width: var(--sidebar-w);
-  background: var(--sidebar-bg);
+  width: var(--ancho-lateral);
+  background: var(--fondo-lateral);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -13,13 +13,13 @@
 .barra-lateral-logo .marca-nombre {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
-  color: var(--cream);
+  color: var(--crema);
   letter-spacing: 0.02rem;
   line-height: 1.2;
 }
 .barra-lateral-logo .marca-sub {
   font-size: .72rem;
-  color: var(--text-light);
+  color: var(--texto-claro);
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   margin-top: 3px;
@@ -32,7 +32,7 @@
   font-size: .68rem;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--texto-suave);
   padding: 16px 24px 6px;
 }
 .nav-elemento {
@@ -44,15 +44,15 @@
   font-size: .88rem;
   font-weight: 500;
   border-left: 3px solid transparent;
-  transition: var(--transition);
+  transition: var(--transicion);
 }
 .nav-elemento:hover {
-  color: var(--cream);
+  color: var(--crema);
   background: rgba(255,255,255,.05);
 }
 .nav-elemento.activo {
-  color: var(--cream);
-  border-left-color: var(--terracotta);
+  color: var(--crema);
+  border-left-color: var(--terracota);
   background: rgba(184,92,56,.12);
 }
 
@@ -68,7 +68,7 @@
 .barra-lateral-avatar {
   width: 36px; height: 36px;
   border-radius: 50%;
-  background: var(--terracotta);
+  background: var(--terracota);
   display: flex; align-items: center; justify-content: center;
   font-size: 0.8rem;
   font-weight: 600;
@@ -77,19 +77,19 @@
 .barra-lateral-info-usuario .usuario-nombre {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--cream);
+  color: var(--crema);
 }
 .barra-lateral-info-usuario .usuario-rol {
   font-size: 0.72rem;
-  color: var(--text-muted);
+  color: var(--texto-suave);
 }
 .barra-lateral-btn-salir {
   margin-left: auto;
-  color: var(--text-muted);
+  color: var(--texto-suave);
   padding: 6px;
   border-radius: 6px;
 }
-.barra-lateral-btn-salir:hover { color: var(--orange); background: rgba(255,255,255,.06); }
+.barra-lateral-btn-salir:hover { color: var(--naranja); background: rgba(255,255,255,.06); }
 
 .cuadricula-dashboard {
   display: grid;
@@ -100,7 +100,7 @@
 
 /* Banner */
 .banner-principal {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radio-grande);
   overflow: hidden;
   position: relative;
   height: 200px;
@@ -118,40 +118,40 @@
 .banner-texto h1 {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
-  color: var(--cream);
+  color: var(--crema);
   font-weight: 600;
   margin-bottom: 8px;
 }
 .banner-texto p { color: rgba(244,237,228,.7); font-size: 0.9rem; }
 
 .panel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--tarjeta-fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
 }
 .tarjeta {
-  background: var(--warm-white);
-  border: 1px solid var(--cream-dark);
-  border-radius: var(--radius-lg);
+  background: var(--blanco-calido);
+  border: 1px solid var(--crema-oscura);
+  border-radius: var(--radio-grande);
   padding: 3rem;
   margin-bottom: 4rem;
   margin-left: 2.5rem;
   margin-right: 2.5rem;
 }
 .tarjeta:hover {
-  transition: var(--transition);
+  transition: var(--transicion);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(184,92,56,.15);
 }
 .tarjeta-cabecera {
   padding: 22px 28px 16px;
-  border-bottom: 1px solid var(--cream-dark);
+  border-bottom: 1px solid var(--crema-oscura);
 }
 .tarjeta-titulo {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--brown-dark);
+  color: var(--marron-oscuro);
 }
 .tarjeta-cuerpo { padding: 24px 28px; }
 
