@@ -117,7 +117,7 @@
   color: #7A2020;
   padding: 12px 14px;
   border-radius: 8px;
-  font-size: .84rem;
+  font-size: 0.84rem;
   margin-bottom: 20px;
 }
 .login-error.mostrar { display: block; }
@@ -144,7 +144,7 @@
 .login-pie {
   margin-top: auto;
   padding-top: 40px;
-  font-size: .76rem;
+  font-size: 0.76rem;
   color: #B8A090;
 }
 
