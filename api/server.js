@@ -17,7 +17,7 @@ import {
     transaccionContratarEmpleado,
     transaccionCerrarProyecto
 } from './consultas_estudiantes.js';
-import authRoutes from './index.js';
+import authRoutes from './auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,7 +31,6 @@ app.use(express.json()); // Permite recibir datos por POST en formato JSON
 
 // Rutas de autenticación (login)
 app.use('/api/auth', authRoutes);
-
 // ==========================================
 // RUTAS (ENDPOINTS) DE LA API
 // ==========================================

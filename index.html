@@ -69,26 +69,34 @@
 
 <script src="js/api.js"></script>
 <script>
-  document.getElementById('login-pass').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') doLogin();
-  });
-
-  function doLogin() {
+async function doLogin() {
     const u   = document.getElementById('login-user').value.trim().toLowerCase();
     const p   = document.getElementById('login-pass').value;
     const err = document.getElementById('login-error');
     err.classList.remove('mostrar');
 
-    if (USUARIOS[u] && USUARIOS[u].pass === p) {
-      localStorage.setItem('nexora-user', u);
-      localStorage.setItem('nexora-rol',  USUARIOS[u].rol);
-      window.location.href = 'routes/dashboard.html';
-    } else {
-      err.classList.add('mostrar');
-      document.getElementById('login-pass').value = '';
-      document.getElementById('login-pass').focus();
+    try {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: u, pass: p })
+        });
+
+        const data = await response.json();
+
+        if (data.exito) {
+            localStorage.setItem('nexora-user', u);
+            localStorage.setItem('nexora-rol', data.rol);
+            window.location.href = 'routes/dashboard.html';
+        } else {
+            err.classList.add('mostrar');
+            document.getElementById('login-pass').value = '';
+        }
+    } catch (e) {
+        console.error("Error al conectar con el servidor:", e);
+        alert("Error de conexión con el servidor");
     }
-  }
+}
 </script>
 </body>
 </html>
