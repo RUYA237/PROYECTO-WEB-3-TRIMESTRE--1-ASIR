@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: empresa_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_DATABASE: 'empresa_core'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - intranet_network
+
+  api:
+    build:
+      context: ./api
+    container_name: empresa_api
+    restart: always
+    environment:
+      - PORT=3000
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=1234
+      - DB_NAME=empresa_core
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - intranet_network
+
+  web:
+    image: nginx:alpine
+    container_name: empresa_web
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./js:/usr/share/nginx/html/js
+      - ./routes:/usr/share/nginx/html/routes
+      - ./styles:/usr/share/nginx/html/styles
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+    networks:
+      - intranet_network
+
+networks:
+  intranet_network:
+    driver: bridge
