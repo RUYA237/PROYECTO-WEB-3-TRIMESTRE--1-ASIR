@@ -109,11 +109,11 @@ function formatEur(num) {
 }
 
 async function inicializar() {
-  // Usamos el endpoint de salarios
+  const loadingEl = document.getElementById('loading-state');
   try {
     const resp = await fetch(`${API_BASE_URL}/salarios`);
     const data = await resp.json();
-    document.getElementById('loading-state').style.display = 'none';
+    loadingEl.style.display = 'none';
 
     if (!data.exito || !data.datos || data.datos.length === 0) {
       document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:var(--muted)">No hay registros salariales.</p>';
@@ -137,16 +137,17 @@ async function inicializar() {
     const media    = total / salarios.length;
     const maximo   = Math.max(...salarios);
 
-    document.getElementById('kpi-total').textContent    = formatEur(total);
-    document.getElementById('kpi-media').textContent    = formatEur(media);
-    document.getElementById('kpi-max').textContent      = formatEur(maximo);
+    document.getElementById('kpi-total').textContent     = formatEur(total);
+    document.getElementById('kpi-media').textContent     = formatEur(media);
+    document.getElementById('kpi-max').textContent       = formatEur(maximo);
     document.getElementById('kpi-registros').textContent = todosLosSalarios.length;
 
     renderTabla(todosLosSalarios);
 
   } catch (e) {
-    document.getElementById('loading-state').style.display = 'none';
-    document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:red">Error al cargar los datos salariales.</p>';
+    loadingEl.style.display = 'none';
+    console.error('Error salarios:', e);
+    document.getElementById('tabla-salarios').innerHTML = '<p style="padding:20px;color:red">Error al conectar con la API. Comprueba que el servidor está activo.</p>';
   }
 }
 
