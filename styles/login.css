@@ -72,7 +72,7 @@
 
 .login-titulo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 600;
   color: #1E120A;
   margin-bottom: 6px;
@@ -83,13 +83,12 @@
   margin-bottom: 36px;
 }
 
-/* --- Form --- */
 .grupo-formulario { margin-bottom: 20px; }
 .etiqueta-formulario {
   display: block;
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
   color: #5C3320;
   margin-bottom: 8px;
@@ -103,8 +102,6 @@
   color: #1E120A;
   font-size: 0.95rem;
   font-family: 'DM Sans', sans-serif;
-  outline: none;
-  transition: 0.2s ease;
 }
 .entrada-formulario:focus {
   border-color: #B85C38;
@@ -113,7 +110,6 @@
 }
 .entrada-formulario::placeholder { color: #B8A090; }
 
-/* --- Error message --- */
 .login-error {
   display: none;
   background: #F5E8E8;
@@ -126,7 +122,6 @@
 }
 .login-error.mostrar { display: block; }
 
-/* --- Login button --- */
 .btn-acceso {
   width: 100%;
   padding: 14px;
@@ -135,10 +130,9 @@
   border: none;
   border-radius: 10px;
   font-family: 'DM Sans', sans-serif;
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: .2s ease;
   margin-top: 4px;
   display: flex;
   align-items: center;
@@ -146,9 +140,7 @@
   gap: 8px;
 }
 .btn-acceso:hover  { background: #5C3320; }
-.btn-acceso:active { transform: scale(.99); }
 
-/* --- Footer --- */
 .login-pie {
   margin-top: auto;
   padding-top: 40px;
