@@ -407,19 +407,75 @@ async function tx_cerrarProyecto() {
   }
 }
 
-// 5. Asignar empleado a proyecto (placeholder — endpoint no definido en server.js)
+// 5. Asignar empleado a proyecto
 async function tx_asignar() {
-  mostrarResultado('res-asignar', false, '⚠ Esta operación aún no está implementada en el servidor.');
+  const id_empleado = document.getElementById('as-emp').value;
+  const id_proyecto = document.getElementById('as-proy').value;
+  const rol         = document.getElementById('as-rol').value.trim();
+
+  if (!id_empleado || !id_proyecto || !rol) {
+    mostrarResultado('res-asignar', false, '⚠ Rellena todos los campos.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/transaccion/asignar-proyecto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_empleado, id_proyecto, rol })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-asignar', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-asignar', false, '❌ Error de red.');
+  }
 }
 
 // 6. Actualizar salario
 async function tx_actualizarSalario() {
-  mostrarResultado('res-salario', false, '⚠ Esta operación aún no está implementada en el servidor.');
+  const id_empleado   = document.getElementById('sal-emp').value;
+  const nuevo_salario = document.getElementById('sal-nuevo').value;
+  const motivo        = document.getElementById('sal-motivo').value.trim();
+
+  if (!id_empleado || !nuevo_salario || !motivo) {
+    mostrarResultado('res-salario', false, '⚠ Rellena todos los campos.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/transaccion/actualizar-salario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_empleado, nuevo_salario, motivo })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-salario', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-salario', false, '❌ Error de red.');
+  }
 }
 
-// 7. Renovar credenciales (placeholder)
+// 7. Renovar credenciales
 async function tx_renovarCredenciales() {
-  mostrarResultado('res-credenciales', false, '⚠ Esta operación aún no está implementada en el servidor.');
+  const id_empleado    = document.getElementById('cr-emp').value;
+  const nueva_password = document.getElementById('cr-pass').value;
+
+  if (!id_empleado || !nueva_password) {
+    mostrarResultado('res-credenciales', false, '⚠ Rellena todos los campos.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/transaccion/renovar-credenciales', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_empleado, nueva_password })
+    });
+    const data = await resp.json();
+    mostrarResultado('res-credenciales', data.exito, data.exito ? '✅ ' + data.mensaje : '❌ ' + data.error);
+  } catch (e) {
+    mostrarResultado('res-credenciales', false, '❌ Error de red.');
+  }
 }
 </script>
 </body>

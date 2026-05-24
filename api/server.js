@@ -16,7 +16,10 @@ import {
     transaccionContratarConEquipo,
     transaccionActualizarDepartamento,
     transaccionContratarEmpleado,
-    transaccionCerrarProyecto
+    transaccionCerrarProyecto,
+    transaccionAsignarProyecto,
+    transaccionActualizarSalario,
+    transaccionRenovarCredenciales
 } from './consultas_estudiantes.js';
 import authRoutes from './auth.js';
 
@@ -139,6 +142,48 @@ app.get('/api/salarios', async (req, res) => {
         res.json({ exito: true, datos: datos });
     } catch (error) {
         res.status(500).json({ exito: false, error: error.message });
+    }
+});
+
+// Ruta POST: Asignar empleado a proyecto
+app.post('/api/transaccion/asignar-proyecto', async (req, res) => {
+    const { id_empleado, id_proyecto, rol } = req.body;
+    if (!id_empleado || !id_proyecto || !rol) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionAsignarProyecto(id_empleado, id_proyecto, rol);
+        res.json({ exito: true, mensaje: "Empleado asignado al proyecto correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Actualizar salario de un empleado
+app.post('/api/transaccion/actualizar-salario', async (req, res) => {
+    const { id_empleado, nuevo_salario, motivo } = req.body;
+    if (!id_empleado || !nuevo_salario || !motivo) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionActualizarSalario(id_empleado, nuevo_salario, motivo);
+        res.json({ exito: true, mensaje: "Salario actualizado correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
+    }
+});
+
+// Ruta POST: Renovar credenciales de acceso
+app.post('/api/transaccion/renovar-credenciales', async (req, res) => {
+    const { id_empleado, nueva_password } = req.body;
+    if (!id_empleado || !nueva_password) {
+        return res.status(400).json({ exito: false, mensaje: "Faltan datos" });
+    }
+    try {
+        await transaccionRenovarCredenciales(id_empleado, nueva_password);
+        res.json({ exito: true, mensaje: "Credenciales renovadas correctamente." });
+    } catch (error) {
+        res.status(500).json({ exito: false, mensaje: "LA TRANSACCIÓN FUE REVERTIDA (ROLLBACK)", error: error.message });
     }
 });
 

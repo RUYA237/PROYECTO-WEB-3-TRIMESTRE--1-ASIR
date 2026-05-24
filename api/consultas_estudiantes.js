@@ -507,7 +507,90 @@ export async function edicion4LimpiarHistorialHuerfano() {
     } catch (error) { await conexion.rollback(); throw error; } finally { conexion.release(); }
 }
 
-// 5. Asignar un proyecto a los nuevos contratados
+// Transacción: Asignar Empleado a Proyecto (Ruta: /api/transaccion/asignar-proyecto)
+export async function transaccionAsignarProyecto(id_empleado, id_proyecto, rol) {
+    const conexion = await pool.getConnection();
+    try {
+        await conexion.beginTransaction();
+
+        await conexion.query(
+            `INSERT INTO asignaciones_proyectos (id_empleado, id_proyecto, rol_en_proyecto, fecha_asignacion)
+             VALUES (?, ?, ?, CURDATE())`,
+            [id_empleado, id_proyecto, rol]
+        );
+
+        await conexion.query(
+            `INSERT INTO registro_auditoria (tabla_afectada, accion, detalles) VALUES ('asignaciones_proyectos', 'INSERT', ?)`,
+            [`Empleado ${id_empleado} asignado al proyecto ${id_proyecto} como ${rol}`]
+        );
+
+        await conexion.commit();
+    } catch (error) {
+        await conexion.rollback();
+        throw error;
+    } finally {
+        conexion.release();
+    }
+}
+
+// Transacción: Actualizar Salario (Ruta: /api/transaccion/actualizar-salario)
+export async function transaccionActualizarSalario(id_empleado, nuevo_salario, motivo) {
+    const conexion = await pool.getConnection();
+    try {
+        await conexion.beginTransaction();
+
+        // Cerrar el registro salarial actual
+        await conexion.query(
+            `UPDATE historial_salarial SET fecha_fin = CURDATE() WHERE id_empleado = ? AND fecha_fin IS NULL`,
+            [id_empleado]
+        );
+
+        // Insertar el nuevo registro salarial
+        await conexion.query(
+            `INSERT INTO historial_salarial (id_empleado, salario_anual, fecha_inicio, motivo_cambio)
+             VALUES (?, ?, CURDATE(), ?)`,
+            [id_empleado, nuevo_salario, motivo]
+        );
+
+        await conexion.query(
+            `INSERT INTO registro_auditoria (tabla_afectada, accion, detalles) VALUES ('historial_salarial', 'UPDATE', ?)`,
+            [`Salario del empleado ${id_empleado} actualizado a ${nuevo_salario} € — Motivo: ${motivo}`]
+        );
+
+        await conexion.commit();
+    } catch (error) {
+        await conexion.rollback();
+        throw error;
+    } finally {
+        conexion.release();
+    }
+}
+
+// Transacción: Renovar Credenciales (Ruta: /api/transaccion/renovar-credenciales)
+export async function transaccionRenovarCredenciales(id_empleado, nueva_password) {
+    const conexion = await pool.getConnection();
+    try {
+        await conexion.beginTransaction();
+
+        await conexion.query(
+            `UPDATE control_accesos SET password_hash = SHA2(?, 256), fecha_ultimo_acceso = NOW()
+             WHERE id_empleado = ?`,
+            [nueva_password, id_empleado]
+        );
+
+        await conexion.query(
+            `INSERT INTO registro_auditoria (tabla_afectada, accion, detalles) VALUES ('control_accesos', 'UPDATE', ?)`,
+            [`Credenciales renovadas para el empleado ID: ${id_empleado}`]
+        );
+
+        await conexion.commit();
+    } catch (error) {
+        await conexion.rollback();
+        throw error;
+    } finally {
+        conexion.release();
+    }
+}
 export async function edicion5AsignarProyectoNuevos() {
     const conexion = await pool.getConnection();
     try {
