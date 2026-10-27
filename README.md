@@ -55,8 +55,8 @@ flowchart LR
 ## 🚀 Puesta en marcha
 
 ```bash
-git clone https://github.com/RUYA237/3-TRIMESTRE-LM-MACAR.git
-cd 3-TRIMESTRE-LM-MACAR
+git clone https://github.com/RUYA237/PROYECTO-WEB-3-TRIMESTRE--1-ASIR.git
+cd PROYECTO-WEB-3-TRIMESTRE--1-ASIR
 cp .env.example .env        # y cambia DB_PASSWORD
 docker compose up -d --build
 ```
