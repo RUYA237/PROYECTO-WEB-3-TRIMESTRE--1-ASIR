@@ -4,7 +4,7 @@ services:
     container_name: empresa_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: 'empresa_core'
       MYSQL_CHARACTER_SET_SERVER: utf8mb4
       MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
@@ -18,7 +18,7 @@ services:
 
   api:
     build:
-      context: ./api        # ← ESTO ES LO QUE ESTABA MAL (ponía ./servidor api)
+      context: ./api
     container_name: empresa_api
     restart: always
     environment:
@@ -26,7 +26,7 @@ services:
       - DB_HOST=db
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=1234
+      - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=empresa_core
     ports:
       - "3000:3000"
@@ -36,7 +36,7 @@ services:
       - intranet_network
 
   web:
-    image: nginx:alpine       # ← ESTE SERVICIO FALTABA (sirve tu HTML)
+    image: nginx:alpine
     container_name: empresa_web
     restart: always
     ports:
